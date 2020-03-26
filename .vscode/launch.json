@@ -6,23 +6,16 @@
     "configurations": [
         {
             "type": "java",
-            "name": "CodeLens (Launch) - Game",
-            "request": "launch",
-            "mainClass": "Main.Game",
-            "projectName": "Light no more"
-        },
-        {
-            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-Game<Dragon Tale Tutorial>",
+            "name": "Debug (Launch)-Game<Light no more>",
             "request": "launch",
             "mainClass": "Main.Game",
-            "projectName": "Dragon Tale Tutorial"
+            "projectName": "Light no more"
         }
     ]
 }
