@@ -115,6 +115,5 @@ public class TownState extends GameState {
 	
 	//z dziedziczenia
 	public void keyReleased(int k) {}
-	public void update() {}
 	
 }

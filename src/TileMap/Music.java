@@ -26,27 +26,30 @@ public class Music {
 	public static void play(){
 		
 		//test
-		if(unmuted){
-			try{
-				path = new File(playing);
-				audio = AudioSystem.getAudioInputStream(path);
-				clip = AudioSystem.getClip();
-	
-				clip.open(audio);
+		
+		try{
+			path = new File(playing);
+			audio = AudioSystem.getAudioInputStream(path);
+			clip = AudioSystem.getClip();
+
+			clip.open(audio);
+
+			if(unmuted){
 				clip.start();
 				clip.loop(Clip.LOOP_CONTINUOUSLY);
 			}
-			catch(Exception e){
-				e.printStackTrace();
-			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 
 	//zmien utwor
 	public static void change(String name){
 		clip.stop();
+		playing = name;
+		
 		if(unmuted){
-			playing = name;
 			Music.play();
 		}
 	}

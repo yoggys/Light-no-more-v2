@@ -73,6 +73,7 @@ public class EscState extends GameState {
 		}
 
 		if(currentChoice == 2) {
+			///Save.saveall();
 			//System.exit(0);
 		}
 	}

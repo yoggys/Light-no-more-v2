@@ -17,9 +17,6 @@ public class HqInfoState extends GameState {
 	//zmienne obslugi
 	private int[] currentChoice = {0,0};
 	private int row = 0;
-	private int state = 0;
-
-	private int hp[] = {20, 70, 100};
 
 	//konstruktor
 	public HqInfoState(GameStateManager gsm) {	
@@ -61,7 +58,7 @@ public class HqInfoState extends GameState {
 	//wybor aktualnego trybu pracy / opcji menu etc.
 	private void select() {
 		if(row == 0){
-			gsm.setState(GameStateManager.TOWNSTATE);
+			gsm.setState(GameStateManager.HEADQUARTERSSTATE);
 		}
 	}
 
@@ -87,8 +84,18 @@ public class HqInfoState extends GameState {
 			}
 			else{
 				row--;
+			}	
+		}
+		if(k == KeyEvent.VK_LEFT) {
+			if(row == 0){
+				currentChoice[row]--;
 			}
-			
+
+		}
+		if(k == KeyEvent.VK_RIGHT) {
+			if(row == 0){
+				currentChoice[row]++;
+			}
 		}
 		if(k == KeyEvent.VK_ESCAPE) {
 			EscState.back = gsm.getState();
