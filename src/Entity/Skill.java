@@ -9,10 +9,7 @@ public class Skill
     private Efect efect;
     private int damage;
 
-    public String getName()
-    {
-        return name;
-    }
+    public String getName(){ return name; }
 
     public Skill(String name, int damage, int staminaUse)
     {
