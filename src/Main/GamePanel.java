@@ -30,7 +30,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 		requestFocus();
 	}
 
-	//inicjalizacja drugiego watku (wielowatkowosc)
 	public void addNotify() {
 		super.addNotify();
 		if(thread == null) {

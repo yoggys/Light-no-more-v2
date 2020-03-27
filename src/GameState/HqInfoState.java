@@ -39,8 +39,6 @@ public class HqInfoState extends GameState {
 	@Override
 	public void draw(Graphics2D g) {
 
-		int check[] = {0,0,0};
-
 		bg.draw(g);
 		hud.draw(g);
 		

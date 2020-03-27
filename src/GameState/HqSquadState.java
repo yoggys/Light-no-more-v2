@@ -17,7 +17,6 @@ public class HqSquadState extends GameState {
 	//zmienne obslugi
 	private int[] currentChoice = {0,0};
 	private int row = 0;
-	private int state = 0;
 
 	private int hp[] = {20, 70, 100};
 
