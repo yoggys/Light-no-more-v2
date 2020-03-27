@@ -184,8 +184,12 @@ public class Player extends MapObject {
 		
 	}
 
-	
-	
+	public static void changeSquad(int posCurrent, int posReserve){
+		Champion tmp = new Champion(0,0,0,"");
+		tmp = champions.get(posCurrent);
+		champions.set(posCurrent, reserve.get(posReserve));
+		reserve.set(posReserve, tmp);
+	}
 }
 
 

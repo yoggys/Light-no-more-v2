@@ -57,10 +57,10 @@ public class HeadquartersState extends GameState {
 	//wybor aktualnego trybu pracy / opcji menu etc.
 	private void select() {
 		if(currentChoice == 0){
-			gsm.setState(GameStateManager.TOWNSTATE);
+			gsm.setState(GameStateManager.HQUPGRADESTATE);
 		}
 		else if(currentChoice == 1){
-			gsm.setState(GameStateManager.TOWNSTATE);
+			gsm.setState(GameStateManager.HQSQUADSTATE);
 		}
 		else if(currentChoice == 2){
 			gsm.setState(GameStateManager.HQINFOSTATE);
