@@ -120,7 +120,7 @@ public class MerchantState extends GameState {
 			gsm.setState(GameStateManager.TOWNSTATE);
 		}
 		else if(row == 1 && Inventory.getid(currentChoice[row]) != 0 && Inventory.invsize() != 0){
-			Inventory.sellitem(Inventory.getid(currentChoice[row]));
+			Inventory.sellitem(currentChoice[row]);
 			if(currentChoice[row] != 0){
 				currentChoice[row]--;
 			}

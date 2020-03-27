@@ -25,9 +25,9 @@ public class TavernState extends GameState {
 	public TavernState(GameStateManager gsm) {	
 		this.gsm = gsm;
 		
-		Player.reserve.add(new Champion(25, 10, 20, "test1", "0"));
-		Player.reserve.add(new Champion(25, 10, 20, "test2", "1"));
-		Player.reserve.add(new Champion(100, 10, 30, "test3", "2"));
+		Player.reserve.add(new Champion(25, 10, 20, "test1"));
+		Player.reserve.add(new Champion(25, 10, 20, "test2"));
+		Player.reserve.add(new Champion(100, 10, 30, "test3"));
 
 		//test
 		try {
