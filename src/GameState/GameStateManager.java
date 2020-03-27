@@ -36,9 +36,9 @@ public class GameStateManager {
 		gameStates.add(new CharlatanState(this));
 		gameStates.add(new MerchantState(this));
 		gameStates.add(new HeadquartersState(this));
-		gameStates.add(new HqInfoState(this));
-		gameStates.add(new HqUpgradeState(this));
 		gameStates.add(new HqSquadState(this));
+		gameStates.add(new HqUpgradeState(this));
+		gameStates.add(new HqInfoState(this));
 		gameStates.add(new EscState(this));
 	}
 	
