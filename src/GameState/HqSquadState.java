@@ -4,6 +4,7 @@ import TileMap.Background;
 import Entity.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class HqSquadState extends GameState {
 	
@@ -24,7 +25,7 @@ public class HqSquadState extends GameState {
 		//test
 		try {
 			bg = new Background("Resources/Backgrounds/hqbg.png");
-			font = new Font("Arial", Font.PLAIN, 24);
+			font = new Font("Arial", Font.PLAIN, 18);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -37,8 +38,7 @@ public class HqSquadState extends GameState {
 	@Override
 	public void draw(Graphics2D g) {
 
-		bg.draw(g);
-		
+		bg.draw(g);		
 		g.setFont(font);
 		
 		//INFO COL
@@ -59,6 +59,36 @@ public class HqSquadState extends GameState {
 			g.drawString("RESERVE CHAMPS", 40, 440);
 			g.drawString("CURRENT SQUAD", 40, 140);
 		}
+
+		//card draw	
+		if(!lock[0] && !lock[1]) {	
+			if(row == 1){
+				Player.championCurCard(currentChoice[1], g, image, 900, 180);
+			}
+			if(row == 2){
+				Player.championResCard(currentChoice[2], g, image, 900, 180);
+			}
+		}
+		else{
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Arial", Font.BOLD, 24));
+			g.drawString("Change current squad", 770, 110);
+			g.setColor(Color.RED);
+			g.drawString("THIS", 720, 160);
+			g.setColor(Color.GREEN);
+			g.drawString("FOR", 1020, 160);
+			g.setFont(font);
+
+			if(lock[0]) {		
+				Player.championCurCard(currentChoice[1], g, image, 600, 180);
+				Player.championResCard(currentChoice[2], g, image, 900, 180);	
+			}
+			if(lock[1]) {
+				Player.championResCard(currentChoice[2], g, image, 600, 180);
+				Player.championCurCard(currentChoice[1], g, image, 900, 180);
+			}
+		}
+
 
 		//current squad
 		for(int i = 0; i < Player.champions.size(); i++) {

@@ -41,9 +41,11 @@ public class Someone
     }
 
     public int getHp() { return hp; }
+    public int getMaxHp() { return maxHp; }
     public boolean isActive() { return isActive; }
     public void setActive(boolean value) { isActive = value; }
     public int getStamina() { return stamina; }
+    public int getMaxStamina() { return maxStamina; }
 
     public void takeDamage(int damage)
     {

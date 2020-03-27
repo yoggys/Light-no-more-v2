@@ -18,6 +18,10 @@ public class Efect
         this.timeInTurn = efect.timeInTurn;
     }
 
+    public int getTotal(){
+        return this.damagePerTurn*this.timeInTurn;
+    }
+
     public void use(Someone target)
     {
         if(timeInTurn>0)

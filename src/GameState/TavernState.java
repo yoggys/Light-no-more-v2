@@ -4,6 +4,7 @@ import TileMap.Background;
 import Entity.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class TavernState extends GameState {
 	
@@ -13,13 +14,13 @@ public class TavernState extends GameState {
 	private HUDgold hud;
 	private Images image;
 	private Font font;
-
+	
 	//zmienne obslugi
 	private int[] currentChoice = {0,0};
 	private int row = 0;
 	private int state = 0;
 
-	private int hp[] = {20, 70, 100};
+	public static ArrayList<Champion> tavernChampions = new ArrayList<Champion>();
 
 	//konstruktor
 	public TavernState(GameStateManager gsm) {	
@@ -29,6 +30,10 @@ public class TavernState extends GameState {
 		Player.reserve.add(new Champion(25, 10, 20, "test2"));
 		Player.reserve.add(new Champion(100, 10, 30, "test3"));
 
+		TavernState.tavernChampions.add(new Champion(25, 10, 20, "test4"));
+		TavernState.tavernChampions.add(new Champion(25, 10, 20, "test5"));
+		TavernState.tavernChampions.add(new Champion(100, 10, 30, "test6"));
+		
 		//test
 		try {
 			bg = new Background("Resources/Backgrounds/tavernbg1.png");
@@ -45,8 +50,6 @@ public class TavernState extends GameState {
 	//rysowanie gui
 	@Override
 	public void draw(Graphics2D g) {
-
-		int check[] = {0,0,0};
 
 		bg.draw(g);
 		hud.draw(g);
