@@ -71,7 +71,7 @@ public class CharlatanState extends GameState {
 			row = 0;
 		}
 
-		for(int i = 0; i < 3; i++) {
+		for(int i = 0; i < Player.champions.size(); i++) {
 			if(i == currentChoice[1] && row == 1) {
 				g.setColor(Color.WHITE);
 			}
@@ -81,18 +81,18 @@ public class CharlatanState extends GameState {
 
 			if(Player.champions.get(i).getPercent() >= 90){
 				image.draw(g, 298 + 200*i, 380, "Resources/HUD/highframe2.png");
-				image.draw(g, 298 + 200*i, 380, "Resources/HUD/champ"+i+".png");
+				image.draw(g, 298 + 200*i, 380, Player.champions.get(i).getAvatar());
 				g.drawString(String.valueOf((int)Player.champions.get(i).payHeal()), 427 + (200*i) + (int)(check[i]*12), 615);		
 			}
 			
 			else if(Player.champions.get(i).getPercent() < 90 && Player.champions.get(i).getPercent() >= 50){
 				image.draw(g, 298 + 200*i, 380, "Resources/HUD/midframe2.png");
-				image.draw(g, 298 + 200*i, 380, "Resources/HUD/champ"+i+".png");	
+				image.draw(g, 298 + 200*i, 380, Player.champions.get(i).getAvatar());	
 				g.drawString(String.valueOf((int)Player.champions.get(i).payHeal()), 427 + (200*i) + (int)(check[i]*12), 615);
 			}
 			else{
 				image.draw(g, 298 + 200*i, 380, "Resources/HUD/lowframe2.png");
-				image.draw(g, 298 + 200*i, 380, "Resources/HUD/champ"+i+".png");	
+				image.draw(g, 298 + 200*i, 380, Player.champions.get(i).getAvatar());	
 				g.drawString(String.valueOf((int)Player.champions.get(i).payHeal()), 427 + (200*i) + (int)(check[i]*12), 615);
 			}
 		}

@@ -54,6 +54,7 @@ public class Music {
 		}
 	}
 
+	//zatrzymaj
 	public static void stop(){
 		clip.stop();
 	}

@@ -13,6 +13,7 @@ public class Player extends MapObject {
 	public static int sumchamp;
 
 	public static ArrayList<Champion> champions = new ArrayList<Champion>();
+	public static ArrayList<Champion> reserve = new ArrayList<Champion>();
     public static ArrayList<Someone> enemys = new ArrayList<Someone>();
 
 	private int level;

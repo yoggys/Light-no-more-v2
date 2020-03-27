@@ -13,14 +13,15 @@ public class Someone
 
 	private int level;
 	private int exp;
-	private String name;
-	private String profession;
+    private String name;
+    private String avatar;
+    private String profession;
     private boolean dead = false;
     private boolean isActive = true;
     
     public ArrayList<Efect> efects;
     
-    public Someone(int maxHp, int stamina, int maxStamina, String name)
+    public Someone(int maxHp, int stamina, int maxStamina, String name, String av)
     {
         this.maxHp = maxHp;
         this.hp = this.maxHp;
@@ -31,6 +32,8 @@ public class Someone
         
         this.name=name;
         efects = new ArrayList<Efect>();
+
+        this.avatar = "Resources/HUD/champ"+ av + ".png";
     }
 
     public int getHp() { return hp; }
@@ -75,5 +78,6 @@ public class Someone
     public void setHp() { hp = maxHp; }
 
     public void useStamina(int staminaUsed) { stamina -= staminaUsed; }
-
+    
+    public String getAvatar(){ return avatar; }
 }

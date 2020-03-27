@@ -7,9 +7,9 @@ public class Champion extends Someone
     public ArrayList<Skill> skills;
 
 
-    public Champion(int maxHp, int stamina, int maxStamina,  String name)
+    public Champion(int maxHp, int stamina, int maxStamina,  String name, String av)
     {
-        super(maxHp, stamina, maxStamina, name);
+        super(maxHp, stamina, maxStamina, name, av);
         skills= new ArrayList<Skill>();
     }
 
@@ -18,5 +18,4 @@ public class Champion extends Someone
         skills.add(skill);
     }
 
-    
 }
