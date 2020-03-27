@@ -1,6 +1,8 @@
 package Entity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class Someone
 {
@@ -18,10 +20,14 @@ public class Someone
     private String profession;
     private boolean dead = false;
     private boolean isActive = true;
+
+    private ArrayList<String> avatars = new ArrayList<String>(Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8"));
+    private Random random = new Random();
     
     public ArrayList<Efect> efects;
     
-    public Someone(int maxHp, int stamina, int maxStamina, String name, String av)
+
+    public Someone(int maxHp, int stamina, int maxStamina, String name)
     {
         this.maxHp = maxHp;
         this.hp = this.maxHp;
@@ -32,8 +38,6 @@ public class Someone
         
         this.name=name;
         efects = new ArrayList<Efect>();
-
-        this.avatar = "Resources/HUD/champ"+ av + ".png";
     }
 
     public int getHp() { return hp; }
@@ -58,7 +62,6 @@ public class Someone
     private void die()
     {
         hp=0;
-        //some awesome death
     }
     
     public void takeHeal(int heal)
@@ -80,4 +83,13 @@ public class Someone
     public void useStamina(int staminaUsed) { stamina -= staminaUsed; }
     
     public String getAvatar(){ return avatar; }
+
+    public void setAvatar(){ 
+        if(avatars.size() != 0){
+            int id = 0;
+            id = random.nextInt(avatars.size());
+            avatar = "Resources/HUD/champ"+ avatars.get(id) + ".png";
+            avatars.remove(id);
+        }
+    }
 }
