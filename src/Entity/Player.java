@@ -14,7 +14,8 @@ public class Player extends MapObject {
 
 	public static ArrayList<Champion> champions = new ArrayList<Champion>();
 	public static ArrayList<Champion> reserve = new ArrayList<Champion>();
-    public static ArrayList<Someone> enemys = new ArrayList<Someone>();
+	public static ArrayList<Someone> enemys = new ArrayList<Someone>();
+	public static ArrayList<Champion> tavernChampions = new ArrayList<Champion>();
 
 	private int level;
 	private int exp;
@@ -191,6 +192,13 @@ public class Player extends MapObject {
 		reserve.set(posReserve, tmp);
 	}
 	
+	public static void buyChampion(Champion buyChamp){
+		reserve.add(buyChamp);
+	}
+
+	public static void sellChampion(int posReserve){
+		reserve.remove(posReserve);
+	}
 	
 	public static void championCurCard(int choice, Graphics2D g, Images image, int x, int y){
 		g.setColor(Color.BLACK);
@@ -253,6 +261,40 @@ public class Player extends MapObject {
 				g.drawString("*"+ Player.reserve.get(choice).skills.get(1).getName() + "(" +
 				-1*((Player.reserve.get(choice).skills.get(1).getDamage() + 
 				Player.reserve.get(choice).skills.get(1).getEfect().getTotal())) + ")", x+50, y+30*11);
+			}
+		}
+		else{
+			g.drawString("NONE!", x+50, y+30*10);
+		}
+	}
+
+	public static void championTavCard(int choice, Graphics2D g, Images image, int x, int y){
+		g.setColor(Color.BLACK);
+		image.draw(g, x, y, "Resources/HUD/card.png");
+		image.draw(g, x, y-44, "Resources/HUD/cardframe.png");
+		image.draw(g, x, y-44, Player.tavernChampions.get(choice).getAvatar());
+		g.drawString("NAME: " + Player.tavernChampions.get(choice).getName(), x+50, y+30*6);
+		g.drawString("HP/MAX_HP: " + Player.tavernChampions.get(choice).getHp() +"/"+ Player.tavernChampions.get(choice).getMaxHp(), x+50, y+30*7);	
+		g.drawString("SA/MAX_SA: " + Player.tavernChampions.get(choice).getStamina() +"/"+ Player.tavernChampions.get(choice).getMaxStamina(), x+50, y+30*8);
+		g.drawString("SKILLS(DMG/HEAL): ", x+50, y+30*9);
+		if(Player.tavernChampions.get(choice).skills.size() != 0){
+			if(Player.tavernChampions.get(choice).skills.get(0).getEfect() == null){
+				g.drawString("*"+ Player.tavernChampions.get(choice).skills.get(0).getName() + "(" +
+				-1*(Player.tavernChampions.get(choice).skills.get(0).getDamage()) +")", x+50, y+30*10);
+			}
+			else{
+				g.drawString("*"+ Player.tavernChampions.get(choice).skills.get(0).getName() + "(" +
+				-1*((Player.tavernChampions.get(choice).skills.get(0).getDamage() + 
+				Player.tavernChampions.get(choice).skills.get(0).getEfect().getTotal())) + ")", x+50, y+30*10);
+			}
+			if(Player.tavernChampions.get(choice).skills.get(0).getEfect() == null){
+				g.drawString("*"+ Player.tavernChampions.get(choice).skills.get(1).getName() + "(" +
+				-1*(Player.tavernChampions.get(choice).skills.get(1).getDamage()) +")", x+50, y+30*11);
+			}
+			else{
+				g.drawString("*"+ Player.tavernChampions.get(choice).skills.get(1).getName() + "(" +
+				-1*((Player.tavernChampions.get(choice).skills.get(1).getDamage() + 
+				Player.tavernChampions.get(choice).skills.get(1).getEfect().getTotal())) + ")", x+50, y+30*11);
 			}
 		}
 		else{

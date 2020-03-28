@@ -1,7 +1,5 @@
 package Entity;
 
-
-
 public class Skill
 {
     private int staminaUse;
@@ -31,6 +29,12 @@ public class Skill
     public int getDamage() { return damage; }
 
     public int getStaminaUse() { return staminaUse; }
-    
-    
+
+    public void upgradeSkill(double rand){
+        this.damage += damage*rand;
+        if(this.efect != null){
+            this.efect.upgradeEfect(rand);
+        } 
+    }
+
 }

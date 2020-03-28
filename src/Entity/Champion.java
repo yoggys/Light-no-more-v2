@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Champion extends Someone 
 {
-    public ArrayList<Skill> skills;
 
     public Champion(int maxHp, int stamina, int maxStamina,  String name)
     {

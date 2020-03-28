@@ -1,6 +1,5 @@
 package Entity;
 
-
 public class Efect
 {
     int timeInTurn;
@@ -39,4 +38,8 @@ public class Efect
     }
 
     public int getTime() { return timeInTurn; }
+
+    public void upgradeEfect(double rand){
+        this.damagePerTurn += damagePerTurn*rand;
+    }
 }

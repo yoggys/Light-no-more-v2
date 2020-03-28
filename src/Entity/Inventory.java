@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Inventory {
-	private static ArrayList<Integer> items /*= new ArrayList<Integer>();*/ = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9));
+	private static ArrayList<Integer> items /*= new ArrayList<Integer>();*/ = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9,9));
 	//private static int[] items = {1,2,3,4,5,6,7,8,9,0};
-	
-	//jak testujesz wpisz 0 zawsze na koncu i podaj dobry amount bo wywali gre
-	//w sensie tego merchanta bo tam polega wszystko na tym statycznym liczniku i id
-	//bo mechanike zrobilem ze 0 to puste eq i zawsze jest po przedmiotach btw
 
 	private static String names[] = {
 		"working",
@@ -24,7 +20,20 @@ public class Inventory {
 		"curepot"
 	};
 
-	private static int gold = 1200;
+	private static String info[] = {
+		"working",
+		"You can sell it to get some money",
+		"You can sell it to get some money",
+		"You can sell it to get some money",
+		"You can sell it to get some money",
+		"You can sell it to get some money",
+		"SA Potion: Restore 30% of target stamina",
+		"Health Potion: Restore 30% of target health",
+		"Poison: Poisons target",
+		"Cure Potion: Clear poison on target"
+	};
+
+	private static int gold = 120000;
 
 	public static void additem(int id){
 			items.add(id);
@@ -64,7 +73,10 @@ public class Inventory {
 	}
 
 	public static int getprice(int pos){
-		return Store.price(items.get(pos));
+		if(pos < items.size()){
+			return Store.price(items.get(pos));
+		}
+			return 0;
 	}
 
 	public static int getgold(){
@@ -72,6 +84,9 @@ public class Inventory {
 	}
 	public static String getname(int pos){
 		return names[pos];
+	}
+	public static String getInfo(int pos){
+		return info[items.get(pos)];
 	}
 }
 

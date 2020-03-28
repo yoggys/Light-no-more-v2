@@ -15,10 +15,8 @@ public class HqInfoState extends GameState {
 	private Font font;
 
 	//zmienne obslugi
-	private int[] currentChoice = {0,0};
+	private int currentChoice = 0;
 	private int row = 0;
-
-	private int hp[] = {20, 70, 100};
 
 	//konstruktor
 	public HqInfoState(GameStateManager gsm) {	
@@ -26,7 +24,7 @@ public class HqInfoState extends GameState {
 		
 		//test
 		try {
-			bg = new Background("Resources/Backgrounds/hqbg.png");
+			bg = new Background("Resources/Backgrounds/hqbg3.png");
 			font = new Font("Arial", Font.PLAIN, 24);
 		}
 		catch(Exception e) {
@@ -41,26 +39,53 @@ public class HqInfoState extends GameState {
 	@Override
 	public void draw(Graphics2D g) {
 
-		int check[] = {0,0,0};
-
 		bg.draw(g);
 		hud.draw(g);
 		
 		g.setFont(font);
 		g.setColor(Color.RED);
 
+		g.drawString("INFO: ", 33, 200);
+		g.drawString("PRICE: ", 33, 360);
+		if(row == 1){
+			g.setColor(Color.WHITE);
+		}
+		if(Inventory.invsize()>0 && row == 1){
+			g.drawString(Inventory.getInfo(currentChoice), 33, 230);
+			g.drawString(String.valueOf(Inventory.getprice(currentChoice)), 33, 390);
+		}
+		else{
+			g.drawString("None", 33, 230);
+			g.drawString("None", 33, 390);
+		}
+		if(Inventory.invsize() == 0){
+			g.setColor(Color.GREEN);
+			g.drawString("No items in inventory", 33, 560);
+		}
+		g.setColor(Color.RED);
 		if(row == 0){
 			g.setColor(Color.WHITE);
 		}
 		g.drawString(options, 620, 680);
 		
+		for(int i = 0; i < Inventory.invsize(); i++) {
+				
+			if(i == currentChoice && row == 1) {
+				g.setColor(Color.WHITE);
+				image.draw(g, -85 + 126*i, 393, "Resources/Items/selectedframe.png");
+			}
+			else {
+				g.setColor(Color.RED);
+			}
+			image.draw(g, 33 + 126*i, 510, "Resources/Items/"+Inventory.getname(Inventory.getid(i)) +".png");
+		}
 		
 	}
 	
 	//wybor aktualnego trybu pracy / opcji menu etc.
 	private void select() {
 		if(row == 0){
-			gsm.setState(GameStateManager.TOWNSTATE);
+			gsm.setState(GameStateManager.HEADQUARTERSSTATE);
 		}
 	}
 
@@ -71,7 +96,7 @@ public class HqInfoState extends GameState {
 			select();
 		}
 
-		if(k == KeyEvent.VK_UP) {
+		if(k == KeyEvent.VK_UP && Inventory.invsize() > 0) {
 			if(row == 1){
 				row = 0;
 			}
@@ -82,12 +107,31 @@ public class HqInfoState extends GameState {
 		}
 		if(k == KeyEvent.VK_DOWN) {
 			if(row == 0){
-				row = 1;
+				if(Inventory.invsize() > 0){
+					row = 1;
+				}
+
 			}
 			else{
 				row--;
 			}
 			
+		}
+		if(k == KeyEvent.VK_RIGHT) {
+			if(row == 1){
+				currentChoice++;
+				if(currentChoice == Inventory.invsize()) {
+					currentChoice = 0;
+				}
+			}
+		}
+		if(k == KeyEvent.VK_LEFT) {
+			if(row == 1){
+				currentChoice--;
+				if(currentChoice == -1) {
+					currentChoice = Inventory.invsize()-1;
+				}
+			}
 		}
 		if(k == KeyEvent.VK_ESCAPE) {
 			EscState.back = gsm.getState();
