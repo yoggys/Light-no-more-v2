@@ -26,7 +26,7 @@ public class Background {
 		}
 	}
 	
-	//rysowanie obiekut
+	//rysowanie
 	public void draw(Graphics2D g) {
 		g.drawImage(image, (int)x, (int)y, null);
 		
