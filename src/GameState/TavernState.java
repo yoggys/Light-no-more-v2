@@ -17,7 +17,6 @@ public class TavernState extends GameState {
 
 	//zmienne obslugi
 	private int[] currentChoice = {0, 0, 0};
-	private boolean[] lock = {false,false};
 	private int row = 0;
 	private int state = 0;
 
@@ -41,12 +40,12 @@ public class TavernState extends GameState {
 		image = new Images();
 		hud = new HUDgold();
 
-		//Player.reserve.add(new Champion(25, 10, 20, "test1"));
-		//Player.reserve.add(new Champion(25, 10, 20, "test2"));
+		Player.reserve.add(new Champion(25, 10, 20, "test1"));
+		Player.reserve.add(new Champion(25, 10, 20, "test2"));
 		Player.reserve.add(new Champion(100, 10, 30, "test3"));
 
-		//Player.tavernChampions.add(new Champion(25, 10, 20, "test4"));
-		//Player.tavernChampions.add(new Champion(25, 10, 20, "test5"));
+		Player.tavernChampions.add(new Champion(25, 10, 20, "test4"));
+		Player.tavernChampions.add(new Champion(25, 10, 20, "test5"));
 		Player.tavernChampions.add(new Champion(100, 10, 30, "test6"));
 	}
 	
@@ -79,10 +78,10 @@ public class TavernState extends GameState {
 
 		//card draw	
 		if(row == 1 && Player.tavernChampions.size()>0){
-			Player.championTavCard(currentChoice[1], g, image, 900, 180);
+			Player.championTavCard(currentChoice[row], g, image, 900, 180);
 		}
 		if(row == 2 && Player.reserve.size()>0){
-			Player.championResCard(currentChoice[2], g, image, 900, 180);
+			Player.championResCard(currentChoice[row], g, image, 900, 180);
 		}
 		
 
@@ -93,7 +92,7 @@ public class TavernState extends GameState {
 		}
 		else{
 			for(int i = 0; i < Player.tavernChampions.size(); i++) {
-				if((i == currentChoice[1] && row == 1) || (i == currentChoice[1] && lock [0])) {
+				if(i == currentChoice[row] && row == 1) {
 					g.setColor(Color.WHITE);
 					image.draw(g, -69 + 150*i, 80, "Resources/HUD/selectedframe.png");
 				}
@@ -113,7 +112,7 @@ public class TavernState extends GameState {
 		}
 		else{
 			for(int i = 0; i < Player.reserve.size(); i++) {
-				if((i == currentChoice[2] && row == 2) || (i == currentChoice[2] && lock [1])) {
+				if(i == currentChoice[row] && row == 2) {
 					g.setColor(Color.WHITE);
 					image.draw(g, -69 + 150*i, 380, "Resources/HUD/selectedframe.png");
 				}
@@ -159,6 +158,11 @@ public class TavernState extends GameState {
 			if(currentChoice[row] != 0){
 				currentChoice[row]--;
 			}
+			row = 0;
+			/*
+			if(currentChoice[row] != 0){
+				currentChoice[row]++;
+			}
 			else if(currentChoice[row] == 0 && Player.reserve.size() != 0){}
 			else{
 				if(Player.tavernChampions.size() > 0){
@@ -168,13 +172,18 @@ public class TavernState extends GameState {
 					row = 0;
 				}
 			}
-			
+			*/
 		}
 		else if(row == 1 && Player.tavernChampions.size() > 0 && Player.reserve.size() < 3 && Inventory.getgold() - priceSell.get(currentChoice[row]) >= 0){
 			Player.buyChampion(Player.tavernChampions.get(currentChoice[row]));
 			Player.tavernChampions.remove(currentChoice[row]);
 			Inventory.pay(priceSell.get(currentChoice[row]));
 
+			if(currentChoice[row] != 0){
+				currentChoice[row]--;
+			}
+			row = 0;
+			/*
 			if(currentChoice[row] != 0){
 				currentChoice[row]--;
 			}
@@ -189,6 +198,7 @@ public class TavernState extends GameState {
 					row = 0;
 				}
 			}
+			*/
 		}
 		if(Inventory.getgold() - priceSell.get(currentChoice[row]) < 0 && row == 1){
 			state = 1;
@@ -225,37 +235,37 @@ public class TavernState extends GameState {
 		}
 		if(k == KeyEvent.VK_LEFT) {
 			if(row == 1){
-				if(currentChoice[1] == 0){ 
-					currentChoice[1] = Player.champions.size()-1; 
+				if(currentChoice[row] == 0){ 
+					currentChoice[row] = Player.tavernChampions.size()-1; 
 				}
 				else{
-					currentChoice[1]--;
+					currentChoice[row]--;
 				}
 			}
 			else if(row == 2){
-				if(currentChoice[2] == 0){ 
-					currentChoice[2] = Player.reserve.size()-1; 
+				if(currentChoice[row] == 0){ 
+					currentChoice[row] = Player.reserve.size()-1; 
 				}
 				else{
-					currentChoice[2]--;
+					currentChoice[row]--;
 				}
 			}
 		}
 		if(k == KeyEvent.VK_RIGHT) {
 			if(row == 1){
-				if(currentChoice[1] == Player.champions.size()-1){ 
-					currentChoice[1] = 0; 
+				if(currentChoice[row] == Player.tavernChampions.size()-1){ 
+					currentChoice[row] = 0; 
 				}
 				else{
-					currentChoice[1]++;
+					currentChoice[row]++;
 				}
 			}
 			else if(row == 2){
-				if(currentChoice[2] == Player.reserve.size()-1){ 
-					currentChoice[2] = 0; 
+				if(currentChoice[row] == Player.reserve.size()-1){ 
+					currentChoice[row] = 0; 
 				}
 				else{
-					currentChoice[2]++;
+					currentChoice[row]++;
 				}
 			}
 		}
