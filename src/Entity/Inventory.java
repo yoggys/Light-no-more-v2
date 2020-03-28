@@ -70,6 +70,10 @@ public class Inventory {
 		gold -= price;
 	}
 
+	public static void sell(int price){
+		gold += price;
+	}
+
 	public static int invsize() {
 		return items.size();
 	}

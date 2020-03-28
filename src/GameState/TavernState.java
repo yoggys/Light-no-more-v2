@@ -57,7 +57,7 @@ public class TavernState extends GameState {
 		bg.draw(g);	
 		hud.draw(g);	
 		g.setFont(font);
-		
+
 		//INFO COL
 		if(row == 1){
 			g.setColor(Color.RED);
@@ -89,7 +89,7 @@ public class TavernState extends GameState {
 		//tavern champs
 		if(Player.tavernChampions.size() == 0){
 			g.setColor(Color.GREEN);
-			g.drawString("No champs in tavern", 40, 300);
+			g.drawString("No champs in tavern", 40, 200);
 		}
 		else{
 			for(int i = 0; i < Player.tavernChampions.size(); i++) {
@@ -154,7 +154,8 @@ public class TavernState extends GameState {
 		}
 		else if(row == 2 && Player.reserve.size() > 0){
 			Player.sellChampion(currentChoice[row]);
-			
+			Inventory.sell(priceBuy.get(currentChoice[row]));
+
 			if(currentChoice[row] != 0){
 				currentChoice[row]--;
 			}
@@ -171,8 +172,7 @@ public class TavernState extends GameState {
 		}
 		else if(row == 1 && Player.tavernChampions.size() > 0 && Player.reserve.size() < 3 && Inventory.getgold() - priceSell.get(currentChoice[row]) >= 0){
 			Player.buyChampion(Player.tavernChampions.get(currentChoice[row]));
-			Player.tavernChampions.remove(currentChoice[row])
-			;
+			Player.tavernChampions.remove(currentChoice[row]);
 			Inventory.pay(priceSell.get(currentChoice[row]));
 
 			if(currentChoice[row] != 0){
@@ -183,7 +183,7 @@ public class TavernState extends GameState {
 			}
 			else{
 				if(Player.reserve.size() == 0){
-					currentChoice[row]++;
+					row++;
 				}
 				else{
 					row = 0;
