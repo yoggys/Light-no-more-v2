@@ -38,10 +38,7 @@ public class Player extends MapObject {
 	private static final int WALKING = 1;
 
 	public Player(final TileMap tm) {
-
-
 		
-
 		super(tm);
 		
 		width = 30;
