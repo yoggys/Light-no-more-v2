@@ -8,7 +8,7 @@ public class HeadquartersState extends GameState {
 	
 	//zmienne gui
 	private Background bg;
-	private String options[] = {"Upgrade skills", "Change current squad", "Inspect inventory", "Back"};
+	private String options[] = {"Upgrade squad champions", "Change current squad", "Inspect inventory", "Back"};
 	private Font font;
 
 	//zmienne obslugi

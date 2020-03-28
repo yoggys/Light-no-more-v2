@@ -48,10 +48,18 @@ public class CharlatanState extends GameState {
 		g.setFont(font);
 		g.setColor(Color.RED);
 
+
+		
 		if(row == 0){
 			g.setColor(Color.WHITE);
 		}
 		g.drawString(options, 620, 680);
+
+		g.setColor(Color.RED);
+		if(row == 1){
+			g.setColor(Color.WHITE);
+		}
+		g.drawString("HEAL", 615, 450);
 
 		for(int i = 0; i < 3; i++){
 			if(Player.champions.get(i).payHeal() >= 100){

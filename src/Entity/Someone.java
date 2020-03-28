@@ -20,10 +20,12 @@ public class Someone
     private String profession;
     private boolean dead = false;
     private boolean isActive = true;
+    
 
     private ArrayList<String> avatars = new ArrayList<String>(Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8"));
     private Random random = new Random();
     
+    public ArrayList<Skill> skills;
     public ArrayList<Efect> efects;
     
 
@@ -35,8 +37,8 @@ public class Someone
         this.stamina = stamina;
         this.maxStamina = maxStamina;
         
-        
         this.name=name;
+
         efects = new ArrayList<Efect>();
     }
 
@@ -93,5 +95,22 @@ public class Someone
             avatar = "Resources/HUD/champ"+ avatars.get(id) + ".png";
             avatars.remove(id);
         }
+    }
+
+    public void upgradeChamp(){
+        double tmp = random.nextDouble()/2;
+        this.maxHp += maxHp*tmp;
+        this.hp += hp*tmp;
+
+        tmp = random.nextDouble()/2;
+        this.stamina += stamina*tmp;
+        this.maxStamina += maxStamina*tmp;
+
+        if(skills != null && skills.size()>0){
+            tmp = random.nextDouble()/3;
+            this.skills.get(0).upgradeSkill(tmp);
+            this.skills.get(1).upgradeSkill(tmp);
+        }
+
     }
 }

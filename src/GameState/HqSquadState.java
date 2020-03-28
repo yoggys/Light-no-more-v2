@@ -4,7 +4,6 @@ import TileMap.Background;
 import Entity.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 public class HqSquadState extends GameState {
 	
@@ -24,7 +23,7 @@ public class HqSquadState extends GameState {
 		
 		//test
 		try {
-			bg = new Background("Resources/Backgrounds/hqbg.png");
+			bg = new Background("Resources/Backgrounds/hqbg3.png");
 			font = new Font("Arial", Font.PLAIN, 18);
 		}
 		catch(Exception e) {
@@ -84,8 +83,8 @@ public class HqSquadState extends GameState {
 				Player.championResCard(currentChoice[2], g, image, 900, 180);	
 			}
 			if(lock[1]) {
-				Player.championResCard(currentChoice[2], g, image, 600, 180);
-				Player.championCurCard(currentChoice[1], g, image, 900, 180);
+				Player.championResCard(currentChoice[2], g, image, 900, 180);
+				Player.championCurCard(currentChoice[1], g, image, 600, 180);
 			}
 		}
 
