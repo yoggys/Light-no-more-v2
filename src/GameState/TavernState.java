@@ -43,7 +43,7 @@ public class TavernState extends GameState {
 
 		//Player.reserve.add(new Champion(25, 10, 20, "test1"));
 		//Player.reserve.add(new Champion(25, 10, 20, "test2"));
-		//Player.reserve.add(new Champion(100, 10, 30, "test3"));
+		Player.reserve.add(new Champion(100, 10, 30, "test3"));
 
 		//Player.tavernChampions.add(new Champion(25, 10, 20, "test4"));
 		//Player.tavernChampions.add(new Champion(25, 10, 20, "test5"));
@@ -84,8 +84,7 @@ public class TavernState extends GameState {
 		if(row == 2 && Player.reserve.size()>0){
 			Player.championResCard(currentChoice[2], g, image, 900, 180);
 		}
-
-
+		
 
 		//tavern champs
 		if(Player.tavernChampions.size() == 0){
@@ -159,17 +158,16 @@ public class TavernState extends GameState {
 			if(currentChoice[row] != 0){
 				currentChoice[row]--;
 			}
-			else if(currentChoice[row] == 0 && Player.reserve.size() != 0){
-				currentChoice[row] = 0;
-			}
+			else if(currentChoice[row] == 0 && Player.reserve.size() != 0){}
 			else{
 				if(Player.tavernChampions.size() > 0){
-					row--;
+					row++;
 				}
 				else{
 					row = 0;
 				}
 			}
+			
 		}
 		else if(row == 1 && Player.tavernChampions.size() > 0 && Player.reserve.size() < 3 && Inventory.getgold() - priceSell.get(currentChoice[row]) >= 0){
 			Player.buyChampion(Player.tavernChampions.get(currentChoice[row]));
@@ -209,41 +207,20 @@ public class TavernState extends GameState {
 		}
 
 		if(k == KeyEvent.VK_DOWN) {
-			if(row == 0){
-				if(Player.reserve.size() != 0){
-					row = 2;
-				}
-				else{
-					row--;
-				}
+			if(row == 2){
+				row=0;
 			}
 			else{
-				if(row == 2 && Player.tavernChampions.size() != 0){
-					row--;
-				}
-				else{
-					row = 0;
-				}
-				
+				row++;
 			}
 		}
 
 		if(k == KeyEvent.VK_UP) {
-			if(row == 2){
-				row = 0;
+			if(row == 0){
+				row=2;
 			}
 			else{
-				if(row == 0 && Player.reserve.size() != 0){
-					row++;
-				}
-				else{
-					if(row == 1 && Player.tavernChampions.size() != 0){
-						row++;
-					}
-					else{
-						row = 0;
-					}
-				}
+				row--;
 			}
 		}
 		if(k == KeyEvent.VK_LEFT) {
