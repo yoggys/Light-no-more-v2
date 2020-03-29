@@ -24,8 +24,8 @@ public class TavernState extends GameState {
 	private int state = 0;
 	private Random random = new Random();
 
-	private ArrayList<Integer> priceSell = new ArrayList<>(Arrays.asList(rand(),rand(),rand())); 
-	private ArrayList<Integer> priceBuy = new ArrayList<>(Arrays.asList(rand(),rand(),rand())); 
+	private ArrayList<Integer> priceSell = new ArrayList<>(Arrays.asList(rand(500, 500),rand(500, 500),rand(500, 500))); 
+	private ArrayList<Integer> priceBuy = new ArrayList<>(Arrays.asList(rand(300, 200),rand(300, 200),rand(300, 200))); 
 	
 	//konstruktor
 	public TavernState(GameStateManager gsm) {	
@@ -60,7 +60,7 @@ public class TavernState extends GameState {
 			Player.buyChampion(Player.tavernChampions.get(currentChoice[row]));
 			Player.tavernChampions.remove(currentChoice[row]);
 			Inventory.pay(priceSell.get(currentChoice[row]));
-
+			reroll(priceSell);
 			if(currentChoice[row] != 0){
 				currentChoice[row]--;
 			}
@@ -78,6 +78,7 @@ public class TavernState extends GameState {
 		else if(state == 2){
 			Player.sellChampion(currentChoice[row]);
 			Inventory.sell(priceBuy.get(currentChoice[row]));
+			reroll(priceBuy);
 
 			if(currentChoice[row] != 0){
 				currentChoice[row]--;
@@ -306,14 +307,21 @@ public class TavernState extends GameState {
 		}
 	}
 
-	public int rand(){
-		return 500+random.nextInt(500);
-	}
-
 	//z dziedziczenia
 	public void keyReleased(int k) {
 		if(k == KeyEvent.VK_ENTER){
 			select();
+		}
+	}
+
+	public int rand(int x, int y){
+		return x+random.nextInt(y);
+	}
+
+	public void reroll(ArrayList<Integer> arr){
+		for(int i = 0; i < 3; i++){
+			arr.set(i,rand(300, 200));
+			arr.set(i,rand(500,500));
 		}
 	}
 }
