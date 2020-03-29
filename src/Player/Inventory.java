@@ -1,11 +1,12 @@
-package Entity;
+package Player;
 
+import System.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+//class by Mateusz Karbownik
 public class Inventory {
-	private static ArrayList<Integer> items /*= new ArrayList<Integer>();*/ = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9,9));
-	//private static int[] items = {1,2,3,4,5,6,7,8,9,0};
+	private static ArrayList<Integer> items = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9,9));
 	public static int itemsSize = items.size();
 
 	private static String names[] = {

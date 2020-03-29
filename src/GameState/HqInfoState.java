@@ -1,10 +1,11 @@
 package GameState;
 
-import TileMap.Background;
-import Entity.*;
+import System.*;
+import Player.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+//class by Mateusz Karbownik
 public class HqInfoState extends GameState {
 	
 	//zmienne gui
@@ -52,6 +53,7 @@ public class HqInfoState extends GameState {
 		}
 		if(Inventory.invsize()>0 && row == 1){
 			g.drawString(Inventory.getInfo(currentChoice), 33, 230);
+			g.setColor(Color.ORANGE);
 			g.drawString(String.valueOf(Inventory.getprice(currentChoice)), 33, 390);
 		}
 		else{
@@ -71,11 +73,7 @@ public class HqInfoState extends GameState {
 		for(int i = 0; i < Inventory.invsize(); i++) {
 				
 			if(i == currentChoice && row == 1) {
-				g.setColor(Color.WHITE);
 				image.draw(g, -85 + 126*i, 393, "Resources/Items/selectedframe.png");
-			}
-			else {
-				g.setColor(Color.RED);
 			}
 			image.draw(g, 33 + 126*i, 510, "Resources/Items/"+Inventory.getname(Inventory.getid(i)) +".png");
 		}
@@ -92,9 +90,6 @@ public class HqInfoState extends GameState {
 	//keyevent poszczegolnych klawiszy
 	@Override
 	public void keyPressed(int k) {
-		if(k == KeyEvent.VK_ENTER){
-			select();
-		}
 
 		if(k == KeyEvent.VK_UP && Inventory.invsize() > 0) {
 			if(row == 1){
@@ -139,6 +134,9 @@ public class HqInfoState extends GameState {
 		}		
 	}
 
-	//z dziedziczenia
-	public void keyReleased(int k) {}
+	public void keyReleased(int k) {
+		if(k == KeyEvent.VK_ENTER){
+			select();
+		}
+	}
 }

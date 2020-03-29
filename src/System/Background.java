@@ -1,4 +1,4 @@
-package TileMap;
+package System;
 
 import Main.GamePanel;
 
@@ -8,6 +8,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+//class by Mateusz Karbownik
 public class Background {
 	
 	//zmienne ustawiania obiektu i pozycji

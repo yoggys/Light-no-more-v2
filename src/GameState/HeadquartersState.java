@@ -1,9 +1,10 @@
 package GameState;
 
-import TileMap.Background;
+import System.Background;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+//class by Mateusz Karbownik
 public class HeadquartersState extends GameState {
 	
 	//zmienne gui
@@ -73,9 +74,6 @@ public class HeadquartersState extends GameState {
 	//keyevent poszczegolnych klawiszy
 	@Override
 	public void keyPressed(int k) {
-		if(k == KeyEvent.VK_ENTER){
-			select();
-		}
 
 		if(k == KeyEvent.VK_DOWN) {
 			if(currentChoice == 3){
@@ -101,6 +99,9 @@ public class HeadquartersState extends GameState {
 		}	
 	}
 
-	//z dziedziczenia
-	public void keyReleased(int k) {}
+	public void keyReleased(int k) {
+		if(k == KeyEvent.VK_ENTER){
+			select();
+		}
+	}
 }

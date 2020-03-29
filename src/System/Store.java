@@ -1,5 +1,6 @@
-package Entity;
+package System;
 
+//class by Mateusz Karbownik
 public class Store {
 
 	private static int gold[] = {

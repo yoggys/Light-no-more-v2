@@ -1,10 +1,11 @@
-package TileMap;
+package System;
 
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+//class by Mateusz Karbownik
 public class Music {
 
 	//zmienne odtwarzania
@@ -12,7 +13,7 @@ public class Music {
 	private static File path;
 	private static Clip clip;
 	//true - unmuted / false - muted
-	public static boolean unmuted = false;
+	public static boolean unmuted = true;
 
 	//zmienna nazwy pliku
 	private static String playing;
