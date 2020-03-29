@@ -43,13 +43,13 @@ public class TavernState extends GameState {
 		image = new Images();
 		hud = new HUDgold();
 
-		Player.reserve.add(new Champion(25, 10, 20, "test1"));
-		Player.reserve.add(new Champion(25, 10, 20, "test2"));
-		Player.reserve.add(new Champion(100, 10, 30, "test3"));
+		Player.reserve.add(new Champion(25, 20, "test1"));
+		Player.reserve.add(new Champion(25, 20, "test2"));
+		Player.reserve.add(new Champion(100, 30, "test3"));
 
-		Player.tavernChampions.add(new Champion(25, 10, 20, "test4"));
-		Player.tavernChampions.add(new Champion(25, 10, 20, "test5"));
-		Player.tavernChampions.add(new Champion(100, 10, 30, "test6"));
+		Player.tavernChampions.add(new Champion(25, 20, "test4"));
+		Player.tavernChampions.add(new Champion(25, 20, "test5"));
+		Player.tavernChampions.add(new Champion(100, 30, "test6"));
 	}
 	
 	//rysowanie gui
