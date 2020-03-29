@@ -1,7 +1,6 @@
 package GameState;
 
-import System.Background;
-import System.Music;
+import System.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -74,8 +73,13 @@ public class EscState extends GameState {
 		}
 
 		if(currentChoice == 2) {
-			///Save.saveall();
-			//System.exit(0);
+			try{
+				SaveGame.saveGame();
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			System.exit(0);
 		}
 	}
 	
