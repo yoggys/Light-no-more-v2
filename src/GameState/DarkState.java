@@ -28,7 +28,7 @@ public class DarkState extends GameState {
 	
 	private boolean tmp=true;
 
-	Champion emptyChamp = new Champion(0,0,0,"");
+	Champion emptyChamp = new Champion(0,0,"");
 
 	public DarkState(GameStateManager gsm) 
 	{
@@ -41,10 +41,10 @@ public class DarkState extends GameState {
 		Skill skillSlise = new Skill("Slise",20,5);
 		Skill skillSmite = new Skill("Smite",10,20);
 		Skill skillHeal = new Skill("Heal",-4, 2, healOverTime);
-		Player.champions.add(new Champion(25, 10, 20, "AleXXX"));
-		Player.champions.add(new Champion(25, 10, 20, "Sasha"));
-		Player.champions.add(new Champion(100, 10, 30, "Siwy"));
-		Player.enemys.add(new Someone(50, 0, 10, "wolf"));
+		Player.champions.add(new Champion(25, 20, "AleXXX"));
+		Player.champions.add(new Champion(25, 20, "Sasha"));
+		Player.champions.add(new Champion(100, 30, "Siwy"));
+		Player.enemys.add(new Someone(50, 10, "wolf"));
 		Player.champions.get(0).addSkill( skillSlise );
 		Player.champions.get(0).addSkill( skillSmite );
 		Player.champions.get(1).addSkill( skillHeal );

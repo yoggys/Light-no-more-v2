@@ -26,13 +26,13 @@ public class Someone
     public ArrayList<Efect> efects;
     
 
-    public Someone(int maxHp, int stamina, int maxStamina, String name)
+    public Someone(int maxHp, int maxStamina, String name)
     {
         this.maxHp = maxHp;
         this.hp = this.maxHp;
 
-        this.stamina = stamina;
         this.maxStamina = maxStamina;
+        this.stamina = this.maxStamina;
         
         this.name=name;
 

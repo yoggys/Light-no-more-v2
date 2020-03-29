@@ -7,7 +7,6 @@ import java.util.Arrays;
 //class by Mateusz Karbownik
 public class Inventory {
 	private static ArrayList<Integer> items = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9,9));
-	public static int itemsSize = items.size();
 
 	private static String names[] = {
 		"working",
@@ -58,7 +57,6 @@ public class Inventory {
 	}
 
 	public static void sellitem(int pos){
-		itemsSize--;
 		gold += Store.sell(items.get(pos));
 		items.remove(items.get(pos));
 	}

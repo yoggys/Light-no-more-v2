@@ -13,9 +13,8 @@ public class Player {
 	public static ArrayList<Champion> tavernChampions = new ArrayList<Champion>();
 	public static ArrayList<Someone> enemys = new ArrayList<Someone>();
 
-
 	public static void changeSquad(int posCurrent, int posReserve){
-		Champion tmp = new Champion(0,0,0,"");
+		Champion tmp = new Champion(0,0,"");
 		tmp = champions.get(posCurrent);
 		champions.set(posCurrent, reserve.get(posReserve));
 		reserve.set(posReserve, tmp);
