@@ -18,5 +18,4 @@ public class Game {
 		Music.set("Resources/Music/muz11.wav");
 		Music.play();
 	}
-	
 }

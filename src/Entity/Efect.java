@@ -2,7 +2,7 @@ package Entity;
 
 public class Efect
 {
-    int timeInTurn;
+    int timeInTurn = 0;
     int damagePerTurn = 0;
 
     public Efect(int damage, int time)

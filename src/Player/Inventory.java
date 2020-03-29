@@ -6,7 +6,9 @@ import java.util.Arrays;
 
 //class by Mateusz Karbownik
 public class Inventory {
+
 	private static ArrayList<Integer> items = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9,9));
+	private static int gold = 10000;
 
 	private static String names[] = {
 		"working",
@@ -33,8 +35,6 @@ public class Inventory {
 		"Poison: Poisons target",
 		"Cure Potion: Clear poison on target"
 	};
-
-	private static int gold = 120000;
 
 	public static void additem(int id){
 			items.add(id);

@@ -1,6 +1,6 @@
 package GameState;
 
-import System.Background;
+import System.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
