@@ -1,9 +1,10 @@
 package GameState;
 
-import TileMap.Background;
+import System.Background;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+//class by Mateusz Karbownik
 public class EasterEgg extends GameState {
 	
 	//zmienna gui
@@ -15,7 +16,7 @@ public class EasterEgg extends GameState {
 		
 		//test
 		try {
-			bg = new Background("Resources/Backgrounds/easterbg.png");
+			bg = new Background("Resources/Backgrounds/darkbg.png");
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -29,12 +30,11 @@ public class EasterEgg extends GameState {
 	}	
 
 	@Override
-	public void keyPressed(int k) {
+	public void keyPressed(int k) { }
+
+	public void keyReleased(int k) {
 		if(k == KeyEvent.VK_ENTER){
 			gsm.setState(GameStateManager.MENUSTATE);
 		}
 	}
-
-	//z dziedziczenia
-	public void keyReleased(int k) {}
 }

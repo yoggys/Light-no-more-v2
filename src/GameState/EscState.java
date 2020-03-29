@@ -1,10 +1,11 @@
 package GameState;
 
-import TileMap.Background;
-import TileMap.Music;
+import System.Background;
+import System.Music;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+//class by Mateusz Karbownik
 public class EscState extends GameState {
 	
 	private Background bg;
@@ -81,9 +82,6 @@ public class EscState extends GameState {
 	//keyevent poszczegolnych klawiszy
 	@Override
 	public void keyPressed(int k) {
-		if(k == KeyEvent.VK_ENTER){
-			select();
-		}
 
 		if(k == KeyEvent.VK_UP) {
 			currentChoice--;
@@ -107,6 +105,9 @@ public class EscState extends GameState {
 		}
 	}
 
-	//wymog dziedziczenia
-	public void keyReleased(int k) {}
+	public void keyReleased(int k) {
+		if(k == KeyEvent.VK_ENTER){
+			select();
+		}
+	}
 }

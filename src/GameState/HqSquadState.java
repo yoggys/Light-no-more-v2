@@ -1,10 +1,11 @@
 package GameState;
 
-import TileMap.Background;
-import Entity.*;
+import System.*;
+import Player.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+//class by Mateusz Karbownik
 public class HqSquadState extends GameState {
 	
 	//zmienne gui
@@ -157,9 +158,6 @@ public class HqSquadState extends GameState {
 	//keyevent poszczegolnych klawiszy
 	@Override
 	public void keyPressed(int k) {
-		if(k == KeyEvent.VK_ENTER){
-			select();
-		}
 
 		if(k == KeyEvent.VK_DOWN && !lock[0] && !lock[1]) {
 			if(row == 2){
@@ -234,6 +232,9 @@ public class HqSquadState extends GameState {
 		}
 	}
 
-	//z dziedziczenia
-	public void keyReleased(int k) {}
+	public void keyReleased(int k) {
+		if(k == KeyEvent.VK_ENTER){
+			select();
+		}
+	}
 }

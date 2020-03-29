@@ -1,4 +1,4 @@
-package Entity;
+package System;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -6,6 +6,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+//class by Mateusz Karbownik
 public class Images {
 	
 	private BufferedImage image;

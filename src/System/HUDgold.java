@@ -1,28 +1,29 @@
-package Entity;
+package System;
 
+import Player.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.imageio.ImageIO;
 
-public class HUD {
-	
-	private Player player;
+//class by Mateusz Karbownik
+public class HUDgold {
 	
 	private BufferedImage image;
 	private Font font;
 	
-	public HUD(Player p) {
-		player = p;
+	public HUDgold() {
+		
 		try {
-			File file = new File("Resources/HUD/huddark.png");
+			File file = new File("Resources/HUD/hudgold.png");
 			image = ImageIO.read(file);
-			font = new Font("Arial", Font.PLAIN, 14);
+			font = new Font("Arial", Font.PLAIN, 28);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public void draw(Graphics2D g) {
@@ -30,8 +31,7 @@ public class HUD {
 		g.drawImage(image, 0, 10, null);
 		g.setFont(font);
 		g.setColor(Color.WHITE);
-		g.drawString(player.getHealth() + "/" + player.getMaxHealth(),30,25);
-		g.drawString(player.getFire() / 100 + "/" + player.getMaxFire() / 100,30,45);
+		g.drawString(Inventory.getgold() + "g",70,50);
 		
 	}
 	

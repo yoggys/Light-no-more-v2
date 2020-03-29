@@ -13,11 +13,8 @@ public class Someone
     private int stamina;
     private int maxStamina;
 
-	private int level;
-	private int exp;
     private String name;
     private String avatar;
-    private String profession;
     private boolean dead = false;
     private boolean isActive = true;
     

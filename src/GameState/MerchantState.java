@@ -1,10 +1,11 @@
 package GameState;
 
-import TileMap.Background;
-import Entity.*;
+import System.*;
+import Player.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+//class by Mateusz Karbownik
 public class MerchantState extends GameState {
 	
 	//zmienne gui
@@ -79,7 +80,7 @@ public class MerchantState extends GameState {
 				g.setColor(Color.WHITE);
 			}
 			else {
-				g.setColor(Color.RED);
+				g.setColor(Color.ORANGE);
 			}
 
 			g.drawString(String.valueOf(Store.buy(i)), 42 + i*60, 370);		
@@ -91,7 +92,7 @@ public class MerchantState extends GameState {
 				g.setColor(Color.WHITE);
 			}
 			else {
-				g.setColor(Color.RED);
+				g.setColor(Color.ORANGE);
 			}
 			image.draw(g, 33 + 60*i, 510, "Resources/Items/"+Inventory.getname(Inventory.getid(i)) +".png");
 			g.drawString(String.valueOf(Inventory.getprice(i)), 42 + i*60, 600);
@@ -147,9 +148,6 @@ public class MerchantState extends GameState {
 	//keyevent poszczegolnych klawiszy
 	@Override
 	public void keyPressed(int k) {
-		if(k == KeyEvent.VK_ENTER){
-			select();
-		}
 
 		if(k == KeyEvent.VK_RIGHT) {
 			if(row == 1){
@@ -210,5 +208,9 @@ public class MerchantState extends GameState {
 	}
 
 	//z dziedziczenia
-	public void keyReleased(int k) {}	
+	public void keyReleased(int k) {
+		if(k == KeyEvent.VK_ENTER){
+			select();
+		}
+	}	
 }

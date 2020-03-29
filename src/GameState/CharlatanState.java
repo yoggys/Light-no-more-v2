@@ -1,10 +1,11 @@
 package GameState;
 
-import TileMap.Background;
-import Entity.*;
+import System.*;
+import Player.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+//class by Mateusz Karbownik
 public class CharlatanState extends GameState {
 	
 	//zmienne gui
@@ -84,25 +85,22 @@ public class CharlatanState extends GameState {
 				g.setColor(Color.WHITE);
 			}
 			else {
-				g.setColor(Color.RED);
+				g.setColor(Color.ORANGE);
 			}
 
 			if(Player.champions.get(i).getPercent() >= 90){
-				image.draw(g, 298 + 200*i, 380, "Resources/HUD/highframe2.png");
-				image.draw(g, 298 + 200*i, 380, Player.champions.get(i).getAvatar());
-				g.drawString(String.valueOf((int)Player.champions.get(i).payHeal()), 427 + (200*i) + (int)(check[i]*12), 615);		
+				image.draw(g, 298 + 200*i, 380, "Resources/HUD/highframe2.png");					
 			}
 			
 			else if(Player.champions.get(i).getPercent() < 90 && Player.champions.get(i).getPercent() >= 50){
 				image.draw(g, 298 + 200*i, 380, "Resources/HUD/midframe2.png");
-				image.draw(g, 298 + 200*i, 380, Player.champions.get(i).getAvatar());	
-				g.drawString(String.valueOf((int)Player.champions.get(i).payHeal()), 427 + (200*i) + (int)(check[i]*12), 615);
 			}
 			else{
 				image.draw(g, 298 + 200*i, 380, "Resources/HUD/lowframe2.png");
-				image.draw(g, 298 + 200*i, 380, Player.champions.get(i).getAvatar());	
-				g.drawString(String.valueOf((int)Player.champions.get(i).payHeal()), 427 + (200*i) + (int)(check[i]*12), 615);
 			}
+
+			image.draw(g, 298 + 200*i, 380, Player.champions.get(i).getAvatar());	
+			g.drawString(String.valueOf((int)Player.champions.get(i).payHeal()), 427 + (200*i) + (int)(check[i]*12), 615);
 		}
 		if(state == 1){
 			g.setColor(Color.WHITE);
@@ -157,10 +155,7 @@ public class CharlatanState extends GameState {
 	//keyevent poszczegolnych klawiszy
 	@Override
 	public void keyPressed(int k) {
-		if(k == KeyEvent.VK_ENTER){
-			select();
-		}
-
+		
 		if(k == KeyEvent.VK_RIGHT) {
 			if(row == 1){
 				currentChoice[row]++;
@@ -205,7 +200,7 @@ public class CharlatanState extends GameState {
 					}
 				}
 			}
-
+			
 		}
 		if(k == KeyEvent.VK_DOWN) {
 			if(row == 0){
@@ -229,7 +224,10 @@ public class CharlatanState extends GameState {
 			gsm.setState(GameStateManager.ESCSTATE);
 		}
 	}
-
-	//z dziedziczenia
-	public void keyReleased(int k) {}
+	
+	public void keyReleased(int k) {
+		if(k == KeyEvent.VK_ENTER){
+			select();
+		}
+	}
 }

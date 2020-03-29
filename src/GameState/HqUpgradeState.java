@@ -1,10 +1,11 @@
 package GameState;
 
-import TileMap.Background;
-import Entity.*;
+import System.*;
+import Player.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+//class by Mateusz Karbownik
 public class HqUpgradeState extends GameState {
 	//zmienne gui
 	private Background bg;
@@ -67,7 +68,7 @@ public class HqUpgradeState extends GameState {
 				image.draw(g, 298 + 200*i, 380, "Resources/HUD/selectedframe.png");
 			}
 			else {
-				g.setColor(Color.RED);
+				g.setColor(Color.ORANGE);
 			}
 
 			image.draw(g, 298 + 200*i, 380, Player.champions.get(i).getAvatar());
@@ -100,9 +101,6 @@ public class HqUpgradeState extends GameState {
 	//keyevent poszczegolnych klawiszy
 	@Override
 	public void keyPressed(int k) {
-		if(k == KeyEvent.VK_ENTER){
-			select();
-		}
 
 		if(k == KeyEvent.VK_RIGHT) {
 			if(row == 1){
@@ -145,6 +143,9 @@ public class HqUpgradeState extends GameState {
 		}
 	}
 
-	//z dziedziczenia
-	public void keyReleased(int k) {}
+	public void keyReleased(int k) {
+		if(k == KeyEvent.VK_ENTER){
+			select();
+		}
+	}
 }

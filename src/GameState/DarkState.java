@@ -1,7 +1,8 @@
 package GameState;
 
-import TileMap.Background;
 import Entity.*;
+import System.*;
+import Player.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 

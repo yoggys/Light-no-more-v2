@@ -1,7 +1,7 @@
 package Main;
 
 import javax.swing.JFrame;
-import TileMap.Music;
+import System.Music;
 
 public class Game {
 	
