@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 public class EscState extends GameState {
 	
 	private Background bg;
-	private String[] options = {"Continue", "Mute/unmute music", "Save and quit[soon]"};
+	private String[] options = {"Continue", "Save game", " music", "Quit"};
 	private Color titleColor;
 	private Font titleFont;
 	private Font font;
@@ -50,7 +50,23 @@ public class EscState extends GameState {
 				g.setColor(Color.RED);
 			}
 
-			g.drawString(options[i], 466, 340 + 2 * i * 35);
+			if(i == 0){
+				g.drawString(options[i], 535, 340 + 2 * i * 35);
+			}
+			else if(i == 2){
+				if(Music.unmuted){
+					g.drawString("Mute"+options[i], 510, 340 + 2 * i * 35);
+				}
+				else{
+					g.drawString("Unmute"+options[i], 484, 340 + 2 * i * 35);
+				}
+			}
+			else if(i == 3){
+				g.drawString(options[i], 580, 340 + 2 * i * 35);
+			}
+			else{
+				g.drawString(options[i], 510, 340 + 2 * i * 35);
+			}
 		}
 	}
 	
@@ -59,8 +75,17 @@ public class EscState extends GameState {
 		if(currentChoice == 0) {
 			gsm.setState(back);
 		}
-
+		
 		if(currentChoice == 1) {
+			try{
+				SaveGame.saveGame();
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		if(currentChoice == 2) {
 			if(Music.unmuted){
 				Music.unmuted = false;
 				Music.stop();
@@ -72,13 +97,7 @@ public class EscState extends GameState {
 			
 		}
 
-		if(currentChoice == 2) {
-			try{
-				SaveGame.saveGame();
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
+		if(currentChoice == 3) {
 			System.exit(0);
 		}
 	}

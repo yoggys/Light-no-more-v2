@@ -2,8 +2,8 @@ package Entity;
 
 public class Efect
 {
-    int timeInTurn = 0;
-    int damagePerTurn = 0;
+    private int timeInTurn = 0;
+    private int damagePerTurn = 0;
 
     public Efect(int damage, int time)
     {
@@ -15,10 +15,6 @@ public class Efect
     {
         this.damagePerTurn = efect.damagePerTurn;
         this.timeInTurn = efect.timeInTurn;
-    }
-
-    public int getTotal(){
-        return this.damagePerTurn*this.timeInTurn;
     }
 
     public void use(Someone target)
@@ -38,6 +34,12 @@ public class Efect
     }
 
     public int getTime() { return timeInTurn; }
+    public int getDamage() { return damagePerTurn; }
+
+    //by Mateusz Karbownik
+    public int getTotal(){
+        return this.damagePerTurn*this.timeInTurn;
+    }
 
     public void upgradeEfect(double rand){
         this.damagePerTurn += damagePerTurn*rand;

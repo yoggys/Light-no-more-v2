@@ -25,11 +25,18 @@ public class Skill
     }
 
     public Efect getEfect() { return efect; }
-    
+
     public int getDamage() { return damage; }
 
     public int getStaminaUse() { return staminaUse; }
 
+    //by Mateusz Karbownik
+    public int getEfectDamage(){
+        return efect.getDamage();
+    }
+    public int getEfectTime(){
+        return efect.getTime();
+    }
     public void upgradeSkill(double rand){
         this.damage += damage*rand;
         if(this.efect != null){

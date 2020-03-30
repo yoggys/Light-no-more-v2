@@ -43,13 +43,20 @@ public class TavernState extends GameState {
 		image = new Images();
 		hud = new HUDgold();
 
-		Player.reserve.add(new Champion(25, 20, "test1"));
-		Player.reserve.add(new Champion(25, 20, "test2"));
-		Player.reserve.add(new Champion(100, 30, "test3"));
+		Skill skillSlise = new Skill("Slise",20,5);
+		Skill skillSmite = new Skill("Smite",10,20);
 
-		Player.tavernChampions.add(new Champion(25, 20, "test4"));
-		Player.tavernChampions.add(new Champion(25, 20, "test5"));
+		//Player.reserve.add(new Champion(25, 20, "test1"));
+		//Player.reserve.add(new Champion(25, 20, "test2"));
+		Player.reserve.add(new Champion(100, 30, "test3"));
+		Player.reserve.get(0).addSkill( skillSlise );
+		Player.reserve.get(0).addSkill( skillSmite );
+
+		//Player.tavernChampions.add(new Champion(25, 20, "test4"));
+		//Player.tavernChampions.add(new Champion(25, 20, "test5"));
 		Player.tavernChampions.add(new Champion(100, 30, "test6"));
+		Player.tavernChampions.get(0).addSkill( skillSlise );
+		Player.tavernChampions.get(0).addSkill( skillSmite );
 	}
 	
 	//rysowanie gui
@@ -60,7 +67,7 @@ public class TavernState extends GameState {
 			Player.buyChampion(Player.tavernChampions.get(currentChoice[row]));
 			Player.tavernChampions.remove(currentChoice[row]);
 			Inventory.pay(priceSell.get(currentChoice[row]));
-			reroll(priceSell);
+			rerollSell(currentChoice[row]);
 			if(currentChoice[row] != 0){
 				currentChoice[row]--;
 			}
@@ -78,7 +85,7 @@ public class TavernState extends GameState {
 		else if(state == 2){
 			Player.sellChampion(currentChoice[row]);
 			Inventory.sell(priceBuy.get(currentChoice[row]));
-			reroll(priceBuy);
+			rerollBuy(currentChoice[row]);
 
 			if(currentChoice[row] != 0){
 				currentChoice[row]--;
@@ -318,10 +325,12 @@ public class TavernState extends GameState {
 		return x+random.nextInt(y);
 	}
 
-	public void reroll(ArrayList<Integer> arr){
-		for(int i = 0; i < 3; i++){
-			arr.set(i,rand(300, 200));
-			arr.set(i,rand(500,500));
-		}
+	public void rerollBuy(int pos){
+		priceBuy.remove(pos);
+		priceBuy.add(rand(300, 200));
+	}
+	public void rerollSell(int pos){
+		priceSell.remove(pos);
+		priceSell.set(pos,rand(500, 500));
 	}
 }
