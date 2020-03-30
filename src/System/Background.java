@@ -39,6 +39,15 @@ public class Background {
 			g.drawImage(image, (int)x - GamePanel.WIDTH, (int)y, null);
 		}
 	}
+
+	public void move(String side){
+		if(side == "left" && x != 0){
+			x-=100;
+		}
+		else if(side == "right" && y != 0){
+			x+=100;
+		}
+	}
 	
 }
 

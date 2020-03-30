@@ -20,6 +20,7 @@ public class GameStateManager {
 	public static int HQUPGRADESTATE = 10;
 	public static int HQINFOSTATE = 11;
 	public static int ESCSTATE = 12;
+	public static int DUNGEONSTATE = 13;
 
 	
 	public GameStateManager() {
@@ -40,6 +41,7 @@ public class GameStateManager {
 		gameStates.add(new HqUpgradeState(this));
 		gameStates.add(new HqInfoState(this));
 		gameStates.add(new EscState(this));
+		gameStates.add(new DungeonState(this));
 	}
 	
 	public void setState(int state) {
