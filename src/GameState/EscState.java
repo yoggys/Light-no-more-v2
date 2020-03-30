@@ -83,6 +83,7 @@ public class EscState extends GameState {
 			catch(Exception e) {
 				e.printStackTrace();
 			}
+			gsm.setState(back);
 		}
 
 		if(currentChoice == 2) {
@@ -124,7 +125,6 @@ public class EscState extends GameState {
 
 		if(k == KeyEvent.VK_ESCAPE) {
 			gsm.setState(back);
-			//mus loc
 		}
 	}
 
