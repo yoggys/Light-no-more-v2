@@ -86,9 +86,9 @@ public class SaveGame {
 					put.setString(11, Player.champions.get(i).skills.get(1).getName());
 					put.setInt(12, Player.champions.get(i).skills.get(1).getDamage());
 					put.setInt(13,Player.champions.get(i).skills.get(1).getStaminaUse());
-					if( Player.champions.get(i).skills.get(0).getEfect() != null){
-						put.setInt(14, Player.champions.get(i).skills.get(0).getEfect().getDamage());
-						put.setInt(15, Player.champions.get(i).skills.get(0).getEfect().getTime());
+					if(Player.champions.get(i).skills.get(1).getEfect() != null){
+						put.setInt(14, Player.champions.get(i).skills.get(1).getEfect().getDamage());
+						put.setInt(15, Player.champions.get(i).skills.get(1).getEfect().getTime());
 					}
 					else{
 						put.setInt(14, 0);
@@ -141,9 +141,9 @@ public class SaveGame {
 					put.setString(11, Player.reserve.get(i).skills.get(1).getName());
 					put.setInt(12, Player.reserve.get(i).skills.get(1).getDamage());
 					put.setInt(13,Player.reserve.get(i).skills.get(1).getStaminaUse());
-					if( Player.reserve.get(i).skills.get(0).getEfect() != null){
-						put.setInt(14, Player.reserve.get(i).skills.get(0).getEfect().getDamage());
-						put.setInt(15, Player.reserve.get(i).skills.get(0).getEfect().getTime());
+					if( Player.reserve.get(i).skills.get(1).getEfect() != null){
+						put.setInt(14, Player.reserve.get(i).skills.get(1).getEfect().getDamage());
+						put.setInt(15, Player.reserve.get(i).skills.get(1).getEfect().getTime());
 					}
 					else{
 						put.setInt(14, 0);
@@ -196,9 +196,9 @@ public class SaveGame {
 					put.setString(11, Player.tavernChampions.get(i).skills.get(1).getName());
 					put.setInt(12, Player.tavernChampions.get(i).skills.get(1).getDamage());
 					put.setInt(13,Player.tavernChampions.get(i).skills.get(1).getStaminaUse());
-					if( Player.tavernChampions.get(i).skills.get(0).getEfect() != null){
-						put.setInt(14, Player.tavernChampions.get(i).skills.get(0).getEfect().getDamage());
-						put.setInt(15, Player.tavernChampions.get(i).skills.get(0).getEfect().getTime());
+					if(Player.tavernChampions.get(i).skills.get(1).getEfect() != null){
+						put.setInt(14, Player.tavernChampions.get(i).skills.get(1).getEfect().getDamage());
+						put.setInt(15, Player.tavernChampions.get(i).skills.get(1).getEfect().getTime());
 					}
 					else{
 						put.setInt(14, 0);
