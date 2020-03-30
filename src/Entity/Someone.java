@@ -3,6 +3,7 @@ package Entity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.awt.Graphics2D;
 
 public class Someone
 {
@@ -111,7 +112,16 @@ public class Someone
         avatar = av;
     }
 
-    public void upgradeChamp(){
+
+    public void drawSomeone(int x, int y, Graphics2D g)
+    {
+        g.drawString(""+this.getName(),x , y);
+		g.drawString(""+this.getHp()+ "HP", x, y + 20);
+		g.drawString(""+this.getStamina()+"ST", x + 50, y + 20);
+    }
+
+    public void upgradeChamp()
+    {
         double tmp = random.nextDouble()/2;
         this.maxHp += maxHp*tmp;
         this.hp += hp*tmp;
