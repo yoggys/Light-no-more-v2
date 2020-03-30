@@ -271,7 +271,7 @@ public class DarkState extends GameState {
 
 	@Override
 	public void keyPressed(int k) {
-		if(k == KeyEvent.VK_SPACE)
+		if(k == KeyEvent.VK_ENTER)
 		{
 			if(tmp)
 			{
@@ -299,12 +299,12 @@ public class DarkState extends GameState {
 		}
 		if(k == KeyEvent.VK_ESCAPE) {
 			EscState.back = gsm.getState();
-			//gsm.setState(GameStateManager.ESCSTATE);
+			gsm.setState(GameStateManager.ESCSTATE);
 		}
 	}
 	public void keyReleased(int k) 
 	{
-		if(k == KeyEvent.VK_SPACE)
+		if(k == KeyEvent.VK_ENTER)
 		tmp=true;
 	}
 
