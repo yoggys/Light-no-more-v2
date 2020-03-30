@@ -54,16 +54,16 @@ public class MenuState extends GameState {
 			}
 
 			if(i==0){
-				g.drawString(options[i], 522, 340 + 2 * i * 35);
+				g.drawString(options[i], 60, 340 + 2 * i * 35);
 			}
 			else if(i == 1){
-				g.drawString(options[i], 520, 340 + 2 * i * 35);
+				g.drawString(options[i], 60, 340 + 2 * i * 35);
 			}
 			else if(i == 2){
-				g.drawString(options[i], 584, 340 + 2 * i * 35);
+				g.drawString(options[i], 60, 340 + 2 * i * 35);
 			}
 			else{
-				g.drawString(options[i], 586, 340 + 2 * i * 35);
+				g.drawString(options[i], 60, 340 + 2 * i * 35);
 			}
 		}
 	}

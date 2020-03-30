@@ -13,7 +13,7 @@ public class MerchantState extends GameState {
 	private HUDgold hud;
 	private Images image;
 	private Font font;
-	private String options = "Back";
+	public static String options[];
 
 
 	//zmienne obslugi
@@ -50,23 +50,23 @@ public class MerchantState extends GameState {
 		if(row == 0){
 			g.setColor(Color.WHITE);
 		}
-		g.drawString(options, 620, 680);
+		g.drawString(options[0], 620, 680);
 		if(row == 1){
 			g.setColor(Color.RED);
-			g.drawString("BUY ITEMS", 40, 240);
+			g.drawString(options[1], 40, 240);
 			g.setColor(Color.WHITE);
-			g.drawString("SELL ITEMS", 40, 470);
+			g.drawString(options[2], 40, 470);
 		}
 		else if(row == 2){
 			g.setColor(Color.RED);
-			g.drawString("SELL ITEMS", 40, 470);
+			g.drawString(options[2], 40, 470);
 			g.setColor(Color.WHITE);
-			g.drawString("BUY ITEMS", 40, 240);
+			g.drawString(options[1], 40, 240);
 		}
 		else{
 			g.setColor(Color.RED);
-			g.drawString("SELL ITEMS", 40, 470);
-			g.drawString("BUY ITEMS", 40, 240);
+			g.drawString(options[2], 40, 470);
+			g.drawString(options[1], 40, 240);
 		}
 
 		image.draw(g, 33, 280, "Resources/Items/sapot.png");
@@ -99,16 +99,16 @@ public class MerchantState extends GameState {
 		}
 		if(Inventory.invsize() == 0){
 			g.setColor(Color.GREEN);
-			g.drawString("No items to sell", 40, 530);
+			g.drawString(options[3], 40, 530);
 		}
 		if(state[0] == 1){
 			g.setColor(Color.WHITE);
-			g.drawString("NOT ENOUGH INVENTORY SPACE!", 40, 680);
+			g.drawString(options[4], 40, 680);
 			state[0] = 0;
 		}
 		if(state[1] == 1){
 			g.setColor(Color.WHITE);
-			g.drawString("NOT ENOUGH MONEY!", 40, 680);
+			g.drawString(options[5], 40, 680);
 			state[1] = 0;
 		}
 		

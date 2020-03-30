@@ -21,13 +21,14 @@ public class GameStateManager {
 	public static int HQINFOSTATE = 11;
 	public static int ESCSTATE = 12;
 	public static int DUNGEONSTATE = 13;
+	public static int LANGSTATE = 14;
 
 	
 	public GameStateManager() {
 		
 		gameStates = new ArrayList<GameState>();
 		
-		currentState = MENUSTATE;
+		currentState = LANGSTATE;
 		gameStates.add(new MenuState(this));
 		gameStates.add(new TownState(this));
 		gameStates.add(new HelpState(this));
@@ -42,6 +43,7 @@ public class GameStateManager {
 		gameStates.add(new HqInfoState(this));
 		gameStates.add(new EscState(this));
 		gameStates.add(new DungeonState(this));
+		gameStates.add(new LangState(this));
 	}
 	
 	public void setState(int state) {

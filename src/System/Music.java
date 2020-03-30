@@ -13,7 +13,7 @@ public class Music {
 	private static File path;
 	private static Clip clip;
 	//true - unmuted / false - muted
-	public static boolean unmuted = false;
+	public static boolean unmuted = true;
 
 	//zmienna nazwy pliku
 	private static String playing;

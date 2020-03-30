@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 public class EscState extends GameState {
 	
 	private Background bg;
-	private String[] options = {"Continue", "Save game", " music", "Quit"};
+	public static String[] options;
 	private Color titleColor;
 	private Font titleFont;
 	private Font font;
@@ -51,21 +51,21 @@ public class EscState extends GameState {
 			}
 
 			if(i == 0){
-				g.drawString(options[i], 535, 340 + 2 * i * 35);
+				g.drawString(options[i], 60, 340 + 2 * i * 35);
 			}
 			else if(i == 2){
 				if(Music.unmuted){
-					g.drawString("Mute"+options[i], 510, 340 + 2 * i * 35);
+					g.drawString(options[i], 60, 340 + 2 * i * 35);
 				}
 				else{
-					g.drawString("Unmute"+options[i], 484, 340 + 2 * i * 35);
+					g.drawString(options[4], 60, 340 + 2 * i * 35);
 				}
 			}
 			else if(i == 3){
-				g.drawString(options[i], 580, 340 + 2 * i * 35);
+				g.drawString(options[i], 60, 340 + 2 * i * 35);
 			}
-			else{
-				g.drawString(options[i], 510, 340 + 2 * i * 35);
+			else if(i == 1){
+				g.drawString(options[i], 60, 340 + 2 * i * 35);
 			}
 		}
 	}
@@ -86,7 +86,7 @@ public class EscState extends GameState {
 			gsm.setState(back);
 		}
 
-		if(currentChoice == 2) {
+		if(currentChoice == 2 || currentChoice == 4) {
 			if(Music.unmuted){
 				Music.unmuted = false;
 				Music.stop();
@@ -111,14 +111,14 @@ public class EscState extends GameState {
 			currentChoice--;
 
 			if(currentChoice == -1) {
-				currentChoice = options.length - 1;
+				currentChoice = options.length - 2;
 			}
 		}
 
 		if(k == KeyEvent.VK_DOWN) {
 			currentChoice++;
 
-			if(currentChoice == options.length) {
+			if(currentChoice == options.length-1) {
 				currentChoice = 0;
 			}
 		}
