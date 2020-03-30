@@ -5,6 +5,9 @@ import System.*;
 import Player.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.Vector;
+
+import javax.lang.model.util.ElementScanner6;
 
 public class DarkState extends GameState {
 	
@@ -20,6 +23,7 @@ public class DarkState extends GameState {
 	private Someone target = null;
 	private int targetId=999;
 	
+
 	private Someone enemy = null;
 
 	private int currentChoice = 0;
@@ -29,6 +33,8 @@ public class DarkState extends GameState {
 	private boolean tmp=true;
 
 	Champion emptyChamp = new Champion(0,0,"");
+
+	private int firstChampX = 200, firstChampY = 400, firstEnemyX = 600, firstEnemyY = 400;
 
 	public DarkState(GameStateManager gsm) 
 	{
@@ -45,12 +51,12 @@ public class DarkState extends GameState {
 		Player.champions.add(new Champion(25, 20, "Sasha"));
 		Player.champions.add(new Champion(100, 30, "Siwy"));
 		Player.enemys.add(new Someone(50, 10, "wolf"));
-		Player.champions.get(0).addSkill( skillSlise );
-		Player.champions.get(0).addSkill( skillSmite );
-		Player.champions.get(1).addSkill( skillHeal );
-		Player.champions.get(1).addSkill( skillPoison );
-		Player.champions.get(2).addSkill( skillSmite );
-		Player.champions.get(2).addSkill( skillHeal );
+		Player.champions.get(0).addSkill( new Skill(skillSlise ));
+		Player.champions.get(0).addSkill( new Skill(skillSmite ));
+		Player.champions.get(1).addSkill( new Skill(skillHeal  ));
+		Player.champions.get(1).addSkill( new Skill(skillPoison ));
+		Player.champions.get(2).addSkill( new Skill(skillSmite ));
+		Player.champions.get(2).addSkill( new Skill(skillHeal  ));
 
 		this.gsm = gsm;
 		
@@ -111,15 +117,13 @@ public class DarkState extends GameState {
 						g.setColor(Color.GRAY);
 					}
 
-					g.drawString(Player.champions.get(i).getName(), 100 + i*50, 100);
-					g.drawString(""+Player.champions.get(i).getHp(), 100 + i*50, 120);
-					g.drawString(""+Player.champions.get(i).getStamina(), 120 + i*50, 120);
+					
+					Player.champions.get(i).drawSomeone(firstChampX + i *100, firstChampY, g);
+					
 				} 
 				else if(i< Player.champions.size() + Player.enemys.size())
 				{
-					g.drawString(Player.enemys.get(i - Player.champions.size()).getName(), 200 + i*50, 100);
-					g.drawString(""+Player.enemys.get(i - Player.champions.size()).getHp(), 200 + i*50, 120);
-					g.drawString(""+Player.enemys.get(i - Player.champions.size()).getStamina(), 220 + i*50, 120);
+					Player.enemys.get(i - Player.champions.size()).drawSomeone(firstEnemyX + i*100, firstEnemyY, g);
 				}
 				else if(activeChamp!=null && i < Player.champions.size() + Player.enemys.size() + activeChamp.skills.size())
 				{
@@ -133,11 +137,12 @@ public class DarkState extends GameState {
 						g.setColor(Color.GRAY);
 					}
 
-					g.drawString(activeChamp.skills.get(j).getName(), 100+ j*50, 150);
+					activeChamp.skills.get(j).drawSkill(firstChampX + j * 75, firstChampY + 50, g);
+					//g.drawString(activeChamp.skills.get(j).getName(), firstChampX + j*50, firstChampY + 50);
 				}
 				else
 				{
-					g.drawString("back",  586, 410);
+					g.drawString("back",  586, 700);
 				}
 				
 				if(activeChamp!=null && target != null && selectedSkill != null)
@@ -254,6 +259,7 @@ public class DarkState extends GameState {
 			if(selectedSkill.getStaminaUse() < activeChamp.getStamina())
 			{
 				selectedSkillId = currentChoice;
+				currentChoice = 0;
 			}
 			else
 			{
@@ -285,23 +291,60 @@ public class DarkState extends GameState {
 		}
 		
 
-		if(k == KeyEvent.VK_UP || k == KeyEvent.VK_RIGHT) {
-			currentChoice++;
-			if(currentChoice == Player.champions.size()+Player.enemys.size()+activeChamp.skills.size()+1) {
-				currentChoice = 0;
+		if(k == KeyEvent.VK_UP)
+		{
+			
+			if( currentChoice == Player.champions.size() + Player.enemys.size() +activeChamp.skills.size())
+			{
+				if(activeChamp.skills.size()>0)
+					currentChoice = Player.champions.size() + Player.enemys.size();
+				else
+					currentChoice = 0;
 			}
+			else if (currentChoice >= Player.champions.size() + Player.enemys.size())
+			{
+				currentChoice = activeChampId;
+			}
+		} 
+
+		if(k == KeyEvent.VK_RIGHT) 
+		{
+			if(currentChoice == Player.champions.size() + Player.enemys.size()-1  || 
+			currentChoice >= Player.champions.size() + Player.enemys.size() + activeChamp.skills.size()-1)
+			{}
+			else
+				currentChoice++;
 		}
-		if(k == KeyEvent.VK_DOWN || k == KeyEvent.VK_LEFT) {
-			currentChoice--;
-			if(currentChoice == -1) {
+
+
+		if(k == KeyEvent.VK_DOWN)
+		{
+			if (currentChoice<Player.champions.size() + Player.enemys.size())
+			{
+				currentChoice = Player.champions.size() + Player.enemys.size();
+			} 
+			else if( currentChoice >= Player.champions.size() + Player.enemys.size())
+			{
 				currentChoice = Player.champions.size()+Player.enemys.size()+activeChamp.skills.size();
 			}
 		}
-		if(k == KeyEvent.VK_ESCAPE) {
+		
+		if(k == KeyEvent.VK_LEFT) 
+		{
+			if(currentChoice == 0 || currentChoice == Player.champions.size() + Player.enemys.size() 
+			|| currentChoice == Player.champions.size() + Player.enemys.size() + activeChamp.skills.size())
+			{}
+			else 
+				currentChoice--;
+		}
+		if(k == KeyEvent.VK_ESCAPE) 
+		{
 			EscState.back = gsm.getState();
 			gsm.setState(GameStateManager.ESCSTATE);
 		}
 	}
+
+
 	public void keyReleased(int k) 
 	{
 		if(k == KeyEvent.VK_ENTER)

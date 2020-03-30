@@ -1,5 +1,7 @@
 package Entity;
 
+import java.awt.Graphics2D;
+
 public class Skill
 {
     private int staminaUse;
@@ -23,6 +25,14 @@ public class Skill
         this.damage = damage;
         this.efect = efect;
     }
+    
+    public Skill(Skill s)
+    {
+        this.name = s.name;
+        this.staminaUse =s.staminaUse;
+        this.damage = s.damage;
+        this.efect = s.efect;
+    }
 
     public Efect getEfect() { return efect; }
 
@@ -43,5 +53,13 @@ public class Skill
             this.efect.upgradeEfect(rand);
         } 
     }
+
+    public void drawSkill(int x, int y, Graphics2D g)
+    {
+        g.drawString(this.getName(), x, y);
+        g.drawString(""+this.getDamage(), x, y +20);
+        g.drawString(""+this.getStaminaUse(), x + 20, y + 20);
+    }
+
 
 }
