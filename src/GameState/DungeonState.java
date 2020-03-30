@@ -8,9 +8,6 @@ import java.awt.event.KeyEvent;
 public class DungeonState extends GameState {
 	
 	//zmienne gui
-	private Background bg;
-	private Color titleColor;
-	private Font font;
 	private Images image;
 	private int x = 0;
 	private int xmax = 2780;
@@ -23,8 +20,6 @@ public class DungeonState extends GameState {
 		//test
 		try {
 			image = new Images();
-
-			font = new Font("Arial", Font.PLAIN, 44);
 			
 		}
 		catch(Exception e) {
