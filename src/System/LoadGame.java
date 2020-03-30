@@ -16,7 +16,7 @@ public class LoadGame {
 		
 		Connection conn = null;
 		try {
-		    conn = DriverManager.getConnection("jdbc:h2:./LNM_save", "LNM", "LNM");
+		    conn = DriverManager.getConnection("jdbc:h2:./Saves/LNM_save", "LNM", "LNM");
 			
 			Statement statement = conn.createStatement();
 			
