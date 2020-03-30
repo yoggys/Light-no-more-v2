@@ -12,6 +12,7 @@ public class HqSquadState extends GameState {
 	private Background bg;
 	private Images image;
 	private Font font;
+	public static String text[];
 
 	//zmienne obslugi
 	private int[] currentChoice = {0, 0, 0};
@@ -44,20 +45,20 @@ public class HqSquadState extends GameState {
 		//INFO COL
 		if(row == 1){
 			g.setColor(Color.RED);
-			g.drawString("RESERVE CHAMPS", 40, 440);
+			g.drawString(text[0], 40, 440);
 			g.setColor(Color.WHITE);
-			g.drawString("CURRENT SQUAD", 40, 140);
+			g.drawString(text[1], 40, 140);
 		}
 		else if(row == 2){
 			g.setColor(Color.WHITE);
-			g.drawString("RESERVE CHAMPS", 40, 440);			
+			g.drawString(text[0], 40, 440);			
 			g.setColor(Color.RED);
-			g.drawString("CURRENT SQUAD", 40, 140);
+			g.drawString(text[1], 40, 140);
 		}
 		else{
 			g.setColor(Color.RED);
-			g.drawString("RESERVE CHAMPS", 40, 440);
-			g.drawString("CURRENT SQUAD", 40, 140);
+			g.drawString(text[0], 40, 440);
+			g.drawString(text[1], 40, 140);
 		}
 
 		//card draw	
@@ -72,11 +73,11 @@ public class HqSquadState extends GameState {
 		else{
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Arial", Font.BOLD, 24));
-			g.drawString("Change current squad", 770, 110);
+			g.drawString(text[2], 770, 110);
 			g.setColor(Color.RED);
-			g.drawString("THIS", 720, 160);
+			g.drawString(text[3], 720, 160);
 			g.setColor(Color.GREEN);
-			g.drawString("FOR", 1020, 160);
+			g.drawString(text[4], 1020, 160);
 			g.setFont(font);
 
 			if(lock[0]) {		
@@ -106,7 +107,7 @@ public class HqSquadState extends GameState {
 		//reserve champs
 		if(Player.reserve.size() == 0){
 			g.setColor(Color.GREEN);
-			g.drawString("No champs in reserve", 40, 500);
+			g.drawString(text[5], 40, 500);
 		}
 		else{
 			for(int i = 0; i < Player.reserve.size(); i++) {
@@ -130,7 +131,7 @@ public class HqSquadState extends GameState {
 		else{
 			g.setColor(Color.RED);
 		}
-		g.drawString("Back", 620, 680);
+		g.drawString(text[6], 620, 680);
 	}
 	
 	//wybor aktualnego trybu pracy / opcji menu etc.

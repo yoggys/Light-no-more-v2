@@ -5,9 +5,6 @@ import System.*;
 import Player.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.Vector;
-
-import javax.lang.model.util.ElementScanner6;
 
 public class DarkState extends GameState {
 	

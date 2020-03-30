@@ -10,7 +10,7 @@ public class CharlatanState extends GameState {
 	
 	//zmienne gui
 	private Background bg;
-	private String options = "Back";
+	public static String options[];
 	private HUDgold hud;
 	private Images image;
 	private Font font;
@@ -54,13 +54,13 @@ public class CharlatanState extends GameState {
 		if(row == 0){
 			g.setColor(Color.WHITE);
 		}
-		g.drawString(options, 620, 680);
+		g.drawString(options[0], 620, 680);
 
 		g.setColor(Color.RED);
 		if(row == 1){
 			g.setColor(Color.WHITE);
 		}
-		g.drawString("HEAL", 615, 450);
+		g.drawString(options[1], 615, 450);
 
 		for(int i = 0; i < 3; i++){
 			if(Player.champions.get(i).payHeal() >= 100){
@@ -104,7 +104,7 @@ public class CharlatanState extends GameState {
 		}
 		if(state == 1){
 			g.setColor(Color.WHITE);
-			g.drawString("NOT ENOUGH MONEY!", 40, 680);
+			g.drawString(options[2], 40, 680);
 			state = 0;
 		}
 	}

@@ -10,7 +10,7 @@ public class HqInfoState extends GameState {
 	
 	//zmienne gui
 	private Background bg;
-	private String options = "Back";
+	public static String options[];
 	private HUDgold hud;
 	private Images image;
 	private Font font;
@@ -47,7 +47,7 @@ public class HqInfoState extends GameState {
 		g.setColor(Color.RED);
 
 		g.drawString("INFO: ", 33, 200);
-		g.drawString("PRICE: ", 33, 360);
+		g.drawString(options[0], 33, 360);
 		if(row == 1){
 			g.setColor(Color.WHITE);
 		}
@@ -57,18 +57,18 @@ public class HqInfoState extends GameState {
 			g.drawString(String.valueOf(Inventory.getprice(currentChoice)), 33, 390);
 		}
 		else{
-			g.drawString("None", 33, 230);
-			g.drawString("None", 33, 390);
+			g.drawString(options[2], 33, 230);
+			g.drawString(options[2], 33, 390);
 		}
 		if(Inventory.invsize() == 0){
 			g.setColor(Color.GREEN);
-			g.drawString("No items in inventory", 33, 560);
+			g.drawString(options[3], 33, 560);
 		}
 		g.setColor(Color.RED);
 		if(row == 0){
 			g.setColor(Color.WHITE);
 		}
-		g.drawString(options, 620, 680);
+		g.drawString(options[1], 620, 680);
 		
 		for(int i = 0; i < Inventory.invsize(); i++) {
 				

@@ -12,8 +12,10 @@ public class Player {
 	public static ArrayList<Champion> reserve = new ArrayList<Champion>();
 	public static ArrayList<Champion> tavernChampions = new ArrayList<Champion>();
 	public static ArrayList<Someone> enemys = new ArrayList<Someone>();
-
+	
 	public static int currentDungeon = 1;
+	public static String langCards[];
+
 
 	public static void changeSquad(int posCurrent, int posReserve){
 		Champion tmp = new Champion(0,0,"");
@@ -35,10 +37,10 @@ public class Player {
 		image.draw(g, x, y, "Resources/HUD/card.png");
 		image.draw(g, x, y-44, "Resources/HUD/cardframe.png");
 		image.draw(g, x, y-44, Player.champions.get(choice).getAvatar());
-		g.drawString("NAME: " + Player.champions.get(choice).getName(), x+50, y+30*6);
+		g.drawString(langCards[0] + Player.champions.get(choice).getName(), x+50, y+30*6);
 		g.drawString("HP/MAX_HP: " + Player.champions.get(choice).getHp() +"/"+ Player.champions.get(choice).getMaxHp(), x+50, y+30*7);	
 		g.drawString("SA/MAX_SA: " + Player.champions.get(choice).getStamina() +"/"+ Player.champions.get(choice).getMaxStamina(), x+50, y+30*8);
-		g.drawString("SKILLS(DMG/HEAL): ", x+50, y+30*9);
+		g.drawString(langCards[1]+"("+langCards[2]+"/"+langCards[3]+"): ", x+50, y+30*9);
 		if(Player.champions.get(choice).skills.size() != 0){
 			if(Player.champions.get(choice).skills.get(0).getEfect() == null){
 				g.drawString("*"+ Player.champions.get(choice).skills.get(0).getName() + "(" +
@@ -60,7 +62,7 @@ public class Player {
 			}
 		}
 		else{
-			g.drawString("NONE!", x+50, y+30*10);
+			g.drawString(langCards[4], x+50, y+30*10);
 		}
 	}
 
@@ -69,10 +71,10 @@ public class Player {
 		image.draw(g, x, y, "Resources/HUD/card.png");
 		image.draw(g, x, y-44, "Resources/HUD/cardframe.png");
 		image.draw(g, x, y-44, Player.reserve.get(choice).getAvatar());
-		g.drawString("NAME: " + Player.reserve.get(choice).getName(), x+50, y+30*6);
+		g.drawString(langCards[0] + Player.reserve.get(choice).getName(), x+50, y+30*6);
 		g.drawString("HP/MAX_HP: " + Player.reserve.get(choice).getHp() +"/"+ Player.reserve.get(choice).getMaxHp(), x+50, y+30*7);	
 		g.drawString("SA/MAX_SA: " + Player.reserve.get(choice).getStamina() +"/"+ Player.reserve.get(choice).getMaxStamina(), x+50, y+30*8);
-		g.drawString("SKILLS(DMG/HEAL): ", x+50, y+30*9);
+		g.drawString(langCards[1]+"("+langCards[2]+"/"+langCards[3]+"): ", x+50, y+30*9);
 		if(Player.reserve.get(choice).skills.size() != 0){
 			if(Player.reserve.get(choice).skills.get(0).getEfect() == null){
 				g.drawString("*"+ Player.reserve.get(choice).skills.get(0).getName() + "(" +
@@ -94,7 +96,7 @@ public class Player {
 			}
 		}
 		else{
-			g.drawString("NONE!", x+50, y+30*10);
+			g.drawString(langCards[4], x+50, y+30*10);
 		}
 	}
 
@@ -103,10 +105,10 @@ public class Player {
 		image.draw(g, x, y, "Resources/HUD/card.png");
 		image.draw(g, x, y-44, "Resources/HUD/cardframe.png");
 		image.draw(g, x, y-44, Player.tavernChampions.get(choice).getAvatar());
-		g.drawString("NAME: " + Player.tavernChampions.get(choice).getName(), x+50, y+30*6);
+		g.drawString(langCards[0] + Player.tavernChampions.get(choice).getName(), x+50, y+30*6);
 		g.drawString("HP/MAX_HP: " + Player.tavernChampions.get(choice).getHp() +"/"+ Player.tavernChampions.get(choice).getMaxHp(), x+50, y+30*7);	
 		g.drawString("SA/MAX_SA: " + Player.tavernChampions.get(choice).getStamina() +"/"+ Player.tavernChampions.get(choice).getMaxStamina(), x+50, y+30*8);
-		g.drawString("SKILLS(DMG/HEAL): ", x+50, y+30*9);
+		g.drawString(langCards[1]+"("+langCards[2]+"/"+langCards[3]+"): ", x+50, y+30*9);
 		if(Player.tavernChampions.get(choice).skills.size() != 0){
 			if(Player.tavernChampions.get(choice).skills.get(0).getEfect() == null){
 				g.drawString("*"+ Player.tavernChampions.get(choice).skills.get(0).getName() + "(" +
@@ -128,7 +130,7 @@ public class Player {
 			}
 		}
 		else{
-			g.drawString("NONE!", x+50, y+30*10);
+			g.drawString(langCards[4], x+50, y+30*10);
 		}
 	}
 }

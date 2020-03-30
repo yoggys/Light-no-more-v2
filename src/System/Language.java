@@ -5,19 +5,14 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import GameState.*;
-import Player.Inventory;
+import Player.*;
 
+//class by Mateusz Karbownik
 public class Language {
 	
 	private static  Locale en = new Locale("en", "US");
 	private static Locale pl = new Locale("pl", "PL"); 	
-	
-	private static ResourceBundle bundle;
-	
-	public Language() {
-		bundle = ResourceBundle.getBundle("lang");
-	}
-	
+
  	public static void setLanguage(String language) {
  		if(language == "pl") {
  			loc(pl);
@@ -34,6 +29,13 @@ public class Language {
 			names.add(bndl.getString("Item" + i));
 		}
 		Inventory.info = names.toArray(new String[names.size()]);
+		names.clear();
+
+		names.add(bndl.getString("Price"));
+		names.add(bndl.getString("Back"));
+		names.add(bndl.getString("None"));
+		names.add(bndl.getString("No inv"));
+		HqInfoState.options = names.toArray(new String[names.size()]);
 		names.clear();
 
 		names.add(bndl.getString("New game"));
@@ -63,6 +65,61 @@ public class Language {
 		names.add(bndl.getString("Missing res"));
 		names.add(bndl.getString("Back"));
 		TavernState.text = names.toArray(new String[names.size()]);
+		names.clear();
+
+		names.add(bndl.getString("Back"));
+		names.add(bndl.getString("Buy items"));
+		names.add(bndl.getString("Sell items"));
+		names.add(bndl.getString("No items"));
+		names.add(bndl.getString("Missing inv"));
+		names.add(bndl.getString("Missing money"));
+		MerchantState.options = names.toArray(new String[names.size()]);
+		names.clear();
+
+		names.add(bndl.getString("Upgrade squad champions"));
+		names.add(bndl.getString("Change current squad"));
+		names.add(bndl.getString("Inspect inventory"));
+		names.add(bndl.getString("Back"));
+		HeadquartersState.options = names.toArray(new String[names.size()]);
+		names.clear();
+
+		names.add(bndl.getString("Reserve champs"));
+		names.add(bndl.getString("Current squad"));
+		names.add(bndl.getString("Change current squad"));
+		names.add(bndl.getString("This"));
+		names.add(bndl.getString("For"));
+		names.add(bndl.getString("No res"));
+		names.add(bndl.getString("Back"));
+		HqSquadState.text = names.toArray(new String[names.size()]);
+		names.clear();
+
+		names.add(bndl.getString("Back"));
+		names.add(bndl.getString("Heal"));
+		names.add(bndl.getString("Missing money"));
+		CharlatanState.options = names.toArray(new String[names.size()]);
+		names.clear();
+
+		names.add(bndl.getString("Back"));
+		names.add(bndl.getString("Upgrade"));
+		names.add(bndl.getString("Missing money"));
+		HqUpgradeState.options = names.toArray(new String[names.size()]);
+		names.clear();
+
+		
+		names.add(bndl.getString("Name"));
+		names.add(bndl.getString("Skills"));
+		names.add(bndl.getString("Dmg"));
+		names.add(bndl.getString("Heal2"));
+		names.add(bndl.getString("None"));
+		Player.langCards = names.toArray(new String[names.size()]);
+		names.clear();
+
+		names.add(bndl.getString("Continue"));
+		names.add(bndl.getString("Save game"));
+		names.add(bndl.getString("Mute music"));
+		names.add(bndl.getString("Quit"));
+		names.add(bndl.getString("Unmute music"));
+		EscState.options = names.toArray(new String[names.size()]);
 		names.clear();
  	}
 }

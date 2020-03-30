@@ -2,7 +2,6 @@ package Main;
 
 import javax.swing.JFrame;
 
-import System.Language;
 import System.Music;
 
 //class by Mateusz Karbownik
@@ -21,8 +20,5 @@ public class Game {
 
 		Music.set("Resources/Music/muz11.wav");
 		Music.play();
-
-		Language lang = new Language();
-		Language.setLanguage("en");
 	}
 }
