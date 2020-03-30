@@ -24,6 +24,8 @@ public class TavernState extends GameState {
 	private int state = 0;
 	private Random random = new Random();
 
+	public static String text[];
+
 	private ArrayList<Integer> priceSell = new ArrayList<>(Arrays.asList(rand(500, 500),rand(500, 500),rand(500, 500))); 
 	private ArrayList<Integer> priceBuy = new ArrayList<>(Arrays.asList(rand(300, 200),rand(300, 200),rand(300, 200))); 
 	
@@ -109,20 +111,20 @@ public class TavernState extends GameState {
 		//INFO COL
 		if(row == 1){
 			g.setColor(Color.RED);
-			g.drawString("RESERVE CHAMPS (SELL)", 40, 440);
+			g.drawString(text[0] + "(" + text[2] +")", 40, 440);
 			g.setColor(Color.WHITE);
-			g.drawString("TAVERN CHAMPS (BUY)", 40, 140);
+			g.drawString(text[1] + "(" + text[3] +")", 40, 140);
 		}
 		else if(row == 2){
 			g.setColor(Color.WHITE);
-			g.drawString("RESERVE CHAMPS (SELL)", 40, 440);			
+			g.drawString(text[0] + "(" + text[2] +")", 40, 440);			
 			g.setColor(Color.RED);
-			g.drawString("TAVERN CHAMPS (BUY)", 40, 140);
+			g.drawString(text[1] + "(" + text[3] +")", 40, 140);
 		}
 		else{
 			g.setColor(Color.RED);
-			g.drawString("RESERVE CHAMPS (SELL)", 40, 440);
-			g.drawString("TAVERN CHAMPS (BUY)", 40, 140);
+			g.drawString(text[0] + "(" + text[2] +")", 40, 440);
+			g.drawString(text[1] + "(" + text[3] +")", 40, 140);
 		}
 
 		//card draw	
@@ -137,7 +139,7 @@ public class TavernState extends GameState {
 		//tavern champs
 		if(Player.tavernChampions.size() == 0){
 			g.setColor(Color.GREEN);
-			g.drawString("No new champs in tavern", 40, 200);
+			g.drawString(text[4], 40, 200);
 		}
 		else{
 			for(int i = 0; i < Player.tavernChampions.size(); i++) {
@@ -159,7 +161,7 @@ public class TavernState extends GameState {
 		//reserve champs
 		if(Player.reserve.size() == 0){
 			g.setColor(Color.GREEN);
-			g.drawString("No champs in reserve", 40, 500);
+			g.drawString(text[5], 40, 500);
 		}
 		else{
 			for(int i = 0; i < Player.reserve.size(); i++) {
@@ -180,13 +182,13 @@ public class TavernState extends GameState {
 
 		if(state == 3){
 			g.setColor(Color.WHITE);
-			g.drawString("NOT ENOUGH MONEY!", 40, 680);
+			g.drawString(text[6], 40, 680);
 			state = 0;
 		}
 
 		if(state == 4){
 			g.setColor(Color.WHITE);
-			g.drawString("RESERVE FULL!", 40, 680);
+			g.drawString(text[7], 40, 680);
 			state = 0;
 		}
 		
@@ -197,7 +199,7 @@ public class TavernState extends GameState {
 		else{
 			g.setColor(Color.RED);
 		}
-		g.drawString("Back", 620, 680);
+		g.drawString(text[8], 620, 680);
 
 	}
 	

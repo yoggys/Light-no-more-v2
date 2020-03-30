@@ -9,7 +9,7 @@ public class HelpState extends GameState {
 	
 	//zmienne gui
 	private Background bg;
-	private String options = "Back";
+	public static String options;
 	private String gamever = "alpha v1.2";
 	private String authors = "by Mateusz Karbownik, Cyprian Siwy";
 	private Color titleColor;
