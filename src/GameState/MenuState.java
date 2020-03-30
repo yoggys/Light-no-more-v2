@@ -11,7 +11,7 @@ public class MenuState extends GameState {
 	
 	//zmienne gui
 	private Background bg;
-	private String[] options = {"New game","Load game", "Help", "Quit"};
+	public static String[] options;
 	private Color titleColor;
 	private Font titleFont;
 	private Font font;

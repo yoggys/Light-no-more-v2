@@ -23,18 +23,7 @@ public class Inventory {
 		"curepot"
 	};
 
-	private static String info[] = {
-		"working",
-		"You can sell it to get some money",
-		"You can sell it to get some money",
-		"You can sell it to get some money",
-		"You can sell it to get some money",
-		"You can sell it to get some money",
-		"SA Potion: Restore 30% of target stamina",
-		"Health Potion: Restore 30% of target health",
-		"Poison: Poisons target",
-		"Cure Potion: Clear poison on target"
-	};
+	public static String info[];
 
 	public static void additem(int id){
 			items.add(id);

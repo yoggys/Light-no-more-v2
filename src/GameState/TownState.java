@@ -15,7 +15,7 @@ public class TownState extends GameState {
 
 	//zmienne obslugi
 	private int currentChoice = 0;
-	private String objects[] = {"Enter dark", "Tavern", "Charlatan", "Merchant", "Headquarters"};
+	public static String objects[];
 	private int position[]= {1010,320, 180,680, 385,350, 540,500, 720,660};
 
 
