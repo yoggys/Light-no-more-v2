@@ -39,6 +39,19 @@ public class Someone
         efects = new ArrayList<Efect>();
     }
 
+    public Someone(int hp, int maxHp, int sa, int maxSa,  String name)
+    {
+        this.hp = hp;
+        this.maxHp = maxHp;
+
+        this.maxStamina = maxSa;
+        this.stamina = sa;
+        
+        this.name=name;
+
+        efects = new ArrayList<Efect>();
+    }
+
     public int getHp() { return hp; }
     public int getMaxHp() { return maxHp; }
     public boolean isActive() { return isActive; }
@@ -75,16 +88,17 @@ public class Someone
     }
     public String getName() { return name; }
 
-    public int getPercent() { return hp*100/maxHp; }
 
-    public float payHeal() { return (100-((hp*100)/maxHp))*5; }
-    
-    public void setHp() { hp = maxHp; }
 
     public void useStamina(int staminaUsed) { stamina -= staminaUsed; }
     
-    public String getAvatar(){ return avatar; }
 
+    //by Mateusz Karbownik
+    public float payHeal() { return (100-((hp*100)/maxHp))*5; }
+    public int getPercent() { return hp*100/maxHp; }
+    public void setHp() { hp = maxHp; }
+    public String getAvatar(){ return avatar; }
+    
     public void setAvatar(){ 
         if(avatars.size() != 0){
             int id = 0;
@@ -92,6 +106,9 @@ public class Someone
             avatar = "Resources/HUD/champ"+ avatars.get(id) + ".png";
             avatars.remove(id);
         }
+    }
+    public void setAvatar(String av){
+        avatar = av;
     }
 
     public void upgradeChamp(){

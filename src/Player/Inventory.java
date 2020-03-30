@@ -93,6 +93,14 @@ public class Inventory {
 	public static String getInfo(int pos){
 		return info[items.get(pos)];
 	}
+
+	public static void setGold(int g){
+		gold = g;
+	}
+
+	public static void clearItems(){
+		items.clear();
+	}
 }
 
 

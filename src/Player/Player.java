@@ -5,13 +5,15 @@ import System.*;
 import java.util.ArrayList;
 import java.awt.*;
 
-//class by Mateusz Karbownik + Cyprian Siwy
+//class by Mateusz Karbownik
 public class Player {
 
 	public static ArrayList<Champion> champions = new ArrayList<Champion>();
 	public static ArrayList<Champion> reserve = new ArrayList<Champion>();
 	public static ArrayList<Champion> tavernChampions = new ArrayList<Champion>();
 	public static ArrayList<Someone> enemys = new ArrayList<Someone>();
+
+	public static int currentDungeon = 1;
 
 	public static void changeSquad(int posCurrent, int posReserve){
 		Champion tmp = new Champion(0,0,"");

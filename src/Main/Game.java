@@ -3,6 +3,7 @@ package Main;
 import javax.swing.JFrame;
 import System.Music;
 
+//class by Mateusz Karbownik
 public class Game {
 	
 	public static void main(String[] args) {

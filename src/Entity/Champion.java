@@ -17,4 +17,10 @@ public class Champion extends Someone
         skills.add(skill);
     }
 
+    //by Mateusz Karbownik
+    public Champion(int hp, int maxHp ,int sa, int maxSa,  String name, String av) {
+        super(hp, maxHp, sa, maxSa, name);
+        skills= new ArrayList<Skill>();
+        super.setAvatar(av);
+    }
 }

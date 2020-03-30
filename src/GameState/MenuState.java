@@ -1,6 +1,7 @@
 package GameState;
 
 import System.Background;
+import System.LoadGame;
 import System.Music;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -10,7 +11,7 @@ public class MenuState extends GameState {
 	
 	//zmienne gui
 	private Background bg;
-	private String[] options = {"Start", "Help", "Quit"};
+	private String[] options = {"New game","Load game", "Help", "Quit"};
 	private Color titleColor;
 	private Font titleFont;
 	private Font font;
@@ -52,7 +53,18 @@ public class MenuState extends GameState {
 				g.setColor(Color.RED);
 			}
 
-			g.drawString(options[i], 566, 340 + 2 * i * 35);
+			if(i==0){
+				g.drawString(options[i], 522, 340 + 2 * i * 35);
+			}
+			else if(i == 1){
+				g.drawString(options[i], 520, 340 + 2 * i * 35);
+			}
+			else if(i == 2){
+				g.drawString(options[i], 584, 340 + 2 * i * 35);
+			}
+			else{
+				g.drawString(options[i], 586, 340 + 2 * i * 35);
+			}
 		}
 	}
 	
@@ -64,10 +76,20 @@ public class MenuState extends GameState {
 		}
 
 		if(currentChoice == 1) {
-			gsm.setState(GameStateManager.HELPSTATE);
+			try{
+				LoadGame.loadGame();
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			gsm.setState(GameStateManager.TOWNSTATE);
+			Music.change("Resources/Music/muz22.wav");
 		}
 
 		if(currentChoice == 2) {
+			gsm.setState(GameStateManager.HELPSTATE);
+		}
+		if(currentChoice == 3){
 			System.exit(0);
 		}
 	}
