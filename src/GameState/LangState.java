@@ -61,6 +61,7 @@ public class LangState extends GameState {
 		}
 	}
 
+	@Override
 	public void keyReleased(int k) {
 		if(k == KeyEvent.VK_ENTER){
 			if(current == 0){

@@ -142,6 +142,7 @@ public class HqUpgradeState extends GameState {
 		}
 	}
 
+	@Override
 	public void keyReleased(int k) {
 		if(k == KeyEvent.VK_ENTER){
 			select();

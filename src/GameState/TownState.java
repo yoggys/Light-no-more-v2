@@ -109,7 +109,7 @@ public class TownState extends GameState {
 		}
 	}
 	
-	//z dziedziczenia
+	@Override
 	public void keyReleased(int k) {
 		if(k == KeyEvent.VK_ENTER){
 			select();
