@@ -6,6 +6,7 @@ import java.awt.event.*;
 import javax.swing.JPanel;
 import GameState.GameStateManager;
 
+//by Cyprian Siwy
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener{
 	
