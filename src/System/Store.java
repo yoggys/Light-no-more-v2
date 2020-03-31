@@ -14,6 +14,7 @@ public class Store {
 		150, // 7 -	health potion
 		200, // 8 -	poison potion
 		200  // 9 - cure potion
+		//* to nieuzytkowe 
 	};
 
 	//wymyslimy wiecej czegos przy skrzyniach

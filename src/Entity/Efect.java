@@ -1,5 +1,6 @@
 package Entity;
 
+//by Cyprian Siwy
 public class Efect
 {
     private int timeInTurn = 0;

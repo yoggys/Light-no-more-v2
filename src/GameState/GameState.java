@@ -1,5 +1,6 @@
 package GameState;
 
+//by Cyprian Siwy & Mateusz Karbownik
 public abstract class GameState {
 	
 	protected GameStateManager gsm;

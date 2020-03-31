@@ -2,6 +2,7 @@ package GameState;
 
 import java.util.ArrayList;
 
+//by Cyprian Siwy & Mateusz Karbownik
 public class GameStateManager {
 	
 	private ArrayList<GameState> gameStates;

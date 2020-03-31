@@ -6,6 +6,7 @@ import Player.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+//by Cyprian Siwy
 public class DarkState extends GameState {
 	
     private Background bg;
@@ -34,8 +35,8 @@ public class DarkState extends GameState {
 
 	Champion emptyChamp = new Champion(0,0,"");
 
-	private Vector2D firstChampPos = new Vector2D(200,400);
-	private Vector2D firstEnemyPos = new Vector2D(600,400);
+	private Vector2D firstChampPos = new Vector2D(200,600);
+	private Vector2D firstEnemyPos = new Vector2D(600,600);
 
 	private Vector2D imput = Vector2D.zero;
 	
@@ -51,9 +52,9 @@ public class DarkState extends GameState {
 		healOverTime = new Efect(-2 , 3);
 
 		Skill skillPoison = new Skill("Poison", 4, 2, poison);
-		Skill skillSlise = new Skill("Slise",20,5);
-		Skill skillSmite = new Skill("Smite",10,20);
-		Skill skillHeal = new Skill("Heal",-4, 2, healOverTime);
+		Skill skillSlise = new Skill("Slise",20,0);
+		Skill skillSmite = new Skill("Smite",10,0);
+		Skill skillHeal = new Skill("Heal",-4, 0, healOverTime);
 		Player.champions.add(new Champion(25, 20, "AleXXX"));
 		Player.champions.add(new Champion(25, 20, "Sasha"));
 		Player.champions.add(new Champion(100, 30, "Siwy"));
@@ -69,7 +70,7 @@ public class DarkState extends GameState {
 		
 		try {
 			
-			bg = new Background("Resources/Backgrounds/darkbg.png");
+			bg = new Background("Resources/Backgrounds/fightbg.png");
 
 			font = new Font("Arial", Font.PLAIN, 12);
 			
@@ -286,11 +287,6 @@ public class DarkState extends GameState {
 				}
 				
 			}
-
-			if(currentChoice == Player.champions.size() + Player.enemys.size() + activeChamp.skills.size())
-			{
-				gsm.setState(GameStateManager.TOWNSTATE);
-			}	
 		}
 	}
 	
@@ -398,8 +394,13 @@ public class DarkState extends GameState {
 	
 	public void keyReleased(int k) 
 	{
-		if(k == KeyEvent.VK_ENTER)
-		tmp=true;
+		if(k == KeyEvent.VK_ENTER){
+			tmp=true;
+			if(currentChoice == Player.champions.size() + Player.enemys.size() + activeChamp.skills.size())
+			{
+				gsm.setState(GameStateManager.TOWNSTATE);
+			}	
+		}
 
 		if( k == KeyEvent.VK_W || k == KeyEvent.VK_S || k == KeyEvent.VK_A || k == KeyEvent.VK_D)
 		{

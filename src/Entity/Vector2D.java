@@ -1,5 +1,6 @@
 package Entity;
 
+//by Cyprian Siwy
 public class Vector2D
 {
     public float x,y;

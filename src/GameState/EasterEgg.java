@@ -21,7 +21,7 @@ public class EasterEgg extends GameState {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+		//cos tu bedzie kiedys	
 	}
 	
 	@Override

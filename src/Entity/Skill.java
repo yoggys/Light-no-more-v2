@@ -2,6 +2,7 @@ package Entity;
 
 import java.awt.Graphics2D;
 
+//by Cyprian Siwy
 public class Skill
 {
     private int staminaUse;

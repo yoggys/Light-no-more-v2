@@ -2,6 +2,7 @@ package Entity;
 
 import java.util.ArrayList;
 
+//by Cyprian Siwy
 public class Champion extends Someone 
 {
 

@@ -1,6 +1,6 @@
 package Entity;
 
-
+//by Cyprian Siwy
 public class MovementManager
 {
     final float timeStep = 1/60;
