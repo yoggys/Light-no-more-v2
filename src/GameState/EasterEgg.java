@@ -32,6 +32,7 @@ public class EasterEgg extends GameState {
 	@Override
 	public void keyPressed(int k) { }
 
+	@Override
 	public void keyReleased(int k) {
 		if(k == KeyEvent.VK_ENTER){
 			gsm.setState(GameStateManager.MENUSTATE);

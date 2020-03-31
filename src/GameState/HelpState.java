@@ -75,6 +75,7 @@ public class HelpState extends GameState {
 		}
 	}
 
+	@Override
 	public void keyReleased(int k) {
 		if(k == KeyEvent.VK_ENTER){
 			gsm.setState(GameStateManager.MENUSTATE);

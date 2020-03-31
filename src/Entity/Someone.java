@@ -93,6 +93,12 @@ public class Someone
 
     public void useStamina(int staminaUsed) { stamina -= staminaUsed; }
     
+    public void drawSomeone(int x, int y, Graphics2D g)
+    {
+        g.drawString(""+this.getName(),x , y);
+		g.drawString(""+this.getHp()+ "HP", x, y + 20);
+		g.drawString(""+this.getStamina()+"ST", x + 50, y + 20);
+    }
 
     //by Mateusz Karbownik
     public float payHeal() { return (100-((hp*100)/maxHp))*5; }
@@ -110,14 +116,6 @@ public class Someone
     }
     public void setAvatar(String av){
         avatar = av;
-    }
-
-
-    public void drawSomeone(int x, int y, Graphics2D g)
-    {
-        g.drawString(""+this.getName(),x , y);
-		g.drawString(""+this.getHp()+ "HP", x, y + 20);
-		g.drawString(""+this.getStamina()+"ST", x + 50, y + 20);
     }
 
     public void upgradeChamp()
