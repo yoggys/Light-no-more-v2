@@ -40,9 +40,6 @@ public class Inventory {
 			items.add(tmp);
 			gold -= Store.buy(id);
 		}
-		else{
-			System.out.println("NOT ENOUGHT MONEY!");
-		}
 	}
 
 	public static void sellitem(int pos){

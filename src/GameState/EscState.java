@@ -12,7 +12,6 @@ public class EscState extends GameState {
 	private Color titleColor;
 	private Font titleFont;
 	private Font font;
-	public static int back = 0;
 
 	//zmienne obslugi
 	private int currentChoice = 0;
@@ -73,7 +72,7 @@ public class EscState extends GameState {
 	//wybor aktualnego trybu pracy / opcji menu etc.
 	private void select() {
 		if(currentChoice == 0) {
-			gsm.setState(back);
+			gsm.setState(gsm.getLastState());
 		}
 		
 		if(currentChoice == 1) {
@@ -83,7 +82,7 @@ public class EscState extends GameState {
 			catch(Exception e) {
 				e.printStackTrace();
 			}
-			gsm.setState(back);
+			gsm.setState(gsm.getLastState());
 		}
 
 		if(currentChoice == 2 || currentChoice == 4) {
@@ -124,7 +123,7 @@ public class EscState extends GameState {
 		}
 
 		if(k == KeyEvent.VK_ESCAPE) {
-			gsm.setState(back);
+			gsm.setState(gsm.getLastState());
 		}
 	}
 
