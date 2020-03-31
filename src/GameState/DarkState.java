@@ -383,13 +383,15 @@ public class DarkState extends GameState {
 				else 
 				currentChoice--;
 			}
-			if(k == KeyEvent.VK_ESCAPE) 
-			{
-				EscState.back = gsm.getState();
-				gsm.setState(GameStateManager.ESCSTATE);
-			}
-		}	
-	}
+
+		}
+		
+		if(k == KeyEvent.VK_ESCAPE) 
+		{
+			EscState.back = gsm.getState();
+			gsm.setState(GameStateManager.ESCSTATE);
+		}
+	}	
 	
 	
 	public void keyReleased(int k) 
