@@ -138,7 +138,6 @@ public class HqUpgradeState extends GameState {
 			
 		}
 		if(k == KeyEvent.VK_ESCAPE) {
-			EscState.back = gsm.getState();
 			gsm.setState(GameStateManager.ESCSTATE);
 		}
 	}

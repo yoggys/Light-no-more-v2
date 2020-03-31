@@ -6,6 +6,7 @@ public class GameStateManager {
 	
 	private ArrayList<GameState> gameStates;
 	private int currentState;
+	private int lastState;
 	
 	public static int MENUSTATE = 0;
 	public static int TOWNSTATE = 1;
@@ -22,6 +23,7 @@ public class GameStateManager {
 	public static int ESCSTATE = 12;
 	public static int DUNGEONSTATE = 13;
 	public static int LANGSTATE = 14;
+	public static int CHESTSTATE = 15;
 
 	
 	public GameStateManager() {
@@ -44,9 +46,11 @@ public class GameStateManager {
 		gameStates.add(new EscState(this));
 		gameStates.add(new DungeonState(this));
 		gameStates.add(new LangState(this));
+		gameStates.add(new ChestState(this));
 	}
 	
 	public void setState(int state) {
+		lastState = currentState;
 		currentState = state;
 	}
 	
@@ -64,6 +68,10 @@ public class GameStateManager {
 
 	public int getState(){
 		return currentState;
+	}
+
+	public int getLastState(){
+		return lastState;
 	}
 }
 
