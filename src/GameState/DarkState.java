@@ -20,21 +20,31 @@ public class DarkState extends GameState {
 	private Someone target = null;
 	private int targetId=999;
 	
-
 	private Someone enemy = null;
-
+	
 	private int currentChoice = 0;
-
+	
 	private Font font;
 	
 	private boolean tmp=true;
+	
+	public enum dungeonState{ CombatPhase, MovementPhace};
+	private dungeonState dungState = dungeonState.MovementPhace;
+	private float speed = 360;  	// pixel per secend
 
 	Champion emptyChamp = new Champion(0,0,"");
 
-	private int firstChampX = 200, firstChampY = 400, firstEnemyX = 600, firstEnemyY = 400;
+	private Vector2D firstChampPos = new Vector2D(200,400);
+	private Vector2D firstEnemyPos = new Vector2D(600,400);
+
+	private Vector2D imput = Vector2D.zero;
+	
+	private MovementManager MM = new MovementManager();
+	
 
 	public DarkState(GameStateManager gsm) 
 	{
+		changeStateTo(dungeonState.MovementPhace);
 		
 		activeChamp = emptyChamp;
 		poison = new Efect(2, 3);
@@ -64,7 +74,7 @@ public class DarkState extends GameState {
 			font = new Font("Arial", Font.PLAIN, 12);
 			
 		}
-
+		
 		catch(Exception e) 
 		{
 			e.printStackTrace();
@@ -75,7 +85,11 @@ public class DarkState extends GameState {
 	@Override
     public void draw(Graphics2D g) 
     {
-
+		if(dungState == dungeonState.MovementPhace)
+		{
+			firstChampPos = MM.moveToDirection(firstChampPos, imput, speed);
+		}
+		
 		bg.draw(g);
 		
 		g.setFont(font);
@@ -83,86 +97,87 @@ public class DarkState extends GameState {
 		if(Player.champions.size() == 0)
 		{
 			g.setColor(Color.WHITE);
-			g.drawString("back", 972, 820);
-        }
-			for(int i = 0; i < Player.champions.size() + Player.enemys.size() + activeChamp.skills.size()+1; i++) 
+			g.drawString("back", 586, 700);
+		}
+		
+		for(int i = 0; i < Player.champions.size() + Player.enemys.size() + activeChamp.skills.size()+1; i++) 
+		{
+			if(i == currentChoice)
 			{
-				if(i == currentChoice)
+				g.setColor(Color.WHITE);
+			}
+			else if(i == activeChampId || i == selectedSkillId)
+			{
+				g.setColor(Color.green);
+			}
+			else if(i == targetId)
+			{
+				g.setColor(Color.ORANGE);
+			}
+			else 
+			{
+				g.setColor(Color.RED);
+			}
+			
+			if(i<Player.champions.size())
+			{
+				if( ! Player.champions.get(i).isActive())
 				{
-					g.setColor(Color.WHITE);
-				}
-				else if(i == activeChampId || i == selectedSkillId)
-				{
-					g.setColor(Color.green);
-				}
-				else if(i == targetId)
-				{
-					g.setColor(Color.ORANGE);
-				}
-				else 
-				{
-					g.setColor(Color.RED);
-				}
-				
-				if(i<Player.champions.size())
-				{
-					if( ! Player.champions.get(i).isActive())
-					{
-						if(g.getColor()==Color.WHITE)
-						g.setColor(Color.LIGHT_GRAY);
-						else
-						g.setColor(Color.GRAY);
-					}
-
-					
-					Player.champions.get(i).drawSomeone(firstChampX + i *100, firstChampY, g);
-					
-				} 
-				else if(i< Player.champions.size() + Player.enemys.size())
-				{
-					Player.enemys.get(i - Player.champions.size()).drawSomeone(firstEnemyX + i*100, firstEnemyY, g);
-				}
-				else if(activeChamp!=null && i < Player.champions.size() + Player.enemys.size() + activeChamp.skills.size())
-				{
-					int j = i - Player.champions.size() - Player.enemys.size();
-					
-					if(activeChamp.skills.get(j).getStaminaUse() > activeChamp.getStamina())
-					{
-						if(g.getColor()==Color.WHITE)
-						g.setColor(Color.LIGHT_GRAY);
-						else
-						g.setColor(Color.GRAY);
-					}
-
-					activeChamp.skills.get(j).drawSkill(firstChampX + j * 75, firstChampY + 50, g);
-					//g.drawString(activeChamp.skills.get(j).getName(), firstChampX + j*50, firstChampY + 50);
-				}
-				else
-				{
-					g.drawString("back",  586, 700);
+					if(g.getColor()==Color.WHITE)
+					g.setColor(Color.LIGHT_GRAY);
+					else
+					g.setColor(Color.GRAY);
 				}
 				
+				Player.champions.get(i).drawSomeone( (int) firstChampPos.x + i *100, (int) firstChampPos.y , g);					
+			} 
+			else if(i< Player.champions.size() + Player.enemys.size())
+			{
+				Player.enemys.get(i - Player.champions.size()).drawSomeone( (int) firstEnemyPos.x + i*100, (int) firstEnemyPos.y, g);
+			}
+			else if(activeChamp!=null && i < Player.champions.size() + Player.enemys.size() + activeChamp.skills.size())
+			{
+				int j = i - Player.champions.size() - Player.enemys.size();
+				
+				if(activeChamp.skills.get(j).getStaminaUse() > activeChamp.getStamina())
+				{
+					if(g.getColor()==Color.WHITE)
+					g.setColor(Color.LIGHT_GRAY);
+					else
+					g.setColor(Color.GRAY);
+				}
+
+				activeChamp.skills.get(j).drawSkill( (int) firstChampPos.x + j * 75, (int) firstChampPos.y + 50, g);
+				//g.drawString(activeChamp.skills.get(j).getName(), firstChampX + j*50, firstChampY + 50);
+			}
+			else
+			{
+				g.drawString("back",  586, 700);
+			}
+			
+			if(dungState == dungeonState.CombatPhase)
+			{
 				if(activeChamp!=null && target != null && selectedSkill != null)
 				{
 					calculateMove();
 					currentChoice=0;
 				}
-
+				
 				int x=0;
 				for (Champion champion : Player.champions) 
 				{
 					if(champion.isActive())
 					x++;
 				}
-
+				
 				if( x == 0 )
 				{
 					endTurn();
 				}
-				
 			}   
+		}
 	}
-	
+
 	void calculateMove()
 	{
 		if(selectedSkill.getEfect()!=null)
@@ -222,129 +237,189 @@ public class DarkState extends GameState {
 	
 	private void select() 
 	{
-		
-		if(selectedSkill != null && currentChoice < Player.champions.size() + Player.enemys.size())
+		if(dungState == dungeonState.CombatPhase)
 		{
-			if(currentChoice<Player.champions.size())
+			if(selectedSkill != null && currentChoice < Player.champions.size() + Player.enemys.size())
 			{
-				target = Player.champions.get(currentChoice);
-				targetId = currentChoice;
-			}
-			else
-			{
-				target=Player.enemys.get(currentChoice - Player.champions.size());
-				targetId = currentChoice;
-			}
-		}
-
-		if(currentChoice<Player.champions.size() && selectedSkill == null)
-		{
-			if(activeChamp.isActive())
-			{
-				if(Player.champions.get(currentChoice).isActive())
+				if(currentChoice<Player.champions.size())
 				{
-					activeChamp = Player.champions.get(currentChoice);
-					activeChampId = currentChoice;
+					target = Player.champions.get(currentChoice);
+					targetId = currentChoice;
+				}
+				else
+				{
+					target=Player.enemys.get(currentChoice - Player.champions.size());
+					targetId = currentChoice;
+				}
+			}
+			
+			if(currentChoice<Player.champions.size() && selectedSkill == null)
+			{
+				if(activeChamp.isActive())
+				{
+					if(Player.champions.get(currentChoice).isActive())
+					{
+						activeChamp = Player.champions.get(currentChoice);
+						activeChampId = currentChoice;
+						selectedSkill = null;
+						selectedSkillId = 999;
+					}
+				}
+			}
+			else if(currentChoice< Player.champions.size() + Player.enemys.size() + activeChamp.skills.size() && currentChoice >= Player.champions.size() + Player.enemys.size())
+			{
+				selectedSkill = activeChamp.skills.get(currentChoice - Player.champions.size() - Player.enemys.size() );
+				if(selectedSkill.getStaminaUse() < activeChamp.getStamina())
+				{
+					selectedSkillId = currentChoice;
+					currentChoice = 0;
+				}
+				else
+				{
 					selectedSkill = null;
 					selectedSkillId = 999;
 				}
-			}
-		}
-		else if(currentChoice< Player.champions.size() + Player.enemys.size() + activeChamp.skills.size() && currentChoice >= Player.champions.size() + Player.enemys.size())
-		{
-			selectedSkill = activeChamp.skills.get(currentChoice - Player.champions.size() - Player.enemys.size() );
-			if(selectedSkill.getStaminaUse() < activeChamp.getStamina())
-			{
-				selectedSkillId = currentChoice;
-				currentChoice = 0;
-			}
-			else
-			{
-				selectedSkill = null;
-				selectedSkillId = 999;
+				
 			}
 
+			if(currentChoice == Player.champions.size() + Player.enemys.size() + activeChamp.skills.size())
+			{
+				gsm.setState(GameStateManager.TOWNSTATE);
+			}	
 		}
-
-		if(currentChoice == Player.champions.size() + Player.enemys.size() + activeChamp.skills.size())
-		{
-			gsm.setState(GameStateManager.TOWNSTATE);
-		}	
 	}
-
+	
 	@Override
-	public void keyPressed(int k) {
-		if(k == KeyEvent.VK_ENTER)
+	public void keyPressed(int k) 
+	{
+		if(k == KeyEvent.VK_K)
 		{
-			if(tmp)
-			{
-				select();
-				tmp=false;
-			}
+			if(dungState == dungeonState.MovementPhace)
+				changeStateTo(dungeonState.CombatPhase);
+			else if(dungState == dungeonState.CombatPhase)
+				changeStateTo(dungeonState.MovementPhace);
 		}
-
-		if(k == 32) //Space
+		if(dungState == dungeonState.MovementPhace)
 		{
-		}
-		
-
-		if(k == KeyEvent.VK_UP)
-		{
+			imput = Vector2D.zero;
 			
-			if( currentChoice == Player.champions.size() + Player.enemys.size() +activeChamp.skills.size())
+			if(k == KeyEvent.VK_W)
 			{
-				if(activeChamp.skills.size()>0)
-					currentChoice = Player.champions.size() + Player.enemys.size();
-				else
-					currentChoice = 0;
+				imput = Vector2D.add(imput, Vector2D.up);			
 			}
-			else if (currentChoice >= Player.champions.size() + Player.enemys.size())
+			else if (k == KeyEvent.VK_S)
 			{
-				currentChoice = activeChampId;
+				imput = Vector2D.add(imput, Vector2D.down);
 			}
-		} 
-
-		if(k == KeyEvent.VK_RIGHT) 
-		{
-			if(currentChoice == Player.champions.size() + Player.enemys.size()-1  || 
-			currentChoice >= Player.champions.size() + Player.enemys.size() + activeChamp.skills.size()-1)
-			{}
-			else
-				currentChoice++;
+			
+			if(k== KeyEvent.VK_A)
+			{
+				imput = Vector2D.add(imput, Vector2D.left);
+			}
+			else if(k == KeyEvent.VK_D)
+			{
+				imput = Vector2D.add(imput, Vector2D.right);
+			}
 		}
-
-
-		if(k == KeyEvent.VK_DOWN)
-		{
-			if (currentChoice<Player.champions.size() + Player.enemys.size())
+			
+			
+		if(dungState == dungeonState.CombatPhase)
+		{		
+			if(k == KeyEvent.VK_ENTER)
 			{
-				currentChoice = Player.champions.size() + Player.enemys.size();
-			} 
-			else if( currentChoice >= Player.champions.size() + Player.enemys.size())
-			{
-				currentChoice = Player.champions.size()+Player.enemys.size()+activeChamp.skills.size();
+				if(tmp)
+				{
+					select();
+					tmp=false;
+				}
 			}
+			
+			
+			if(k == KeyEvent.VK_UP)
+			{
+				
+				if( currentChoice == Player.champions.size() + Player.enemys.size() +activeChamp.skills.size())
+				{
+					if(activeChamp.skills.size()>0)
+					currentChoice = Player.champions.size() + Player.enemys.size();
+					else
+					currentChoice = 0;
+				}
+				else if (currentChoice >= Player.champions.size() + Player.enemys.size())
+				{
+					currentChoice = activeChampId;
+				}
+			} 
+			
+			if(k == KeyEvent.VK_RIGHT) 
+			{
+				if(currentChoice == Player.champions.size() + Player.enemys.size()-1  || 
+				currentChoice >= Player.champions.size() + Player.enemys.size() + activeChamp.skills.size()-1)
+				{}
+				else
+				currentChoice++;
+			}
+
+			
+			if(k == KeyEvent.VK_DOWN)
+			{
+				if (currentChoice<Player.champions.size() + Player.enemys.size())
+				{
+					currentChoice = Player.champions.size() + Player.enemys.size();
+				} 
+				else if( currentChoice >= Player.champions.size() + Player.enemys.size())
+				{
+					currentChoice = Player.champions.size()+Player.enemys.size()+activeChamp.skills.size();
+				}
+			}
+			
+			if(k == KeyEvent.VK_LEFT) 
+			{
+				if(currentChoice == 0 || currentChoice == Player.champions.size() + Player.enemys.size() 
+				|| currentChoice == Player.champions.size() + Player.enemys.size() + activeChamp.skills.size())
+				{}
+				else 
+				currentChoice--;
+			}
+
 		}
 		
-		if(k == KeyEvent.VK_LEFT) 
-		{
-			if(currentChoice == 0 || currentChoice == Player.champions.size() + Player.enemys.size() 
-			|| currentChoice == Player.champions.size() + Player.enemys.size() + activeChamp.skills.size())
-			{}
-			else 
-				currentChoice--;
-		}
 		if(k == KeyEvent.VK_ESCAPE) 
 		{
 			gsm.setState(GameStateManager.ESCSTATE);
 		}
-	}
-
-	@Override
+	}	
+	
+	
 	public void keyReleased(int k) 
 	{
 		if(k == KeyEvent.VK_ENTER)
 		tmp=true;
+
+		if( k == KeyEvent.VK_W || k == KeyEvent.VK_S || k == KeyEvent.VK_A || k == KeyEvent.VK_D)
+		{
+			imput = Vector2D.zero;
+		}
 	}
 
+	void changeStateTo(dungeonState S)
+	{
+		switch(S)
+		{
+			case CombatPhase:
+			{
+				currentChoice=0;
+				dungState = dungeonState.CombatPhase;
+			}
+				break;
+			case MovementPhace:
+			{
+				currentChoice = -1;
+				dungState = dungeonState.MovementPhace;
+			}
+				break;
+			default:
+				break;
+		}
+	}
 }
