@@ -59,15 +59,13 @@ public class Someone
     public void setActive(boolean value) { isActive = value; }
     public int getStamina() { return stamina; }
     public int getMaxStamina() { return maxStamina; }
-
+    public boolean isAlive() { return  ! dead; }
     public void takeDamage(int damage)
     {
         if( ! dead )
         hp -=damage;
         if(hp<=0)
         {
-            dead=true;
-            isActive=false;
             die();
         }
     }
@@ -76,6 +74,9 @@ public class Someone
 
     private void die()
     {
+        efects.clear();
+        isActive=false;
+        dead=true;
         hp=0;
     }
     

@@ -44,7 +44,7 @@ public class DarkState extends GameState {
 
 	public DarkState(GameStateManager gsm) 
 	{
-		changeStateTo(dungeonState.MovementPhace);
+		changeStateTo(dungeonState.CombatPhase);
 		
 		activeChamp = emptyChamp;
 		poison = new Efect(2, 3);
@@ -102,6 +102,7 @@ public class DarkState extends GameState {
 		
 		for(int i = 0; i < Player.champions.size() + Player.enemys.size() + activeChamp.skills.size()+1; i++) 
 		{
+
 			if(i == currentChoice)
 			{
 				g.setColor(Color.WHITE);
@@ -205,17 +206,20 @@ public class DarkState extends GameState {
 	{
 		for (Champion champion : Player.champions) 
 		{
-			for (int i = 0 ; i <champion.efects.size();i++) 
+			if(champion.isAlive())
 			{
-				champion.efects.get(i).use(champion);	
-		
-				if(champion.efects.get(i).getTime()==0)
+				for (int i = 0 ; i <champion.efects.size();i++) 
 				{
-					champion.efects.remove(i);
+					champion.efects.get(i).use(champion);	
+					
+					if(champion.efects.get(i).getTime()==0)
+					{
+						champion.efects.remove(i);
+					}
 				}
+				
+				champion.setActive(true);
 			}
-
-			champion.setActive(true);
 		}
 	
 		for (int i = 0; i<Player.enemys.size();i++) 
@@ -263,13 +267,14 @@ public class DarkState extends GameState {
 						activeChampId = currentChoice;
 						selectedSkill = null;
 						selectedSkillId = 999;
+						currentChoice = Player.champions.size() + Player.enemys.size();
 					}
 				}
 			}
 			else if(currentChoice< Player.champions.size() + Player.enemys.size() + activeChamp.skills.size() && currentChoice >= Player.champions.size() + Player.enemys.size())
 			{
 				selectedSkill = activeChamp.skills.get(currentChoice - Player.champions.size() - Player.enemys.size() );
-				if(selectedSkill.getStaminaUse() < activeChamp.getStamina())
+				if(selectedSkill.getStaminaUse() <= activeChamp.getStamina())
 				{
 					selectedSkillId = currentChoice;
 					currentChoice = 0;
