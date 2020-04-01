@@ -83,6 +83,7 @@ public class HqInfoState extends GameState {
 	//wybor aktualnego trybu pracy / opcji menu etc.
 	private void select() {
 		if(row == 0){
+			currentChoice = 0;
 			gsm.setState(GameStateManager.HEADQUARTERSSTATE);
 		}
 	}

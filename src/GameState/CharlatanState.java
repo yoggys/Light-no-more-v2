@@ -194,7 +194,7 @@ public class CharlatanState extends GameState {
 					row++;
 					while((int)Player.champions.get(currentChoice[row]).payHeal() == 0){
 						currentChoice[row]++;
-						if(currentChoice[row] >= 3) {
+						if(currentChoice[row] > 2) {
 							currentChoice[row] = 0;
 						}
 					}
