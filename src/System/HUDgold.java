@@ -30,7 +30,7 @@ public class HUDgold {
 		g.drawImage(image, 0, 10, null);
 		g.setFont(font);
 		g.setColor(Color.WHITE);
-		g.drawString(Inventory.getgold() + "g", 70, 50);
+		g.drawString(Inventory.getGold() + "g", 70, 50);
 
 	}
 

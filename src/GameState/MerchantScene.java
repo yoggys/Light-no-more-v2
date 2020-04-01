@@ -88,8 +88,8 @@ public class MerchantScene extends Scene {
 			} else {
 				g.setColor(Color.ORANGE);
 			}
-			image.draw(g, 33 + 60 * i, 510, "Resources/Items/" + Inventory.getname(Inventory.getId(i)) + ".png");
-			g.drawString(String.valueOf(Inventory.getprice(i)), 42 + i * 60, 600);
+			image.draw(g, 33 + 60 * i, 510, "Resources/Items/" + Inventory.getName(Inventory.getId(i)) + ".png");
+			g.drawString(String.valueOf(Inventory.getPrice(i)), 42 + i * 60, 600);
 		}
 		if (Inventory.invSize() == 0) {
 			g.setColor(Color.GREEN);
@@ -124,7 +124,7 @@ public class MerchantScene extends Scene {
 		} else if (row == 2) {
 			if (Inventory.invSize() >= 10) {
 				state[0] = 1;
-			} else if (Inventory.getgold() - Store.buy(currentChoice[row]) < 0) {
+			} else if (Inventory.getGold() - Store.buy(currentChoice[row]) < 0) {
 				state[1] = 1;
 			} else {
 				Inventory.buyItem(currentChoice[row]);

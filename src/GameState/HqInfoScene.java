@@ -53,7 +53,7 @@ public class HqInfoScene extends Scene {
 		if (Inventory.invSize() > 0 && row == 1) {
 			g.drawString(Inventory.getInfo(currentChoice), 33, 230);
 			g.setColor(Color.ORANGE);
-			g.drawString(String.valueOf(Inventory.getprice(currentChoice)), 33, 390);
+			g.drawString(String.valueOf(Inventory.getPrice(currentChoice)), 33, 390);
 		} else {
 			g.drawString(options[2], 33, 230);
 			g.drawString(options[2], 33, 390);
@@ -73,7 +73,7 @@ public class HqInfoScene extends Scene {
 			if (i == currentChoice && row == 1) {
 				image.draw(g, -85 + 126 * i, 393, "Resources/Items/selectedframe.png");
 			}
-			image.draw(g, 33 + 126 * i, 510, "Resources/Items/" + Inventory.getname(Inventory.getId(i)) + ".png");
+			image.draw(g, 33 + 126 * i, 510, "Resources/Items/" + Inventory.getName(Inventory.getId(i)) + ".png");
 		}
 
 	}

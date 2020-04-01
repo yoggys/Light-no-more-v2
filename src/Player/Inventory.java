@@ -57,18 +57,18 @@ public class Inventory {
 		return items.size();
 	}
 
-	public static int getprice(int pos) {
+	public static int getPrice(int pos) {
 		if (pos < items.size()) {
 			return Store.price(items.get(pos));
 		}
 		return 0;
 	}
 
-	public static int getgold() {
+	public static int getGold() {
 		return gold;
 	}
 
-	public static String getname(int pos) {
+	public static String getName(int pos) {
 		return names[pos];
 	}
 

@@ -57,7 +57,7 @@ public class ChestScene extends Scene {
 				image.draw(g, -85 + 126 * i, 393, "Resources/Items/selectedframe.png");
 			}
 
-			image.draw(g, 33 + 60 * i, 510, "Resources/Items/" + Inventory.getname(chest.get(i)) + ".png");
+			image.draw(g, 33 + 60 * i, 510, "Resources/Items/" + Inventory.getName(chest.get(i)) + ".png");
 		}
 
 		if (state == 1) {

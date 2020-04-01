@@ -131,11 +131,11 @@ public class CharlatanScene extends Scene {
 		if (row == 0) {
 			gsm.setState(SceneManager.TOWN);
 		} else if (row == 1) {
-			if (currentChoice[row] == 0 && Inventory.getgold() - (int) Player.champions.get(0).payHeal() >= 0) {
+			if (currentChoice[row] == 0 && Inventory.getGold() - (int) Player.champions.get(0).payHeal() >= 0) {
 				heal(0);
-			} else if (currentChoice[row] == 1 && Inventory.getgold() - (int) Player.champions.get(1).payHeal() >= 0) {
+			} else if (currentChoice[row] == 1 && Inventory.getGold() - (int) Player.champions.get(1).payHeal() >= 0) {
 				heal(1);
-			} else if (currentChoice[row] == 2 && Inventory.getgold() - (int) Player.champions.get(2).payHeal() >= 0) {
+			} else if (currentChoice[row] == 2 && Inventory.getGold() - (int) Player.champions.get(2).payHeal() >= 0) {
 				heal(2);
 			} else {
 				state = 1;

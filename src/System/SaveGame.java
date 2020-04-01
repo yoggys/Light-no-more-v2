@@ -30,7 +30,7 @@ public class SaveGame {
 							+ "`DUNGEON` int(10) default NULL," + "PRIMARY KEY  (`ID`)" + ") ;");
 			if (true) {
 				PreparedStatement put = conn.prepareStatement("INSERT INTO `player` (`GOLD`,`DUNGEON`) VALUES (?,?);");
-				put.setInt(1, Inventory.getgold());
+				put.setInt(1, Inventory.getGold());
 				put.setInt(2, Player.currentDungeon);
 				put.executeUpdate();
 			}

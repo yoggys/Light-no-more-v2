@@ -198,12 +198,12 @@ public class TavernScene extends Scene {
 		if (row == 0) {
 			gsm.setState(SceneManager.TOWN);
 		} else if (row == 1 && Player.tavernChampions.size() > 0 && Player.reserve.size() < 3
-				&& Inventory.getgold() - priceSell.get(currentChoice[row]) >= 0 && state == 0) {
+				&& Inventory.getGold() - priceSell.get(currentChoice[row]) >= 0 && state == 0) {
 			state = 1;
 		} else if (row == 2 && Player.reserve.size() > 0 && state == 0) {
 			state = 2;
 		}
-		if (Inventory.getgold() - priceSell.get(currentChoice[row]) < 0 && row == 1) {
+		if (Inventory.getGold() - priceSell.get(currentChoice[row]) < 0 && row == 1) {
 			state = 3;
 		}
 		if (Player.reserve.size() >= 3 && row == 1) {

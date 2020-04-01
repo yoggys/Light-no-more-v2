@@ -85,7 +85,7 @@ public class HqUpgradeScene extends Scene {
 		if (row == 0) {
 			gsm.setState(SceneManager.HEADQUARTERS);
 		} else if (row == 1) {
-			if (Inventory.getgold() - 500 >= 0 && Player.champions.get(currentChoice[1]).skills != null) {
+			if (Inventory.getGold() - 500 >= 0 && Player.champions.get(currentChoice[1]).skills != null) {
 				Player.champions.get(currentChoice[1]).upgradeChamp();
 				Inventory.pay(500);
 			} else {
