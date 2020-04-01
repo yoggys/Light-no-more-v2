@@ -8,12 +8,12 @@ import GameState.SceneManager;
 
 //by Cyprian Siwy
 @SuppressWarnings("serial")
-public class GamePanel extends JPanel implements Runnable, KeyListener{
-	
+public class GamePanel extends JPanel implements Runnable, KeyListener {
+
 	public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
 	public static final int SCALE = 1;
-	
+
 	private Thread thread;
 	private boolean running;
 	private int FPS = 60;
@@ -21,9 +21,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 
 	private BufferedImage image;
 	private Graphics2D g;
-	
+
 	private SceneManager gsm;
-	
+
 	public GamePanel() {
 		super();
 		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
@@ -33,72 +33,74 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 
 	public void addNotify() {
 		super.addNotify();
-		if(thread == null) {
+		if (thread == null) {
 			thread = new Thread(this);
 			addKeyListener(this);
 			thread.start();
 		}
 	}
-	
+
 	private void init() {
-		
+
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		g = (Graphics2D) image.getGraphics();
-		
+
 		running = true;
-		
+
 		gsm = new SceneManager();
-		
+
 	}
-	
+
 	public void run() {
-		
+
 		init();
-		
+
 		long start;
 		long elapsed;
 		long wait;
-		
-		while(running) {
-			
+
+		while (running) {
+
 			start = System.nanoTime();
-			
+
 			draw();
 			drawToScreen();
-			
+
 			elapsed = System.nanoTime() - start;
-			
+
 			wait = targetTime - elapsed / 1000000;
-			if(wait < 0) wait = 5;
-			
+			if (wait < 0)
+				wait = 5;
+
 			try {
 				Thread.sleep(wait);
-			}
-			catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		}
-		
+
 	}
-	
+
 	private void draw() {
 		gsm.draw(g);
 	}
-	
+
 	private void drawToScreen() {
 		Graphics g2 = getGraphics();
 		g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
 		g2.dispose();
 	}
-	
-	//keyeventy
+
+	// keyeventy
 	public void keyPressed(KeyEvent key) {
 		gsm.keyPressed(key.getKeyCode());
 	}
+
 	public void keyReleased(KeyEvent key) {
 		gsm.keyReleased(key.getKeyCode());
 	}
 
-	public void keyTyped(KeyEvent key) {}
+	public void keyTyped(KeyEvent key) {
+	}
 }
