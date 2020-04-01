@@ -9,23 +9,22 @@ import Player.*;
 
 //class by Mateusz Karbownik
 public class Language {
-	
-	private static  Locale en = new Locale("en", "US");
-	private static Locale pl = new Locale("pl", "PL"); 	
 
- 	public static void setLanguage(String language) {
- 		if(language == "pl") {
- 			loc(pl);
- 		}
- 		else if(language == "en") {
- 			loc(en);
- 		}
-	} 
- 	
- 	private static void loc(Locale loc) {
- 		ResourceBundle bndl = ResourceBundle.getBundle("lang", loc);	
+	private static Locale en = new Locale("en", "US");
+	private static Locale pl = new Locale("pl", "PL");
+
+	public static void setLanguage(String language) {
+		if (language == "pl") {
+			loc(pl);
+		} else if (language == "en") {
+			loc(en);
+		}
+	}
+
+	private static void loc(Locale loc) {
+		ResourceBundle bndl = ResourceBundle.getBundle("lang", loc);
 		ArrayList<String> names = new ArrayList<String>();
-		for(int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) {
 			names.add(bndl.getString("Item" + i));
 		}
 		Inventory.info = names.toArray(new String[names.size()]);
@@ -44,7 +43,7 @@ public class Language {
 		names.add(bndl.getString("Quit"));
 		MenuScene.options = names.toArray(new String[names.size()]);
 		names.clear();
-		
+
 		HelpScene.options = bndl.getString("Back");
 
 		names.add(bndl.getString("Enter dark"));
@@ -105,7 +104,6 @@ public class Language {
 		HqUpgradeScene.options = names.toArray(new String[names.size()]);
 		names.clear();
 
-		
 		names.add(bndl.getString("Name"));
 		names.add(bndl.getString("Skills"));
 		names.add(bndl.getString("Dmg"));
@@ -121,5 +119,5 @@ public class Language {
 		names.add(bndl.getString("Unmute music"));
 		EscScene.options = names.toArray(new String[names.size()]);
 		names.clear();
- 	}
+	}
 }
