@@ -5,13 +5,13 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 //class by Mateusz Karbownik
-public class EasterEgg extends GameState {
+public class EasterEgg extends Scene {
 	
 	//zmienna gui
 	private Background bg;
 	
 	//konstruktor
-	public EasterEgg(GameStateManager gsm) {
+	public EasterEgg(SceneManager gsm) {
 		this.gsm = gsm;
 		
 		//test
@@ -35,7 +35,7 @@ public class EasterEgg extends GameState {
 	@Override
 	public void keyReleased(int k) {
 		if(k == KeyEvent.VK_ENTER){
-			gsm.setState(GameStateManager.MENUSTATE);
+			gsm.setState(SceneManager.MENU);
 		}
 	}
 }

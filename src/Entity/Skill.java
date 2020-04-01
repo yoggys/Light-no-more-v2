@@ -7,7 +7,7 @@ public class Skill
 {
     private int staminaUse;
     private String name;
-    private Efect efect;
+    private Effect effect;
     private int damage;
 
     public String getName(){ return name; }
@@ -19,12 +19,12 @@ public class Skill
         this.damage=damage;
     }
 
-    public Skill(String name, int damage, int staminaUse, Efect efect)
+    public Skill(String name, int damage, int staminaUse, Effect effect)
     {
         this.name=name;
         this.staminaUse=staminaUse;
         this.damage = damage;
-        this.efect = efect;
+        this.effect = effect;
     }
     
     public Skill(Skill s)
@@ -32,10 +32,10 @@ public class Skill
         this.name = s.name;
         this.staminaUse =s.staminaUse;
         this.damage = s.damage;
-        this.efect = s.efect;
+        this.effect = s.effect;
     }
 
-    public Efect getEfect() { return efect; }
+    public Effect getEffect() { return effect; }
 
     public int getDamage() { return damage; }
 
@@ -43,15 +43,15 @@ public class Skill
 
     //by Mateusz Karbownik
     public int getEfectDamage(){
-        return efect.getDamage();
+        return effect.getDamage();
     }
     public int getEfectTime(){
-        return efect.getTime();
+        return effect.getTime();
     }
     public void upgradeSkill(double rand){
         this.damage += damage*rand;
-        if(this.efect != null){
-            this.efect.upgradeEfect(rand);
+        if(this.effect != null){
+            this.effect.upgradeEfect(rand);
         } 
     }
 

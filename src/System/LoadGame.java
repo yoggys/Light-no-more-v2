@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import Entity.Champion;
-import Entity.Efect;
+import Entity.Effect;
 import Entity.Skill;
 import Player.Inventory;
 import Player.Player;
@@ -51,7 +51,7 @@ public class LoadGame {
 				}
 
 				for(int i = 1; i < blank.size()+1;i+=2){
-					Inventory.additem(Integer.parseInt(blank.get(i)));
+					Inventory.addItem(Integer.parseInt(blank.get(i)));
 				}
 			}
 
@@ -124,17 +124,17 @@ public class LoadGame {
 				Player.tavernChampions.clear();
 			
 			for(int i = 0; i < name.size(); i++){
-				Efect effect1, effect2;
+				Effect effect1, effect2;
 				Skill skill1, skill2;
 				if(skill1_effect_dmg.get(i) != 0){
-					effect1 = new Efect(skill1_effect_dmg.get(i) , skill1_effect_time.get(i));
+					effect1 = new Effect(skill1_effect_dmg.get(i) , skill1_effect_time.get(i));
 					skill1 = new Skill(skill1_name.get(i),skill1_dmg.get(i), skill1_sa.get(i), effect1);
 				}
 				else{
 					skill1 = new Skill(skill1_name.get(i),skill1_dmg.get(i), skill1_sa.get(i));
 				}
 				if(skill1_effect_dmg.get(i) != 0){
-					effect2 = new Efect(skill2_effect_dmg.get(i) , skill2_effect_time.get(i));
+					effect2 = new Effect(skill2_effect_dmg.get(i) , skill2_effect_time.get(i));
 					skill2 = new Skill(skill2_name.get(i),skill2_dmg.get(i), skill2_sa.get(i), effect2);
 				}
 				else{
