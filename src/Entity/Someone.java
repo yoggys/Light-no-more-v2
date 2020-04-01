@@ -25,7 +25,7 @@ public class Someone
     private Random random = new Random();
     
     public ArrayList<Skill> skills;
-    public ArrayList<Efect> efects;
+    public ArrayList<Effect> efects;
     
 
     public Someone(int maxHp, int maxStamina, String name)
@@ -38,7 +38,7 @@ public class Someone
         
         this.name=name;
 
-        efects = new ArrayList<Efect>();
+        efects = new ArrayList<Effect>();
     }
 
     public Someone(int hp, int maxHp, int sa, int maxSa,  String name)
@@ -51,7 +51,7 @@ public class Someone
         
         this.name=name;
 
-        efects = new ArrayList<Efect>();
+        efects = new ArrayList<Effect>();
     }
 
     public int getHp() { return hp; }
@@ -71,7 +71,7 @@ public class Someone
         }
     }
 
-    public void addEfect(Efect efect) { efects.add(efect); }
+    public void addEfect(Effect efect) { efects.add(efect); }
 
     private void die()
     {

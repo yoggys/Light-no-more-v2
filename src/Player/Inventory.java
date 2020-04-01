@@ -25,11 +25,11 @@ public class Inventory {
 
 	public static String info[];
 
-	public static void additem(int id){
+	public static void addItem(int id){
 			items.add(id);
 	}
 
-	public static void buyitem(int id){
+	public static void buyItem(int id){
 		int tmp = 0;
 		if(id == 0) tmp = 6;
 		if(id == 1) tmp = 7;
@@ -42,12 +42,12 @@ public class Inventory {
 		}
 	}
 
-	public static void sellitem(int pos){
+	public static void sellItem(int pos){
 		gold += Store.sell(items.get(pos));
 		items.remove(items.get(pos));
 	}
 
-	public static int getid(int pos){
+	public static int getId(int pos){
 		return items.get(pos);
 	}
 
@@ -59,7 +59,7 @@ public class Inventory {
 		gold += price;
 	}
 
-	public static int invsize() {
+	public static int invSize() {
 		return items.size();
 	}
 

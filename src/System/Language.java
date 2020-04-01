@@ -35,24 +35,24 @@ public class Language {
 		names.add(bndl.getString("Back"));
 		names.add(bndl.getString("None"));
 		names.add(bndl.getString("No inv"));
-		HqInfoState.options = names.toArray(new String[names.size()]);
+		HqInfoScene.options = names.toArray(new String[names.size()]);
 		names.clear();
 
 		names.add(bndl.getString("New game"));
 		names.add(bndl.getString("Load game"));
 		names.add(bndl.getString("Help"));
 		names.add(bndl.getString("Quit"));
-		MenuState.options = names.toArray(new String[names.size()]);
+		MenuScene.options = names.toArray(new String[names.size()]);
 		names.clear();
 		
-		HelpState.options = bndl.getString("Back");
+		HelpScene.options = bndl.getString("Back");
 
 		names.add(bndl.getString("Enter dark"));
 		names.add(bndl.getString("Tavern"));
 		names.add(bndl.getString("Charlatan"));
 		names.add(bndl.getString("Merchant"));
 		names.add(bndl.getString("Headquarters"));
-		TownState.objects = names.toArray(new String[names.size()]);
+		TownScene.objects = names.toArray(new String[names.size()]);
 		names.clear();
 
 		names.add(bndl.getString("Reserve champs"));
@@ -64,7 +64,7 @@ public class Language {
 		names.add(bndl.getString("Missing money"));
 		names.add(bndl.getString("Missing res"));
 		names.add(bndl.getString("Back"));
-		TavernState.text = names.toArray(new String[names.size()]);
+		TavernScene.text = names.toArray(new String[names.size()]);
 		names.clear();
 
 		names.add(bndl.getString("Back"));
@@ -73,14 +73,14 @@ public class Language {
 		names.add(bndl.getString("No items"));
 		names.add(bndl.getString("Missing inv"));
 		names.add(bndl.getString("Missing money"));
-		MerchantState.options = names.toArray(new String[names.size()]);
+		MerchantScene.options = names.toArray(new String[names.size()]);
 		names.clear();
 
 		names.add(bndl.getString("Upgrade squad champions"));
 		names.add(bndl.getString("Change current squad"));
 		names.add(bndl.getString("Inspect inventory"));
 		names.add(bndl.getString("Back"));
-		HeadquartersState.options = names.toArray(new String[names.size()]);
+		HeadquartersScene.options = names.toArray(new String[names.size()]);
 		names.clear();
 
 		names.add(bndl.getString("Reserve champs"));
@@ -90,19 +90,19 @@ public class Language {
 		names.add(bndl.getString("For"));
 		names.add(bndl.getString("No res"));
 		names.add(bndl.getString("Back"));
-		HqSquadState.text = names.toArray(new String[names.size()]);
+		HqSquadScene.text = names.toArray(new String[names.size()]);
 		names.clear();
 
 		names.add(bndl.getString("Back"));
 		names.add(bndl.getString("Heal"));
 		names.add(bndl.getString("Missing money"));
-		CharlatanState.options = names.toArray(new String[names.size()]);
+		CharlatanScene.options = names.toArray(new String[names.size()]);
 		names.clear();
 
 		names.add(bndl.getString("Back"));
 		names.add(bndl.getString("Upgrade"));
 		names.add(bndl.getString("Missing money"));
-		HqUpgradeState.options = names.toArray(new String[names.size()]);
+		HqUpgradeScene.options = names.toArray(new String[names.size()]);
 		names.clear();
 
 		
@@ -119,7 +119,7 @@ public class Language {
 		names.add(bndl.getString("Mute music"));
 		names.add(bndl.getString("Quit"));
 		names.add(bndl.getString("Unmute music"));
-		EscState.options = names.toArray(new String[names.size()]);
+		EscScene.options = names.toArray(new String[names.size()]);
 		names.clear();
  	}
 }

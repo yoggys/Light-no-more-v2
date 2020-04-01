@@ -42,23 +42,23 @@ public class Player {
 		g.drawString("SA/MAX_SA: " + Player.champions.get(choice).getStamina() +"/"+ Player.champions.get(choice).getMaxStamina(), x+50, y+30*8);
 		g.drawString(langCards[1]+"("+langCards[2]+"/"+langCards[3]+"): ", x+50, y+30*9);
 		if(Player.champions.get(choice).skills.size() != 0){
-			if(Player.champions.get(choice).skills.get(0).getEfect() == null){
+			if(Player.champions.get(choice).skills.get(0).getEffect() == null){
 				g.drawString("*"+ Player.champions.get(choice).skills.get(0).getName() + "(" +
 				-1*(Player.champions.get(choice).skills.get(0).getDamage()) +")", x+50, y+30*10);
 			}
 			else{
 				g.drawString("*"+ Player.champions.get(choice).skills.get(0).getName() + "(" +
 				-1*((Player.champions.get(choice).skills.get(0).getDamage() + 
-				Player.champions.get(choice).skills.get(0).getEfect().getTotal())) + ")", x+50, y+30*10);
+				Player.champions.get(choice).skills.get(0).getEffect().getTotal())) + ")", x+50, y+30*10);
 			}
-			if(Player.champions.get(choice).skills.get(0).getEfect() == null){
+			if(Player.champions.get(choice).skills.get(0).getEffect() == null){
 				g.drawString("*"+ Player.champions.get(choice).skills.get(1).getName() + "(" +
 				-1*(Player.champions.get(choice).skills.get(1).getDamage()) +")", x+50, y+30*11);
 			}
 			else{
 				g.drawString("*"+ Player.champions.get(choice).skills.get(1).getName() + "(" +
 				-1*((Player.champions.get(choice).skills.get(1).getDamage() + 
-				Player.champions.get(choice).skills.get(1).getEfect().getTotal())) + ")", x+50, y+30*11);
+				Player.champions.get(choice).skills.get(1).getEffect().getTotal())) + ")", x+50, y+30*11);
 			}
 		}
 		else{
@@ -76,23 +76,23 @@ public class Player {
 		g.drawString("SA/MAX_SA: " + Player.reserve.get(choice).getStamina() +"/"+ Player.reserve.get(choice).getMaxStamina(), x+50, y+30*8);
 		g.drawString(langCards[1]+"("+langCards[2]+"/"+langCards[3]+"): ", x+50, y+30*9);
 		if(Player.reserve.get(choice).skills.size() != 0){
-			if(Player.reserve.get(choice).skills.get(0).getEfect() == null){
+			if(Player.reserve.get(choice).skills.get(0).getEffect() == null){
 				g.drawString("*"+ Player.reserve.get(choice).skills.get(0).getName() + "(" +
 				-1*(Player.reserve.get(choice).skills.get(0).getDamage()) +")", x+50, y+30*10);
 			}
 			else{
 				g.drawString("*"+ Player.reserve.get(choice).skills.get(0).getName() + "(" +
 				-1*((Player.reserve.get(choice).skills.get(0).getDamage() + 
-				Player.reserve.get(choice).skills.get(0).getEfect().getTotal())) + ")", x+50, y+30*10);
+				Player.reserve.get(choice).skills.get(0).getEffect().getTotal())) + ")", x+50, y+30*10);
 			}
-			if(Player.reserve.get(choice).skills.get(0).getEfect() == null){
+			if(Player.reserve.get(choice).skills.get(0).getEffect() == null){
 				g.drawString("*"+ Player.reserve.get(choice).skills.get(1).getName() + "(" +
 				-1*(Player.reserve.get(choice).skills.get(1).getDamage()) +")", x+50, y+30*11);
 			}
 			else{
 				g.drawString("*"+ Player.reserve.get(choice).skills.get(1).getName() + "(" +
 				-1*((Player.reserve.get(choice).skills.get(1).getDamage() + 
-				Player.reserve.get(choice).skills.get(1).getEfect().getTotal())) + ")", x+50, y+30*11);
+				Player.reserve.get(choice).skills.get(1).getEffect().getTotal())) + ")", x+50, y+30*11);
 			}
 		}
 		else{
@@ -110,23 +110,23 @@ public class Player {
 		g.drawString("SA/MAX_SA: " + Player.tavernChampions.get(choice).getStamina() +"/"+ Player.tavernChampions.get(choice).getMaxStamina(), x+50, y+30*8);
 		g.drawString(langCards[1]+"("+langCards[2]+"/"+langCards[3]+"): ", x+50, y+30*9);
 		if(Player.tavernChampions.get(choice).skills.size() != 0){
-			if(Player.tavernChampions.get(choice).skills.get(0).getEfect() == null){
+			if(Player.tavernChampions.get(choice).skills.get(0).getEffect() == null){
 				g.drawString("*"+ Player.tavernChampions.get(choice).skills.get(0).getName() + "(" +
 				-1*(Player.tavernChampions.get(choice).skills.get(0).getDamage()) +")", x+50, y+30*10);
 			}
 			else{
 				g.drawString("*"+ Player.tavernChampions.get(choice).skills.get(0).getName() + "(" +
 				-1*((Player.tavernChampions.get(choice).skills.get(0).getDamage() + 
-				Player.tavernChampions.get(choice).skills.get(0).getEfect().getTotal())) + ")", x+50, y+30*10);
+				Player.tavernChampions.get(choice).skills.get(0).getEffect().getTotal())) + ")", x+50, y+30*10);
 			}
-			if(Player.tavernChampions.get(choice).skills.get(0).getEfect() == null){
+			if(Player.tavernChampions.get(choice).skills.get(0).getEffect() == null){
 				g.drawString("*"+ Player.tavernChampions.get(choice).skills.get(1).getName() + "(" +
 				-1*(Player.tavernChampions.get(choice).skills.get(1).getDamage()) +")", x+50, y+30*11);
 			}
 			else{
 				g.drawString("*"+ Player.tavernChampions.get(choice).skills.get(1).getName() + "(" +
 				-1*((Player.tavernChampions.get(choice).skills.get(1).getDamage() + 
-				Player.tavernChampions.get(choice).skills.get(1).getEfect().getTotal())) + ")", x+50, y+30*11);
+				Player.tavernChampions.get(choice).skills.get(1).getEffect().getTotal())) + ")", x+50, y+30*11);
 			}
 		}
 		else{

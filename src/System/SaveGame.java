@@ -22,10 +22,10 @@ public class SaveGame {
 						  "`ITEM_ID` int(10) default NULL,"+
 						  "PRIMARY KEY  (`ID`)"+
 						") ;");				
-			for(int i = 0; i < Inventory.invsize(); i++){
+			for(int i = 0; i < Inventory.invSize(); i++){
 				PreparedStatement put = conn.prepareStatement 
 					("INSERT INTO `inventory` (`ITEM_ID`) VALUES (?);");
-					put.setInt(1, Inventory.getid(i));
+					put.setInt(1, Inventory.getId(i));
 					put.executeUpdate();
 			}
 			statement.executeUpdate("DROP TABLE IF EXISTS `player`;");
@@ -75,9 +75,9 @@ public class SaveGame {
 					put.setString(6, Player.champions.get(i).skills.get(0).getName());
 					put.setInt(7, Player.champions.get(i).skills.get(0).getDamage());
 					put.setInt(8,Player.champions.get(i).skills.get(0).getStaminaUse());
-					if( Player.champions.get(i).skills.get(0).getEfect() != null){
-						put.setInt(9, Player.champions.get(i).skills.get(0).getEfect().getDamage());
-						put.setInt(10, Player.champions.get(i).skills.get(0).getEfect().getTime());
+					if( Player.champions.get(i).skills.get(0).getEffect() != null){
+						put.setInt(9, Player.champions.get(i).skills.get(0).getEffect().getDamage());
+						put.setInt(10, Player.champions.get(i).skills.get(0).getEffect().getTime());
 					}
 					else{
 						put.setInt(9, 0);
@@ -86,9 +86,9 @@ public class SaveGame {
 					put.setString(11, Player.champions.get(i).skills.get(1).getName());
 					put.setInt(12, Player.champions.get(i).skills.get(1).getDamage());
 					put.setInt(13,Player.champions.get(i).skills.get(1).getStaminaUse());
-					if( Player.champions.get(i).skills.get(0).getEfect() != null){
-						put.setInt(14, Player.champions.get(i).skills.get(0).getEfect().getDamage());
-						put.setInt(15, Player.champions.get(i).skills.get(0).getEfect().getTime());
+					if( Player.champions.get(i).skills.get(0).getEffect() != null){
+						put.setInt(14, Player.champions.get(i).skills.get(0).getEffect().getDamage());
+						put.setInt(15, Player.champions.get(i).skills.get(0).getEffect().getTime());
 					}
 					else{
 						put.setInt(14, 0);
@@ -130,9 +130,9 @@ public class SaveGame {
 					put.setString(6, Player.reserve.get(i).skills.get(0).getName());
 					put.setInt(7, Player.reserve.get(i).skills.get(0).getDamage());
 					put.setInt(8,Player.reserve.get(i).skills.get(0).getStaminaUse());
-					if( Player.reserve.get(i).skills.get(0).getEfect() != null){
-						put.setInt(9, Player.reserve.get(i).skills.get(0).getEfect().getDamage());
-						put.setInt(10, Player.reserve.get(i).skills.get(0).getEfect().getTime());
+					if( Player.reserve.get(i).skills.get(0).getEffect() != null){
+						put.setInt(9, Player.reserve.get(i).skills.get(0).getEffect().getDamage());
+						put.setInt(10, Player.reserve.get(i).skills.get(0).getEffect().getTime());
 					}
 					else{
 						put.setInt(9, 0);
@@ -141,9 +141,9 @@ public class SaveGame {
 					put.setString(11, Player.reserve.get(i).skills.get(1).getName());
 					put.setInt(12, Player.reserve.get(i).skills.get(1).getDamage());
 					put.setInt(13,Player.reserve.get(i).skills.get(1).getStaminaUse());
-					if( Player.reserve.get(i).skills.get(0).getEfect() != null){
-						put.setInt(14, Player.reserve.get(i).skills.get(0).getEfect().getDamage());
-						put.setInt(15, Player.reserve.get(i).skills.get(0).getEfect().getTime());
+					if( Player.reserve.get(i).skills.get(0).getEffect() != null){
+						put.setInt(14, Player.reserve.get(i).skills.get(0).getEffect().getDamage());
+						put.setInt(15, Player.reserve.get(i).skills.get(0).getEffect().getTime());
 					}
 					else{
 						put.setInt(14, 0);
@@ -185,9 +185,9 @@ public class SaveGame {
 					put.setString(6, Player.tavernChampions.get(i).skills.get(0).getName());
 					put.setInt(7, Player.tavernChampions.get(i).skills.get(0).getDamage());
 					put.setInt(8,Player.tavernChampions.get(i).skills.get(0).getStaminaUse());
-					if( Player.tavernChampions.get(i).skills.get(0).getEfect() != null){
-						put.setInt(9, Player.tavernChampions.get(i).skills.get(0).getEfect().getDamage());
-						put.setInt(10, Player.tavernChampions.get(i).skills.get(0).getEfect().getTime());
+					if( Player.tavernChampions.get(i).skills.get(0).getEffect() != null){
+						put.setInt(9, Player.tavernChampions.get(i).skills.get(0).getEffect().getDamage());
+						put.setInt(10, Player.tavernChampions.get(i).skills.get(0).getEffect().getTime());
 					}
 					else{
 						put.setInt(9, 0);
@@ -196,9 +196,9 @@ public class SaveGame {
 					put.setString(11, Player.tavernChampions.get(i).skills.get(1).getName());
 					put.setInt(12, Player.tavernChampions.get(i).skills.get(1).getDamage());
 					put.setInt(13,Player.tavernChampions.get(i).skills.get(1).getStaminaUse());
-					if( Player.tavernChampions.get(i).skills.get(0).getEfect() != null){
-						put.setInt(14, Player.tavernChampions.get(i).skills.get(0).getEfect().getDamage());
-						put.setInt(15, Player.tavernChampions.get(i).skills.get(0).getEfect().getTime());
+					if( Player.tavernChampions.get(i).skills.get(0).getEffect() != null){
+						put.setInt(14, Player.tavernChampions.get(i).skills.get(0).getEffect().getDamage());
+						put.setInt(15, Player.tavernChampions.get(i).skills.get(0).getEffect().getTime());
 					}
 					else{
 						put.setInt(14, 0);
