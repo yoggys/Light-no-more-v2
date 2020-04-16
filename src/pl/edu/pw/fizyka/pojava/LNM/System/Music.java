@@ -4,6 +4,7 @@ import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 
 //class by Mateusz Karbownik
 public class Music {
@@ -12,9 +13,10 @@ public class Music {
 	private static AudioInputStream audio;
 	private static File path;
 	private static Clip clip;
+	private static FloatControl gain;
+	public static float dB = 0;
 	// true - unmuted / false - muted
 	public static boolean unmuted = true;
-
 	// zmienna nazwy pliku
 	private static String playing;
 
@@ -57,5 +59,10 @@ public class Music {
 	// zatrzymaj
 	public static void stop() {
 		clip.stop();
+	}
+
+	public static void setVol(){
+		gain = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
+		gain.setValue(dB);
 	}
 }

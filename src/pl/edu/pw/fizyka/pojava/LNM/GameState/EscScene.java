@@ -51,7 +51,11 @@ public class EscScene extends Scene {
 				g.drawString(options[i], 60, 340 + 2 * i * 35);
 			} else if (i == 2) {
 				if (Music.unmuted) {
-					g.drawString(options[i], 60, 340 + 2 * i * 35);
+					if((int)(100.00-2.5*Music.dB*100/-80) > 0){
+						g.drawString(options[i] +"("+ (int)(100.00-2.5*Music.dB*100/-80)+")", 60, 340 + 2 * i * 35);
+					} else {
+						g.drawString(options[i] + "("+0+")", 60, 340 + 2 * i * 35);
+					}
 				} else {
 					g.drawString(options[4], 60, 340 + 2 * i * 35);
 				}
@@ -117,12 +121,25 @@ public class EscScene extends Scene {
 		if (k == KeyEvent.VK_ESCAPE) {
 			gsm.setState(gsm.getLastState());
 		}
+
 	}
 
 	@Override
 	public void keyReleased(int k) {
 		if (k == KeyEvent.VK_ENTER) {
 			select();
+		}
+		if (k == KeyEvent.VK_Z) {
+			if(Music.dB > -80){
+				Music.dB-= 1;
+			}
+			Music.setVol();
+		}
+		if (k == KeyEvent.VK_X) {
+			if(Music.dB < 0){
+				Music.dB += 1;
+			}
+			Music.setVol();
 		}
 	}
 }
