@@ -51,13 +51,20 @@ public class EscScene extends Scene {
 				g.drawString(options[i], 60, 340 + 2 * i * 35);
 			} else if (i == 2) {
 				if (Music.unmuted) {
-					if((int)(100.00-2.5*Music.dB*100/-80) > 0){
-						g.drawString(options[i] +"("+ (int)(100.00-2.5*Music.dB*100/-80)+")", 60, 340 + 2 * i * 35);
-					} else {
-						g.drawString(options[i] + "("+0+")", 60, 340 + 2 * i * 35);
+					if(Music.level == 0){
+						g.drawString(options[i]+" (● ● ● ●) - (Z -vol, X +vol)" , 60, 340 + 2 * i * 35);
+					}
+					else if(Music.level == 1){
+						g.drawString(options[i]+" (● ● ● ○) - (Z -vol, X +vol)", 60, 340 + 2 * i * 35);
+					}
+					else if(Music.level == 2){
+						g.drawString(options[i]+" (● ● ○ ○) - (Z -vol, X +vol)", 60, 340 + 2 * i * 35);
+					}
+					else if(Music.level == 3){
+						g.drawString(options[i]+" (● ○ ○ ○) - (Z -vol, X +vol)", 60, 340 + 2 * i * 35);
 					}
 				} else {
-					g.drawString(options[4], 60, 340 + 2 * i * 35);
+					g.drawString(options[4]+" - (Z -vol, X +vol)", 60, 340 + 2 * i * 35);
 				}
 			} else if (i == 3) {
 				g.drawString(options[i], 60, 340 + 2 * i * 35);
@@ -87,6 +94,9 @@ public class EscScene extends Scene {
 				Music.unmuted = false;
 				Music.stop();
 			} else {
+				if(Music.level == 4){
+					Music.level--;
+				}
 				Music.unmuted = true;
 				Music.play();
 			}
@@ -130,16 +140,10 @@ public class EscScene extends Scene {
 			select();
 		}
 		if (k == KeyEvent.VK_Z) {
-			if(Music.dB > -80){
-				Music.dB-= 1;
-			}
-			Music.setVol();
+			Music.setLevel(true);
 		}
 		if (k == KeyEvent.VK_X) {
-			if(Music.dB < 0){
-				Music.dB += 1;
-			}
-			Music.setVol();
+			Music.setLevel(false);
 		}
 	}
 }

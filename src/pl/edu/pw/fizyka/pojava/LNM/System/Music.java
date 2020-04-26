@@ -14,7 +14,7 @@ public class Music {
 	private static File path;
 	private static Clip clip;
 	private static FloatControl gain;
-	public static float dB = 0;
+	public static int level = 0;
 	// true - unmuted / false - muted
 	public static boolean unmuted = true;
 	// zmienna nazwy pliku
@@ -27,9 +27,8 @@ public class Music {
 
 	// graj utwor
 	public static void play() {
-
+		
 		// test
-
 		try {
 			path = new File(playing);
 			audio = AudioSystem.getAudioInputStream(path);
@@ -38,6 +37,7 @@ public class Music {
 			clip.open(audio);
 
 			if (unmuted) {
+				setVal(-8*level);
 				clip.start();
 				clip.loop(Clip.LOOP_CONTINUOUSLY);
 			}
@@ -61,8 +61,34 @@ public class Music {
 		clip.stop();
 	}
 
-	public static void setVol(){
+	private static void setVal(float dB){
 		gain = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
 		gain.setValue(dB);
 	}
+
+	public static void setLevel(boolean side){
+		if(side){
+			if(level < 4){
+				level++;
+			}
+			if(level == 4){
+				Music.unmuted = false;
+				Music.stop();
+			}
+			if(level != 4){
+				setVal(-8*level);
+			}
+		} 
+		else {
+			if(level > 0){
+				if(!Music.unmuted){
+					Music.unmuted = true;
+					Music.play();
+				}
+				level--;
+				setVal(-8*level);
+			}
+		}
+	}
+
 }
