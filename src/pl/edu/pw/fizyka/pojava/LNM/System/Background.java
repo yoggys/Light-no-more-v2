@@ -1,5 +1,6 @@
 package pl.edu.pw.fizyka.pojava.LNM.System;
 
+import pl.edu.pw.fizyka.pojava.LNM.Entity.Vector2D;
 import pl.edu.pw.fizyka.pojava.LNM.Main.GamePanel;
 
 import java.awt.*;
@@ -13,8 +14,7 @@ public class Background {
 
 	// zmienne ustawiania obiektu i pozycji
 	private BufferedImage image;
-	private double x;
-	private double y;
+	public Vector2D pos = new Vector2D();
 
 	// test
 	public Background(String s) {
@@ -27,24 +27,23 @@ public class Background {
 	}
 
 	// rysowanie
-	public void draw(Graphics2D g) {
-		g.drawImage(image, (int) x, (int) y, null);
+	public void draw(Graphics2D g) 
+	{
+		g.drawImage(image, (int) pos.x, (int) pos.y, null);
 
-		if (x < 0) {
-			g.drawImage(image, (int) x + GamePanel.WIDTH, (int) y, null);
+		if (pos.x < 0) {
+			g.drawImage(image,(int) pos.x + GamePanel.WIDTH, (int) pos.y, null);
 		}
 
-		if (x > 0) {
-			g.drawImage(image, (int) x - GamePanel.WIDTH, (int) y, null);
+		if (pos.x > 0) {
+			g.drawImage(image, (int) pos.x - GamePanel.WIDTH, (int) pos.y, null);
 		}
 	}
 
-	public void move(String side) {
-		if (side == "left" && x != 0) {
-			x -= 100;
-		} else if (side == "right" && y != 0) {
-			x += 100;
-		}
+	
+	public float getPosX()
+	{
+		return pos.x;
 	}
 
 }
