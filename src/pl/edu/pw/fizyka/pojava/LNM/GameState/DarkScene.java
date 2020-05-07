@@ -104,7 +104,7 @@ public class DarkScene extends Scene {
 		if (dungState == dungeonState.MovementPhace) 
 		{
 
-			if( imput.x == Vector2D.right.x)
+			if( imput.x == Vector2D.right.x && firstChampPos.x - bg.pos.x <activeRoom.lenght)
 			{
 				if(firstChampPos.x >= 500 )
 					bg.pos = MM.moveToDirection(bg.pos, Vector2D.multiply(imput, -1), speed);

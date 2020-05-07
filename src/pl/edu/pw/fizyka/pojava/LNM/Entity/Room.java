@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Room 
 {
     public ArrayList<Door> doors = new ArrayList<Door>();
-    int lenght;
+    public int lenght;
 
     public Room(int lenght)
     {
