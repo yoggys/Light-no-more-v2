@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import pl.edu.pw.fizyka.pojava.LNM.GameState.*;
+import pl.edu.pw.fizyka.pojava.LNM.GameState.Tutorial.Tutorial0;
 import pl.edu.pw.fizyka.pojava.LNM.Player.*;
 
 //class by Mateusz Karbownik
@@ -12,6 +13,7 @@ public class Language {
 
 	private static Locale en = new Locale("en", "US");
 	private static Locale pl = new Locale("pl", "PL");
+	public static boolean isPolish = false;
 
 	public static void setLanguage(String language) {
 		if (language == "pl") {
@@ -119,5 +121,12 @@ public class Language {
 		names.add(bndl.getString("Unmute music"));
 		EscScene.options = names.toArray(new String[names.size()]);
 		names.clear();
+
+		names.add(bndl.getString("Previous"));
+		names.add(bndl.getString("Next"));
+		names.add(bndl.getString("Skip"));
+		Tutorial0.options = names.toArray(new String[names.size()]);
+		names.clear();
+
 	}
 }

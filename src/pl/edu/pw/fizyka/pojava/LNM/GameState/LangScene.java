@@ -1,5 +1,6 @@
 package pl.edu.pw.fizyka.pojava.LNM.GameState;
 
+import pl.edu.pw.fizyka.pojava.LNM.GameState.Tutorial.Tutorial0;
 import pl.edu.pw.fizyka.pojava.LNM.System.Background;
 import pl.edu.pw.fizyka.pojava.LNM.System.Images;
 import pl.edu.pw.fizyka.pojava.LNM.System.Language;
@@ -61,8 +62,10 @@ public class LangScene extends Scene {
 	public void keyReleased(int k) {
 		if (k == KeyEvent.VK_ENTER) {
 			if (current == 0) {
+				Tutorial0.isPolish = false;
 				Language.setLanguage("en");
 			} else if (current == 1) {
+				Tutorial0.isPolish = true;
 				Language.setLanguage("pl");
 			}
 			gsm.setState(SceneManager.MENU);
