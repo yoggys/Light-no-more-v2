@@ -27,6 +27,10 @@ public class DarkScene extends Scene {
 
 	private Font font;
 
+	private Dungeon activeDungeon = new Dungeon();
+	private Room activeRoom = activeDungeon.rooms.get(0);
+	private Door activeDoor;
+
 	private boolean tmp = true;
 
 	public enum dungeonState {
@@ -34,7 +38,7 @@ public class DarkScene extends Scene {
 	};
 
 	private dungeonState dungState = dungeonState.MovementPhace;
-	private float speed = 360; // pixel per secend
+	private float speed = 200; // pixel per secend
 
 	Champion emptyChamp = new Champion(0, 0, "");
 
@@ -45,6 +49,7 @@ public class DarkScene extends Scene {
 
 	private MovementManager MM = new MovementManager();
 
+
 	public DarkScene(SceneManager gsm) {
 		changeStateTo(dungeonState.CombatPhase);
 
@@ -52,14 +57,19 @@ public class DarkScene extends Scene {
 		poison = new Effect(2, 3);
 		healOverTime = new Effect(-2, 3);
 
+		//tworzenie umiejętności
 		Skill skillPoison = new Skill("Poison", 4, 2, poison);
 		Skill skillSlise = new Skill("Slise", 20, 0);
 		Skill skillSmite = new Skill("Smite", 10, 0);
 		Skill skillHeal = new Skill("Heal", -4, 0, healOverTime);
+
+		//Tworzenie Bochaterów i przeciwników
 		Player.champions.add(new Champion(25, 20, "AleXXX"));
 		Player.champions.add(new Champion(25, 20, "Sasha"));
 		Player.champions.add(new Champion(100, 30, "Siwy"));
 		Player.enemys.add(new Someone(50, 10, "wolf"));
+
+		//Dawanie umiejętności
 		Player.champions.get(0).addSkill(new Skill(skillSlise));
 		Player.champions.get(0).addSkill(new Skill(skillSmite));
 		Player.champions.get(1).addSkill(new Skill(skillHeal));
@@ -67,32 +77,72 @@ public class DarkScene extends Scene {
 		Player.champions.get(2).addSkill(new Skill(skillSmite));
 		Player.champions.get(2).addSkill(new Skill(skillHeal));
 
-		this.gsm = gsm;
+ 		this.gsm = gsm;
 
-		try {
-
+		try 
+		{
 			bg = new Background("Resources/Backgrounds/fightbg.png");
-
+			
 			font = new Font("Arial", Font.PLAIN, 12);
-
+			//bg.pos.x+=100;
 		}
-
-		catch (Exception e) {
+		
+		catch (Exception e) 
+		{
 			e.printStackTrace();
 		}
-
 	}
-
+	
 	@Override
 	public void draw(Graphics2D g) {
-		if (dungState == dungeonState.MovementPhace) {
-			firstChampPos = MM.moveToDirection(firstChampPos, imput, speed);
-		}
-
+		
 		bg.draw(g);
-
+		
 		g.setFont(font);
 		g.setColor(Color.WHITE);
+
+		if (dungState == dungeonState.MovementPhace) 
+		{
+
+			if( imput.x == Vector2D.right.x)
+			{
+				if(firstChampPos.x >= 500 )
+					bg.pos = MM.moveToDirection(bg.pos, Vector2D.multiply(imput, -1), speed);
+				else
+					firstChampPos = MM.moveToDirection(firstChampPos, imput, speed);
+			}
+
+			if( imput.x == Vector2D.left.x )
+			{
+				if( bg.pos.x<0 && firstChampPos.x <= 100 )
+					bg.pos = MM.moveToDirection(bg.pos, Vector2D.multiply(imput, -1), speed);	
+				else
+				{
+					firstChampPos = MM.moveToDirection(firstChampPos, imput, speed);
+					if(firstChampPos.x<0)
+						firstChampPos.x=0;
+				}
+			}
+			
+			
+			System.out.println(firstChampPos.x - bg.pos.x);
+
+			for (Door door : activeRoom.doors) 
+			{
+				if(door.posX - 100 - (firstChampPos.x - bg.pos.x) < 100 && door.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
+				{
+					g.drawString("Enter Door", door.posX + bg.pos.x, 300);
+					activeDoor = door;
+					break;
+				}
+				else
+				{
+					activeDoor = null;
+					bg.draw(g);
+				}	
+			}
+		}
+		
 		if (Player.champions.size() == 0) {
 			g.setColor(Color.WHITE);
 			g.drawString("back", 586, 700);
@@ -215,6 +265,7 @@ public class DarkScene extends Scene {
 				if (currentChoice < Player.champions.size()) {
 					target = Player.champions.get(currentChoice);
 					targetId = currentChoice;
+					activeChamp = emptyChamp;
 				} else {
 					target = Player.enemys.get(currentChoice - Player.champions.size());
 					targetId = currentChoice;
@@ -254,19 +305,25 @@ public class DarkScene extends Scene {
 			else if (dungState == dungeonState.CombatPhase)
 				changeStateTo(dungeonState.MovementPhace);
 		}
+
 		if (dungState == dungeonState.MovementPhace) {
 			imput = Vector2D.zero;
 
-			if (k == KeyEvent.VK_W) {
-				imput = Vector2D.add(imput, Vector2D.up);
-			} else if (k == KeyEvent.VK_S) {
-				imput = Vector2D.add(imput, Vector2D.down);
+			if (k == KeyEvent.VK_LEFT) {
+				imput = Vector2D.add(imput, Vector2D.left);
+			} else if (k == KeyEvent.VK_RIGHT) {
+				imput = Vector2D.add(imput, Vector2D.right);
 			}
 
-			if (k == KeyEvent.VK_A) {
-				imput = Vector2D.add(imput, Vector2D.left);
-			} else if (k == KeyEvent.VK_D) {
-				imput = Vector2D.add(imput, Vector2D.right);
+			if(activeDoor != null)
+			{
+				if(k== KeyEvent.VK_SPACE)
+				{
+					activeRoom = activeDoor.leadTo;
+					firstChampPos.x = 200;
+					bg.pos.x = 0;
+					activeDoor = null;
+				}
 			}
 		}
 
@@ -321,7 +378,10 @@ public class DarkScene extends Scene {
 		}
 	}
 
-	public void keyReleased(int k) {
+	public void keyReleased(int k) 
+	{
+		imput = Vector2D.zero;
+
 		if (k == KeyEvent.VK_ENTER) {
 			tmp = true;
 			if (currentChoice == Player.champions.size() + Player.enemys.size() + activeChamp.skills.size()) {
@@ -334,14 +394,18 @@ public class DarkScene extends Scene {
 		}
 	}
 
-	void changeStateTo(dungeonState S) {
-		switch (S) {
-			case CombatPhase: {
+	void changeStateTo(dungeonState S) 
+	{
+		switch (S) 
+		{
+			case CombatPhase: 
+			{
 				currentChoice = 0;
 				dungState = dungeonState.CombatPhase;
 			}
 				break;
-			case MovementPhace: {
+			case MovementPhace: 
+			{
 				currentChoice = -1;
 				dungState = dungeonState.MovementPhace;
 			}
