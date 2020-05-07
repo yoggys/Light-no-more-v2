@@ -66,8 +66,7 @@ public class MenuScene extends Scene {
 	// wybor aktualnego trybu pracy / opcji menu etc.
 	private void select() {
 		if (currentChoice == 0) {
-			gsm.setState(SceneManager.TOWN);
-			Music.change("Resources/Music/muz22.wav");
+			gsm.setState(SceneManager.TUT0);
 		}
 
 		if (currentChoice == 1) {

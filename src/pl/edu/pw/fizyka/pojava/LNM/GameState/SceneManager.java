@@ -1,6 +1,7 @@
 package pl.edu.pw.fizyka.pojava.LNM.GameState;
 
 import java.util.ArrayList;
+import pl.edu.pw.fizyka.pojava.LNM.GameState.Tutorial.*;
 
 //by Cyprian Siwy & Mateusz Karbownik
 public class SceneManager {
@@ -24,6 +25,14 @@ public class SceneManager {
 	public static int ESC = 12;
 	public static int LANG = 13;
 	public static int CHEST = 14;
+	public static int TUT0 = 15;
+	public static int TUT1 = 16;
+	public static int TUT2 = 17;
+	public static int TUT3 = 18;
+	public static int TUT4 = 19;
+	public static int TUT5 = 20;
+	
+
 
 	public SceneManager() {
 
@@ -45,6 +54,12 @@ public class SceneManager {
 		scenes.add(new EscScene(this));
 		scenes.add(new LangScene(this));
 		scenes.add(new ChestScene(this));
+
+		scenes.add(new Tutorial0(this));
+		scenes.add(new Tutorial1(this));
+		scenes.add(new Tutorial2(this));
+		scenes.add(new Tutorial3(this));
+		scenes.add(new Tutorial4(this));
 	}
 
 	public void setState(int state) {
