@@ -3,6 +3,9 @@ package pl.edu.pw.fizyka.pojava.LNM.Entity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+
+import pl.edu.pw.fizyka.pojava.LNM.System.Images;
+
 import java.awt.Graphics2D;
 
 //by Cyprian Siwy
@@ -26,7 +29,11 @@ public class Someone {
     public ArrayList<Skill> skills;
     public ArrayList<Effect> efects;
 
-    public Someone(int maxHp, int maxStamina, String name) {
+    String imagePath;
+    Vector2D offSet;
+
+    private Images image = new Images();
+    public Someone(int maxHp, int maxStamina, String name, String imagePath, Vector2D offSet) {
         this.maxHp = maxHp;
         this.hp = this.maxHp;
 
@@ -34,7 +41,8 @@ public class Someone {
         this.stamina = this.maxStamina;
 
         this.name = name;
-
+        this.imagePath = imagePath;
+        this.offSet = offSet;
         efects = new ArrayList<Effect>();
     }
 
@@ -116,6 +124,8 @@ public class Someone {
         g.drawString("" + this.getName(), x, y);
         g.drawString("" + this.getHp() + "HP", x, y + 20);
         g.drawString("" + this.getStamina() + "ST", x + 50, y + 20);
+        image.draw(g, x + (int) offSet.x , y + (int) offSet.y, imagePath);
+        //20 420
     }
 
     // by Mateusz Karbownik
@@ -162,6 +172,13 @@ public class Someone {
             this.skills.get(0).upgradeSkill(tmp);
             this.skills.get(1).upgradeSkill(tmp);
         }
-
+    }
+    public void setImage(String s)
+    {
+        imagePath = s;
+    }
+    public void setOffSet(Vector2D v1)
+    {
+        offSet = v1;
     }
 }
