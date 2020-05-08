@@ -31,7 +31,7 @@ public class ChestScene extends Scene {
 
 		// test
 		try {
-			bg = new Background("Resources/Backgrounds/darkbg.png");
+			bg = new Background("Resources/Backgrounds/chest2bg.png");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -49,7 +49,6 @@ public class ChestScene extends Scene {
 		bg.draw(g);
 
 		g.setFont(font);
-		g.setColor(Color.WHITE);
 
 		for (int i = 0; i < chest.size(); i++) {
 
@@ -57,11 +56,13 @@ public class ChestScene extends Scene {
 				image.draw(g, -85 + 126 * i, 393, "Resources/Items/selectedframe.png");
 			}
 
-			image.draw(g, 33 + 60 * i, 510, "Resources/Items/" + Inventory.getName(chest.get(i)) + ".png");
+			image.draw(g, 33 + 126 * i, 510, "Resources/Items/" + Inventory.getName(chest.get(i)) + ".png");
 		}
 
-		if (state == 1) {
-			g.drawString(options, 620, 680);
+		if (row == 0) {
+			g.setColor(Color.WHITE);
+		} else {
+			g.setColor(Color.RED);
 		}
 
 		g.drawString(options, 620, 680);

@@ -16,7 +16,7 @@ public class Music {
 	private static FloatControl gain;
 	public static int level = 0;
 	// true - unmuted / false - muted
-	public static boolean unmuted = true;
+	public static boolean unmuted = false;
 	// zmienna nazwy pliku
 	private static String playing;
 
