@@ -15,7 +15,8 @@ public class ChestScene extends Scene {
 	private Background bg;
 	public static String options = "Back";
 	private int row;
-	private int currentChoice[] = { 0, 0 };
+	private HUDgold hud;
+	private int currentChoice[] = { 0, 0 , 0};
 	private int state = 0;
 
 	private Font font;
@@ -37,6 +38,7 @@ public class ChestScene extends Scene {
 		}
 
 		font = new Font("Arial", Font.PLAIN, 24);
+		hud = new HUDgold();
 		image = new Images();
 
 		rollItems();
@@ -47,36 +49,116 @@ public class ChestScene extends Scene {
 	@Override
 	public void draw(Graphics2D g) {
 		bg.draw(g);
+		hud.draw(g);
 
 		g.setFont(font);
 
-		for (int i = 0; i < chest.size(); i++) {
-
-			if (i == currentChoice[1] && row == 1) {
-				image.draw(g, -85 + 126 * i, 393, "Resources/Items/selectedframe.png");
+		if (state == 1) {
+			Inventory.addItem(chest.get(currentChoice[row]));
+			chest.remove(currentChoice[row]);
+			if (currentChoice[row] != 0) {
+				currentChoice[row]--;
 			}
 
-			image.draw(g, 33 + 126 * i, 510, "Resources/Items/" + Inventory.getName(chest.get(i)) + ".png");
+			if (chest.size() == 0) {
+				if (Inventory.invSize() > 0) {
+					row++;
+				} else {
+					row = 0;
+				}
+			}
+			state = 0;
+		}
+		if (state == 2) {
+			chest.add(Inventory.getId(currentChoice[row]));
+			Inventory.removeItems(currentChoice[row]);
+			if (currentChoice[row] != 0) {
+				currentChoice[row]--;
+			}
+
+			if (Inventory.invSize() == 0) {
+				if (chest.size() > 0) {
+					row--;
+				} else {
+					row = 0;
+				}
+			}
+			state = 0;
 		}
 
-		if (row == 0) {
+		// INFO COL
+		if (row == 1) {
+			g.setColor(Color.RED);
+			g.drawString("Inventory items", 40, 140);
+			g.setColor(Color.WHITE);
+			g.drawString("Chest items", 40, 440);
+		} else if (row == 2) {
+			g.setColor(Color.WHITE);
+			g.drawString("Inventory items", 40, 140);
+			g.setColor(Color.RED);
+			g.drawString("Chest items", 40, 440);
+
+		} else {
+			g.setColor(Color.RED);
+			g.drawString("Chest items", 40, 440);
+			g.drawString("Inventory items", 40, 140);
+		}
+
+		if (Inventory.invSize() == 0) {
+			g.setColor(Color.GREEN);
+			g.drawString("Inventory empty", 40, 200);
+		} else {
+			for (int i = 0; i < Inventory.invSize(); i++) {
+
+				if (i == currentChoice[2] && row == 2) {
+					image.draw(g, -65 + 126 * i, 93, "Resources/Items/selectedframe.png");
+				}
+				image.draw(g, 53 + 126 * i, 210, "Resources/Items/" + Inventory.getName(Inventory.getId(i)) + ".png");
+			}
+		}
+		if (chest.size() == 0) {
+			g.setColor(Color.GREEN);
+			g.drawString("Chest empty", 40, 500);
+		} else {
+			for (int i = 0; i < chest.size(); i++) {
+
+				if (i == currentChoice[1] && row == 1) {
+					image.draw(g, -65 + 126 * i, 393, "Resources/Items/selectedframe.png");
+				}
+
+				image.draw(g, 53 + 126 * i, 510, "Resources/Items/" + Inventory.getName(chest.get(i)) + ".png");
+			}
+		}
+		if (row == 0 && currentChoice[0] == 0) {
 			g.setColor(Color.WHITE);
 		} else {
 			g.setColor(Color.RED);
 		}
+		g.drawString(options, 500, 680);
 
-		g.drawString(options, 620, 680);
+		if (row == 0 && currentChoice[0] == 1) {
+			g.setColor(Color.WHITE);
+		} else {
+			g.setColor(Color.RED);
+		}
+		g.drawString("Gold in chest: "+chestGold, 620, 680);
+		
 	}
 
 	private void select() {
-		if (row == 0) {
-			gsm.setState(gsm.getLastState());
+		if (row == 2) {
+			state = 2;
 		}
-		if (row == 1 && Inventory.invSize() < 10) {
-
-		} else {
+		if (row == 1) {
 			state = 1;
 		}
+		if (row == 0 && currentChoice[0] == 0) {
+			gsm.setState(gsm.getLastState());
+		}
+		if (row == 0 && currentChoice[0] == 1) {
+			openChest();
+		}
+
 	}
 
 	// keyevent poszczegolnych klawiszy
@@ -84,21 +166,15 @@ public class ChestScene extends Scene {
 	public void keyPressed(int k) {
 
 		if (k == KeyEvent.VK_UP) {
-			if (row == 1) {
+			row++;
+			if (row == 3) {
 				row = 0;
-			} else {
-				if (chest.size() != 0) {
-					row++;
-				}
 			}
 		}
 		if (k == KeyEvent.VK_DOWN) {
-			if (row == 0) {
-				row = 1;
-			} else {
-				if (chest.size() != 0) {
-					row--;
-				}
+			row--;
+			if (row == -1) {
+				row = 2;
 			}
 		}
 		if (k == KeyEvent.VK_LEFT) {
@@ -109,6 +185,18 @@ public class ChestScene extends Scene {
 					currentChoice[row]--;
 				}
 			}
+			if(row == 0){
+				currentChoice[row]--;
+				if(currentChoice[row] < 0){
+					currentChoice[row] = 1;
+				}
+			}
+			if(row == 2){
+				currentChoice[row]--;
+				if(currentChoice[row] < 0){
+					currentChoice[row] = Inventory.invSize()-1;
+				}
+			}
 		}
 		if (k == KeyEvent.VK_RIGHT) {
 			if (row == 1) {
@@ -116,6 +204,18 @@ public class ChestScene extends Scene {
 					currentChoice[row] = 0;
 				} else {
 					currentChoice[row]++;
+				}
+			}
+			if(row == 0){
+				currentChoice[row]++;
+				if (currentChoice[row] == 2){
+					currentChoice[row] = 0;
+				}
+			}
+			if(row == 2){
+				currentChoice[row]++;
+				if (currentChoice[row] == Inventory.invSize()){
+					currentChoice[row] = 0;
 				}
 			}
 		}
@@ -140,5 +240,6 @@ public class ChestScene extends Scene {
 
 	public void openChest() {
 		Inventory.sell(chestGold);
+		chestGold = 0;
 	}
 }
