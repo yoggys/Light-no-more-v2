@@ -17,7 +17,7 @@ public class Player {
 	public static String langCards[];
 
 	public static void changeSquad(int posCurrent, int posReserve) {
-		Champion tmp = new Champion(0, 0, "");
+		Champion tmp = new Champion(0, 0, "", "Resources/Entity/patyczak.png", new Vector2D(-20, -420) );
 		tmp = champions.get(posCurrent);
 		champions.set(posCurrent, reserve.get(posReserve));
 		reserve.set(posReserve, tmp);

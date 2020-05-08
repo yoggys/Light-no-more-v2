@@ -33,14 +33,16 @@ public class DarkScene extends Scene {
 
 	private boolean tmp = true;
 
+	private Images image = new Images();
+
 	public enum dungeonState {
 		CombatPhase, MovementPhace
 	};
 
-	private dungeonState dungState = dungeonState.MovementPhace;
-	private float speed = 200; // pixel per secend
+	private dungeonState dungState = dungeonState.CombatPhase;
+	private float speed = 600; // pixel per secend
 
-	Champion emptyChamp = new Champion(0, 0, "");
+	Champion emptyChamp = new Champion(0, 0, "", "Resources/Entity/patyczak.png", new Vector2D(-20, -420) );
 
 	private Vector2D firstChampPos = new Vector2D(200, 600);
 	private Vector2D firstEnemyPos = new Vector2D(600, 600);
@@ -51,7 +53,7 @@ public class DarkScene extends Scene {
 
 
 	public DarkScene(SceneManager gsm) {
-		changeStateTo(dungeonState.CombatPhase);
+		changeStateTo(dungeonState.MovementPhace);
 
 		activeChamp = emptyChamp;
 		poison = new Effect(2, 3);
@@ -64,10 +66,10 @@ public class DarkScene extends Scene {
 		Skill skillHeal = new Skill("Heal", -4, 0, healOverTime);
 
 		//Tworzenie Bochaterów i przeciwników
-		Player.champions.add(new Champion(25, 20, "AleXXX"));
-		Player.champions.add(new Champion(25, 20, "Sasha"));
-		Player.champions.add(new Champion(100, 30, "Siwy"));
-		Player.enemys.add(new Someone(50, 10, "wolf"));
+		Player.champions.add(new Champion(25, 20, "AleXXX" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
+		Player.champions.add(new Champion(25, 20, "Sasha",  "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
+		Player.champions.add(new Champion(100, 30, "Siwy" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
+		Player.enemys.add(new Someone(50, 10, "wolf" , "Resources/Entity/wolf.png", new Vector2D(-150, -300)));
 
 		//Dawanie umiejętności
 		Player.champions.get(0).addSkill(new Skill(skillSlise));
@@ -76,6 +78,8 @@ public class DarkScene extends Scene {
 		Player.champions.get(1).addSkill(new Skill(skillPoison));
 		Player.champions.get(2).addSkill(new Skill(skillSmite));
 		Player.champions.get(2).addSkill(new Skill(skillHeal));
+
+		
 
  		this.gsm = gsm;
 
@@ -101,6 +105,11 @@ public class DarkScene extends Scene {
 		g.setFont(font);
 		g.setColor(Color.WHITE);
 
+		for (Door door : activeRoom.doors) 
+			{
+				image.draw(g, (int)( door.posX + bg.pos.x) - 280, 170, "Resources/Entity/doors.png");
+			}
+
 		if (dungState == dungeonState.MovementPhace) 
 		{
 
@@ -125,12 +134,13 @@ public class DarkScene extends Scene {
 			}
 			
 			
-			System.out.println(firstChampPos.x - bg.pos.x);
-
+			//System.out.println(firstChampPos.x - bg.pos.x);
+			
 			for (Door door : activeRoom.doors) 
 			{
 				if(door.posX - 100 - (firstChampPos.x - bg.pos.x) < 100 && door.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
 				{
+					//image.draw(g, (int) door.posX + (int) bg.pos.x - 280, 170, "Resources/Entity/doors.png");
 					g.drawString("Enter Door", door.posX + bg.pos.x, 300);
 					activeDoor = door;
 					break;
@@ -138,10 +148,13 @@ public class DarkScene extends Scene {
 				else
 				{
 					activeDoor = null;
-					bg.draw(g);
+					//image.draw(g, (int) door.posX + (int) bg.pos.x - 280, 170, "Resources/Entity/doors.png");
 				}	
+				
 			}
 		}
+		
+
 		
 		if (Player.champions.size() == 0) {
 			g.setColor(Color.WHITE);
@@ -169,14 +182,18 @@ public class DarkScene extends Scene {
 				}
 
 				Player.champions.get(i).drawSomeone((int) firstChampPos.x + i * 100, (int) firstChampPos.y, g);
-			} else if (i < Player.champions.size() + Player.enemys.size()) {
-				Player.enemys.get(i - Player.champions.size()).drawSomeone((int) firstEnemyPos.x + i * 100,
-						(int) firstEnemyPos.y, g);
-			} else if (activeChamp != null
-					&& i < Player.champions.size() + Player.enemys.size() + activeChamp.skills.size()) {
+			} else if (i < Player.champions.size() + Player.enemys.size()) 
+			{
+				if(dungState == dungeonState.CombatPhase)
+				{
+					Player.enemys.get(i - Player.champions.size()).drawSomeone((int) firstEnemyPos.x + i * 100, (int) firstEnemyPos.y, g);
+				}
+			} else if (activeChamp != null && i < Player.champions.size() + Player.enemys.size() + activeChamp.skills.size())
+			{
 				int j = i - Player.champions.size() - Player.enemys.size();
 
-				if (activeChamp.skills.get(j).getStaminaUse() > activeChamp.getStamina()) {
+				if (activeChamp.skills.get(j).getStaminaUse() > activeChamp.getStamina()) 
+				{
 					if (g.getColor() == Color.WHITE)
 						g.setColor(Color.LIGHT_GRAY);
 					else
