@@ -5,8 +5,8 @@ import java.util.ArrayList;
 //by Cyprian Siwy
 public class Champion extends Someone {
 
-    public Champion(int maxHp, int maxStamina, String name) {
-        super(maxHp, maxStamina, name);
+    public Champion(int maxHp, int maxStamina, String name, String imagePath ,Vector2D offSet) {
+        super(maxHp, maxStamina, name, imagePath, offSet);
         skills = new ArrayList<Skill>();
         super.setAvatar();
     }

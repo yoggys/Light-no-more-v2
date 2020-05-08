@@ -51,13 +51,13 @@ public class TavernScene extends Scene {
 
 		// Player.reserve.add(new Champion(25, 20, "test1"));
 		// Player.reserve.add(new Champion(25, 20, "test2"));
-		Player.reserve.add(new Champion(100, 30, "test3"));
+		Player.reserve.add(new Champion(100, 30, "test3","Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 		Player.reserve.get(0).addSkill(skillSlise);
 		Player.reserve.get(0).addSkill(skillSmite);
 
 		// Player.tavernChampions.add(new Champion(25, 20, "test4"));
 		// Player.tavernChampions.add(new Champion(25, 20, "test5"));
-		Player.tavernChampions.add(new Champion(100, 30, "test6"));
+		Player.tavernChampions.add(new Champion(100, 30, "test6", "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 		Player.tavernChampions.get(0).addSkill(skillSlise);
 		Player.tavernChampions.get(0).addSkill(skillSmite);
 	}

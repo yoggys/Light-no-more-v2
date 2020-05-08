@@ -10,7 +10,7 @@ public class Dungeon
     public Dungeon()
     {
         Room 
-        r1 = new Room(2250), 
+        r1 = new Room(1750), 
         r2 = new Room(1500),
         r3 = new Room(1000),
         r4 = new Room(1250);
