@@ -83,4 +83,8 @@ public class Inventory {
 	public static void clearItems() {
 		items.clear();
 	}
+
+	public static void removeItems(int pos) {
+		items.remove(pos);
+	}
 }
