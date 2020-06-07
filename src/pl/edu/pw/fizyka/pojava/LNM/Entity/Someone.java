@@ -86,10 +86,20 @@ public class Someone {
         return !dead;
     }
 
-    public void takeDamage(int damage) {
+    public void takeDamage(int damage) 
+    {
+
         if (!dead)
+        {
             hp -= damage;
-        if (hp <= 0) {
+            if(hp>maxHp)
+            {
+                hp=maxHp;
+            }
+        }
+        if (hp <= 0) 
+        {
+            hp=0;
             die();
         }
     }
@@ -103,6 +113,7 @@ public class Someone {
         isActive = false;
         dead = true;
         hp = 0;
+        
     }
 
     public void takeHeal(int heal) {

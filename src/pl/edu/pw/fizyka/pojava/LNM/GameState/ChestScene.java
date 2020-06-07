@@ -47,7 +47,6 @@ public class ChestScene extends Scene {
 	@Override
 	public void draw(Graphics2D g) {
 		bg.draw(g);
-
 		g.setFont(font);
 
 		for (int i = 0; i < chest.size(); i++) {
