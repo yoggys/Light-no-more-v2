@@ -3,6 +3,7 @@ package pl.edu.pw.fizyka.pojava.LNM.Main;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.*;
+
 import javax.swing.JPanel;
 import pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager;
 
@@ -12,7 +13,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
-	public static final int SCALE = 1;
+	public static double SCALE = 1;
 
 	private Thread thread;
 	private boolean running;
@@ -26,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	public GamePanel() {
 		super();
-		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		setPreferredSize(new Dimension((int) (WIDTH * SCALE), (int) (HEIGHT * SCALE)));
 		setFocusable(true);
 		requestFocus();
 	}
@@ -88,7 +89,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	private void drawToScreen() {
 		Graphics g2 = getGraphics();
-		g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
+		g2.drawImage(image, 0, 0, (int) (WIDTH * SCALE), (int) (HEIGHT * SCALE), null);
 		g2.dispose();
 	}
 
