@@ -8,37 +8,41 @@ public class EnemyBrain
     Random rand = new Random();
     public void calculateEnemyMove(ArrayList<Champion> champions, Someone thisEnemy)
     {
-        Skill skillToUse = null;
-        Someone target;
-
-        for (Champion champion : champions) 
+        if(thisEnemy.isAlive() && thisEnemy.isActive())
         {
-            for (Skill skill : thisEnemy.skills) 
+
+            Skill skillToUse = null;
+            Someone target;
+            
+            for (Champion champion : champions) 
             {
-                if(thisEnemy.getStamina() >= skill.getStaminaUse())
+                for (Skill skill : thisEnemy.skills) 
                 {
-                    if(champion.getHp() <= skill.getDamage() );
-                    skillToUse=skill;
-                    target = champion;
-                }
-            }    
-        }
-
-        while(skillToUse == null)
-        {
-            skillToUse = thisEnemy.skills.get( rand.nextInt( thisEnemy.skills.size() ) );
-            if(thisEnemy.getStamina() < skillToUse.getStaminaUse())
-            {
-                skillToUse = null;
+                    if(thisEnemy.getStamina() >= skill.getStaminaUse())
+                    {
+                        if(champion.getHp() <= skill.getDamage() );
+                        skillToUse=skill;
+                        target = champion;
+                    }
+                }    
             }
+            
+            while(skillToUse == null)
+            {
+                skillToUse = thisEnemy.skills.get( rand.nextInt( thisEnemy.skills.size() ) );
+                if(thisEnemy.getStamina() < skillToUse.getStaminaUse())
+                {
+                    skillToUse = null;
+                }
+            }
+            
+            target = champions.get( rand.nextInt( champions.size() ) );
+            
+            thisEnemy.useStamina(skillToUse.getStaminaUse());
+            
+            target.takeDamage(skillToUse.getDamage());
+            thisEnemy.setActive(false);
         }
-
-        target = champions.get( rand.nextInt( champions.size() ) );
-        
-        thisEnemy.useStamina(skillToUse.getStaminaUse());
-        
-		target.takeDamage(skillToUse.getDamage());
-        thisEnemy.setActive(false);
     }
 }
 

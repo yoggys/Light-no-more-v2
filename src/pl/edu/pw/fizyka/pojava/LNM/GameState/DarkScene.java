@@ -5,9 +5,6 @@ import pl.edu.pw.fizyka.pojava.LNM.System.*;
 import pl.edu.pw.fizyka.pojava.LNM.Player.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 
@@ -289,15 +286,18 @@ public class DarkScene extends Scene {
 		for (Someone enemy : Player.enemys) 
 		{
 			enemyAI.calculateEnemyMove(Player.champions, enemy);	
-			TimeUnit.MICROSECONDS.sleep(500);
 		}
 
-		for (Champion champion : Player.champions) {
-			if (champion.isAlive()) {
-				for (int i = 0; i < champion.efects.size(); i++) {
+		for (Champion champion : Player.champions) 
+		{
+			if (champion.isAlive()) 
+			{
+				for (int i = 0; i < champion.efects.size(); i++) 
+				{
 					champion.efects.get(i).use(champion);
 
-					if (champion.efects.get(i).getTime() == 0) {
+					if (champion.efects.get(i).getTime() == 0) 
+					{
 						champion.efects.remove(i);
 					}
 				}
@@ -306,19 +306,22 @@ public class DarkScene extends Scene {
 			}
 		}
 
-		for (int i = 0; i < Player.enemys.size(); i++) {
+		for (int i = 0; i < Player.enemys.size(); i++) 
+		{
 			enemy = Player.enemys.get(i);
 			for (int j = 0; j < enemy.efects.size(); j++)
 			// for (Efect efect : enemy.efects)
 			{
 				enemy.efects.get(j).use(enemy);
 
-				if (enemy.efects.get(j).getTime() == 0) {
+				if (enemy.efects.get(j).getTime() == 0) 
+				{
 					enemy.efects.remove(j);
 				}
 			}
 		}
 	}
+	
 
 	private void select() {
 		if (dungState == dungeonState.CombatPhase) 
