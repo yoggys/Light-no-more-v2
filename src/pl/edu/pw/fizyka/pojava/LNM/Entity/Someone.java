@@ -26,7 +26,7 @@ public class Someone {
             Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8"));
     private Random random = new Random();
 
-    public ArrayList<Skill> skills;
+    public ArrayList<Skill> skills = new ArrayList<Skill>();
     public ArrayList<Effect> efects;
 
     String imagePath;
@@ -86,12 +86,27 @@ public class Someone {
         return !dead;
     }
 
-    public void takeDamage(int damage) {
+    public void takeDamage(int damage) 
+    {
+
         if (!dead)
+        {
             hp -= damage;
-        if (hp <= 0) {
+            if(hp>maxHp)
+            {
+                hp=maxHp;
+            }
+        }
+        if (hp <= 0) 
+        {
+            hp=0;
             die();
         }
+    }
+
+    public void addSkill(Skill skill) 
+    {
+        skills.add(skill);
     }
 
     public void addEfect(Effect efect) {
@@ -103,6 +118,7 @@ public class Someone {
         isActive = false;
         dead = true;
         hp = 0;
+
     }
 
     public void takeHeal(int heal) {

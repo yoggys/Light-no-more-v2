@@ -5,6 +5,8 @@ import pl.edu.pw.fizyka.pojava.LNM.System.*;
 import pl.edu.pw.fizyka.pojava.LNM.Player.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.concurrent.TimeUnit;
+
 
 //by Cyprian Siwy
 public class DarkScene extends Scene {
@@ -40,7 +42,7 @@ public class DarkScene extends Scene {
 	};
 
 	private dungeonState dungState = dungeonState.CombatPhase;
-	private float speed = 600; // pixel per secend
+	private float speed = 200; // pixel per secend
 
 	Champion emptyChamp = new Champion(0, 0, "", "Resources/Entity/patyczak.png", new Vector2D(-20, -420) );
 
@@ -50,6 +52,13 @@ public class DarkScene extends Scene {
 	private Vector2D imput = Vector2D.zero;
 
 	private MovementManager MM = new MovementManager();
+
+
+	long lastTime;
+	long currentTime;
+	float timeStep; 
+
+	EnemyBrain enemyAI = new EnemyBrain();
 
 
 	public DarkScene(SceneManager gsm) {
@@ -69,7 +78,7 @@ public class DarkScene extends Scene {
 		Player.champions.add(new Champion(25, 20, "AleXXX" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 		Player.champions.add(new Champion(25, 20, "Sasha",  "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 		Player.champions.add(new Champion(100, 30, "Siwy" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
-		Player.enemys.add(new Someone(50, 10, "wolf" , "Resources/Entity/wolf.png", new Vector2D(-150, -300)));
+		//Player.enemys.add(new Someone(50, 10, "wolf" , "Resources/Entity/wolf.png", new Vector2D(-150, -300)));
 
 		//Dawanie umiejętności
 		Player.champions.get(0).addSkill(new Skill(skillSlise));
@@ -100,6 +109,15 @@ public class DarkScene extends Scene {
 	@Override
 	public void draw(Graphics2D g) {
 		
+		lastTime = currentTime;
+		currentTime = System.currentTimeMillis();
+		if(lastTime!=0)
+		{
+			timeStep = currentTime-lastTime;
+			timeStep/=1000;
+			//System.out.println(timeStep);
+
+		}
 		bg.draw(g);
 		
 		g.setFont(font);
@@ -116,18 +134,18 @@ public class DarkScene extends Scene {
 			if( imput.x == Vector2D.right.x && firstChampPos.x - bg.pos.x <activeRoom.lenght)
 			{
 				if(firstChampPos.x >= 500 )
-					bg.pos = MM.moveToDirection(bg.pos, Vector2D.multiply(imput, -1), speed);
+					bg.pos = MM.moveToDirection(bg.pos, Vector2D.multiply(imput, -1), speed, timeStep);
 				else
-					firstChampPos = MM.moveToDirection(firstChampPos, imput, speed);
+					firstChampPos = MM.moveToDirection(firstChampPos, imput, speed, timeStep);
 			}
 
 			if( imput.x == Vector2D.left.x )
 			{
 				if( bg.pos.x<0 && firstChampPos.x <= 100 )
-					bg.pos = MM.moveToDirection(bg.pos, Vector2D.multiply(imput, -1), speed);	
+					bg.pos = MM.moveToDirection(bg.pos, Vector2D.multiply(imput, -1), speed, timeStep);	
 				else
 				{
-					firstChampPos = MM.moveToDirection(firstChampPos, imput, speed);
+					firstChampPos = MM.moveToDirection(firstChampPos, imput, speed, timeStep);
 					if(firstChampPos.x<0)
 						firstChampPos.x=0;
 				}
@@ -138,7 +156,12 @@ public class DarkScene extends Scene {
 			
 			for (Door door : activeRoom.doors) 
 			{
-				if(door.posX - 100 - (firstChampPos.x - bg.pos.x) < 100 && door.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
+				if((firstChampPos.x - bg.pos.x) < 100)
+				{
+					g.drawString("Exit Room", bg.pos.x + 100, 300);
+					activeDoor = activeRoom.exitDoor;
+				}
+				else if(door.posX - 100 - (firstChampPos.x - bg.pos.x) < 100 && door.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
 				{
 					//image.draw(g, (int) door.posX + (int) bg.pos.x - 280, 170, "Resources/Entity/doors.png");
 					g.drawString("Enter Door", door.posX + bg.pos.x, 300);
@@ -152,6 +175,16 @@ public class DarkScene extends Scene {
 				}	
 				
 			}
+
+			for(pl.edu.pw.fizyka.pojava.LNM.Entity.Event event: activeRoom.events)
+			{
+				if(event.posX - 100 - (firstChampPos.x - bg.pos.x) < 100 && event.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
+				{
+					Player.enemys = event.enemys;
+					changeStateTo(dungState.CombatPhase);
+				}
+			}
+
 		}
 		
 
@@ -208,18 +241,19 @@ public class DarkScene extends Scene {
 			}
 
 			if (dungState == dungeonState.CombatPhase) {
-				if (activeChamp != null && target != null && selectedSkill != null) {
+				if (activeChamp != emptyChamp && target != null && selectedSkill != null) {
 					calculateMove();
 					currentChoice = 0;
 				}
 
-				int x = 0;
-				for (Champion champion : Player.champions) {
+				int numberOfActiveChamps = 0;
+				for (Champion champion : Player.champions) 
+				{
 					if (champion.isActive())
-						x++;
+						numberOfActiveChamps++;
 				}
 
-				if (x == 0) {
+				if (numberOfActiveChamps == 0) {
 					endTurn();
 				}
 			}
@@ -247,13 +281,23 @@ public class DarkScene extends Scene {
 		selectedSkillId = 999;
 	}
 
-	void endTurn() {
-		for (Champion champion : Player.champions) {
-			if (champion.isAlive()) {
-				for (int i = 0; i < champion.efects.size(); i++) {
+	void endTurn() 
+	{
+		for (Someone enemy : Player.enemys) 
+		{
+			enemyAI.calculateEnemyMove(Player.champions, enemy);	
+		}
+
+		for (Champion champion : Player.champions) 
+		{
+			if (champion.isAlive()) 
+			{
+				for (int i = 0; i < champion.efects.size(); i++) 
+				{
 					champion.efects.get(i).use(champion);
 
-					if (champion.efects.get(i).getTime() == 0) {
+					if (champion.efects.get(i).getTime() == 0) 
+					{
 						champion.efects.remove(i);
 					}
 				}
@@ -262,28 +306,37 @@ public class DarkScene extends Scene {
 			}
 		}
 
-		for (int i = 0; i < Player.enemys.size(); i++) {
+		for (int i = 0; i < Player.enemys.size(); i++) 
+		{
 			enemy = Player.enemys.get(i);
 			for (int j = 0; j < enemy.efects.size(); j++)
 			// for (Efect efect : enemy.efects)
 			{
 				enemy.efects.get(j).use(enemy);
 
-				if (enemy.efects.get(j).getTime() == 0) {
+				if (enemy.efects.get(j).getTime() == 0) 
+				{
 					enemy.efects.remove(j);
 				}
 			}
 		}
 	}
+	
 
 	private void select() {
-		if (dungState == dungeonState.CombatPhase) {
-			if (selectedSkill != null && currentChoice < Player.champions.size() + Player.enemys.size()) {
-				if (currentChoice < Player.champions.size()) {
+		if (dungState == dungeonState.CombatPhase) 
+		{
+			if (selectedSkill != null && currentChoice < Player.champions.size() + Player.enemys.size()) 
+			{
+				//wybór celu
+				if (currentChoice < Player.champions.size()) 
+				{
+					//wybór postac jako celu
 					target = Player.champions.get(currentChoice);
 					targetId = currentChoice;
-					activeChamp = emptyChamp;
-				} else {
+				} else 
+				{
+					//wybór przeciwnika jako celu
 					target = Player.enemys.get(currentChoice - Player.champions.size());
 					targetId = currentChoice;
 				}
