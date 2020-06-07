@@ -30,7 +30,7 @@ public class SceneManager {
 	public static int TUT2 = 17;
 	public static int TUT3 = 18;
 	public static int TUT4 = 19;
-	public static int TUT5 = 20;
+	public static int RESOLUTION = 20;
 	
 
 
@@ -38,7 +38,7 @@ public class SceneManager {
 
 		scenes = new ArrayList<Scene>();
 
-		currentScene = LANG;
+		currentScene = RESOLUTION;
 		scenes.add(new MenuScene(this));
 		scenes.add(new TownScene(this));
 		scenes.add(new HelpScene(this));
@@ -60,6 +60,9 @@ public class SceneManager {
 		scenes.add(new Tutorial2(this));
 		scenes.add(new Tutorial3(this));
 		scenes.add(new Tutorial4(this));
+
+
+		scenes.add(new ResolutionScene(this));
 	}
 
 	public void setState(int state) {
