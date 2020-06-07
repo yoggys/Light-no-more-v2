@@ -9,6 +9,9 @@ public class Event
     eventType evType;
     public static ArrayList<Someone> enemys = new ArrayList<Someone>();
     public int posX;
+    
+    Skill skillBite = new Skill("Bite", 5, 0);
+	Skill skillSmite = new Skill("", 10, 0);
 
     public Event(eventType evType, int posX)
     {
@@ -18,6 +21,8 @@ public class Event
         {
             enemys.add(new Someone(50, 10, "wolf" , "Resources/Entity/wolf.png", new Vector2D(-150, -300)));
             enemys.add(new Someone(50, 10, "wolf" , "Resources/Entity/wolf.png", new Vector2D(-150, -300)));
+            enemys.get(0).addSkill(new Skill(skillBite));
+            enemys.get(1).addSkill(new Skill(skillBite));
         }
     }
 }

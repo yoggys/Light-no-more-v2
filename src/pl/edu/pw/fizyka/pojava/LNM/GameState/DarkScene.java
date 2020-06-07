@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 
 //by Cyprian Siwy
@@ -59,6 +60,9 @@ public class DarkScene extends Scene {
 	long lastTime;
 	long currentTime;
 	float timeStep; 
+
+	EnemyBrain enemyAI = new EnemyBrain();
+
 
 	public DarkScene(SceneManager gsm) {
 		changeStateTo(dungeonState.MovementPhace);
@@ -114,7 +118,7 @@ public class DarkScene extends Scene {
 		{
 			timeStep = currentTime-lastTime;
 			timeStep/=1000;
-			System.out.println(timeStep);
+			//System.out.println(timeStep);
 
 		}
 		bg.draw(g);
@@ -245,13 +249,14 @@ public class DarkScene extends Scene {
 					currentChoice = 0;
 				}
 
-				int x = 0;
-				for (Champion champion : Player.champions) {
+				int numberOfActiveChamps = 0;
+				for (Champion champion : Player.champions) 
+				{
 					if (champion.isActive())
-						x++;
+						numberOfActiveChamps++;
 				}
 
-				if (x == 0) {
+				if (numberOfActiveChamps == 0) {
 					endTurn();
 				}
 			}
@@ -279,7 +284,14 @@ public class DarkScene extends Scene {
 		selectedSkillId = 999;
 	}
 
-	void endTurn() {
+	void endTurn() 
+	{
+		for (Someone enemy : Player.enemys) 
+		{
+			enemyAI.calculateEnemyMove(Player.champions, enemy);	
+			TimeUnit.MICROSECONDS.sleep(500);
+		}
+
 		for (Champion champion : Player.champions) {
 			if (champion.isAlive()) {
 				for (int i = 0; i < champion.efects.size(); i++) {
