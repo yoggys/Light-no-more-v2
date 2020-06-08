@@ -8,9 +8,10 @@ public class Event
 {
     public enum eventType {CHEST, FIGHT , DOOR};    
 
-    eventType evType;
+    public eventType evType;
     public ArrayList<Someone> enemys = new ArrayList<Someone>();
     public int posX;
+    public boolean isActive = true;
     
     Skill skillBite = new Skill("Bite", 5, 0);
 	Skill skillSmite = new Skill("", 10, 0);
