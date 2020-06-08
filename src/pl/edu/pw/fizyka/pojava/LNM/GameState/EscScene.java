@@ -77,7 +77,7 @@ public class EscScene extends Scene {
 	// wybor aktualnego trybu pracy / opcji menu etc.
 	private void select() {
 		if (currentChoice == 0) {
-			gsm.setState(gsm.getLastState());
+			gsm.setState(gsm.getLastScene());
 		}
 
 		if (currentChoice == 1) {
@@ -86,7 +86,7 @@ public class EscScene extends Scene {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			gsm.setState(gsm.getLastState());
+			gsm.setState(gsm.getLastScene());
 		}
 
 		if (currentChoice == 2 || currentChoice == 4) {
@@ -129,7 +129,7 @@ public class EscScene extends Scene {
 		}
 
 		if (k == KeyEvent.VK_ESCAPE) {
-			gsm.setState(gsm.getLastState());
+			gsm.setState(gsm.getLastScene());
 		}
 
 	}

@@ -82,11 +82,11 @@ public class SceneManager {
 		scenes.get(currentScene).keyReleased(k);
 	}
 
-	public int getState() {
+	public int getScene() {
 		return currentScene;
 	}
 
-	public int getLastState() {
+	public int getLastScene() {
 		return lastScene;
 	}
 }
