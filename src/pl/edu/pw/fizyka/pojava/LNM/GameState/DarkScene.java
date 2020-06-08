@@ -192,6 +192,7 @@ public class DarkScene extends Scene {
 			}
 
 
+			activeEvent = null;
 			for(pl.edu.pw.fizyka.pojava.LNM.Entity.Event event: activeRoom.events)
 			{
 				if(event.isActive)
@@ -208,6 +209,7 @@ public class DarkScene extends Scene {
 						{
 							g.drawString("Open Chect", event.posX + bg.pos.x, 350);
 							activeEvent = event;
+							break;
 						}
 					}
 				}
@@ -427,12 +429,6 @@ public class DarkScene extends Scene {
 
 	@Override
 	public void keyPressed(int k) {
-		if (k == KeyEvent.VK_K) {
-			if (dungState == dungeonState.MovementPhace)
-				changeStateTo(dungeonState.CombatPhase);
-			else if (dungState == dungeonState.CombatPhase)
-				changeStateTo(dungeonState.MovementPhace);
-		}
 
 		if (dungState == dungeonState.MovementPhace) {
 			imput = Vector2D.zero;
@@ -443,22 +439,29 @@ public class DarkScene extends Scene {
 				imput = Vector2D.add(imput, Vector2D.right);
 			}
 
-			if(activeDoor != null)
-			{
+			
 				if(k== KeyEvent.VK_SPACE)
 				{
-					if(activeDungeon.rooms.indexOf(activeRoom) == 0 && activeDoor == null)
+					if(activeDoor != null)
 					{
-						gsm.setState(SceneManager.TOWN);
+						if(activeDungeon.rooms.indexOf(activeRoom) == 0 && activeDoor == null)
+						{
+							gsm.setState(SceneManager.TOWN);
+						}
+						{
+							activeRoom = activeDoor.leadTo;
+							firstChampPos.x = 200;
+							bg.pos.x = 0;
+							activeDoor = null;
+						}
 					}
+
+					if(activeEvent!=null && activeEvent.evType == eventType.CHEST)
 					{
-						activeRoom = activeDoor.leadTo;
-						firstChampPos.x = 200;
-						bg.pos.x = 0;
-						activeDoor = null;
+						System.out.println("chest Opened");
 					}
 				}
-			}
+			
 		}
 
 		if (dungState == dungeonState.CombatPhase) {
