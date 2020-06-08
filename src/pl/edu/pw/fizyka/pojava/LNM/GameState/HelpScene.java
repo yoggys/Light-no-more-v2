@@ -10,7 +10,7 @@ public class HelpScene extends Scene {
 	// zmienne gui
 	private Background bg;
 	public static String options;
-	private String gamever = "alpha v1.2";
+	private String gamever = "alpha v1.7";
 	private String authors = "by Mateusz Karbownik, Cyprian Siwy";
 	private Color titleColor;
 	private Font titleFont;

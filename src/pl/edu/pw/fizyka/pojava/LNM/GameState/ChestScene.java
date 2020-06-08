@@ -13,7 +13,7 @@ public class ChestScene extends Scene {
 
 	// zmienne gui
 	private Background bg;
-	public static String options = "Back";
+	public static String options[];
 	private int row;
 	private HUDgold hud;
 	private int currentChoice[] = { 0, 0 , 0};
@@ -54,59 +54,72 @@ public class ChestScene extends Scene {
 		g.setFont(font);
 
 		if (state == 1) {
-			Inventory.addItem(chest.get(currentChoice[row]));
-			chest.remove(currentChoice[row]);
-			if (currentChoice[row] != 0) {
-				currentChoice[row]--;
-			}
+			if (Inventory.invSize() >= 10) {
+				g.setColor(Color.WHITE);
+				g.drawString(options[4], 40, 680);
+			} else {
 
-			if (chest.size() == 0) {
-				if (Inventory.invSize() > 0) {
-					row++;
-				} else {
-					row = 0;
+				Inventory.addItem(chest.get(currentChoice[row]));
+				chest.remove(currentChoice[row]);
+				if (currentChoice[row] != 0) {
+					currentChoice[row]--;
 				}
+
+				if (chest.size() == 0) {
+					if (Inventory.invSize() > 0) {
+						row++;
+					} else {
+						row = 0;
+					}
+				}
+				state = 0;
 			}
-			state = 0;
 		}
 		if (state == 2) {
-			chest.add(Inventory.getId(currentChoice[row]));
-			Inventory.removeItems(currentChoice[row]);
-			if (currentChoice[row] != 0) {
-				currentChoice[row]--;
-			}
 
-			if (Inventory.invSize() == 0) {
-				if (chest.size() > 0) {
-					row--;
-				} else {
-					row = 0;
+			if(chest.size() >= 10) {
+				g.setColor(Color.WHITE);
+				g.drawString(options[5], 40, 680);
+			} else {
+				
+				chest.add(Inventory.getId(currentChoice[row]));
+				Inventory.removeItems(currentChoice[row]);
+				if (currentChoice[row] != 0) {
+					currentChoice[row]--;
 				}
+
+				if (Inventory.invSize() == 0) {
+					if (chest.size() > 0) {
+						row--;
+					} else {
+						row = 0;
+					}
+				}
+				state = 0;
 			}
-			state = 0;
 		}
 
 		// INFO COL
 		if (row == 1) {
 			g.setColor(Color.RED);
-			g.drawString("Inventory items", 40, 140);
+			g.drawString(options[1], 40, 140);
 			g.setColor(Color.WHITE);
-			g.drawString("Chest items", 40, 440);
+			g.drawString(options[2], 40, 440);
 		} else if (row == 2) {
 			g.setColor(Color.WHITE);
-			g.drawString("Inventory items", 40, 140);
+			g.drawString(options[1], 40, 140);
 			g.setColor(Color.RED);
-			g.drawString("Chest items", 40, 440);
+			g.drawString(options[2], 40, 440);
 
 		} else {
 			g.setColor(Color.RED);
-			g.drawString("Chest items", 40, 440);
-			g.drawString("Inventory items", 40, 140);
+			g.drawString(options[2], 40, 440);
+			g.drawString(options[1], 40, 140);
 		}
 
 		if (Inventory.invSize() == 0) {
 			g.setColor(Color.GREEN);
-			g.drawString("Inventory empty", 40, 200);
+			g.drawString(options[6], 40, 200);
 		} else {
 			for (int i = 0; i < Inventory.invSize(); i++) {
 
@@ -118,7 +131,7 @@ public class ChestScene extends Scene {
 		}
 		if (chest.size() == 0) {
 			g.setColor(Color.GREEN);
-			g.drawString("Chest empty", 40, 500);
+			g.drawString(options[7], 40, 500);
 		} else {
 			for (int i = 0; i < chest.size(); i++) {
 
@@ -134,14 +147,14 @@ public class ChestScene extends Scene {
 		} else {
 			g.setColor(Color.RED);
 		}
-		g.drawString(options, 500, 680);
+		g.drawString(options[0], 500, 680);
 
 		if (row == 0 && currentChoice[0] == 1) {
 			g.setColor(Color.WHITE);
 		} else {
 			g.setColor(Color.RED);
 		}
-		g.drawString("Gold in chest: "+chestGold, 620, 680);
+		g.drawString(options[3] + ": "+chestGold, 620, 680);
 		
 	}
 
