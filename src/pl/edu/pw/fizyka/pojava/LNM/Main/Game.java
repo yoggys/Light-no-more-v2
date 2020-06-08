@@ -1,5 +1,7 @@
 package pl.edu.pw.fizyka.pojava.LNM.Main;
 
+import java.util.Random;
+
 import javax.swing.JFrame;
 
 import pl.edu.pw.fizyka.pojava.LNM.System.Music;

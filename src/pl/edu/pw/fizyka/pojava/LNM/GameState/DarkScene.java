@@ -31,8 +31,8 @@ public class DarkScene extends Scene {
 
 	private Font font;
 
-	private Dungeon activeDungeon = new Dungeon();
-	private Room activeRoom = activeDungeon.rooms.get(0);
+	private Dungeon activeDungeon;
+	private Room activeRoom;
 	private Door activeDoor;
 	private Event activeEvent;
 	private boolean tmp = true;
@@ -70,19 +70,31 @@ public class DarkScene extends Scene {
 
 		activeChamp = emptyChamp;
 		poison = new Effect(2, 3);
-		healOverTime = new Effect(-2, 3);
+		healOverTime = new Effect(0, 3);
 
 		//tworzenie umiejętności
-		Skill skillPoison = new Skill("Poison", 4, 2, poison);
-		Skill skillSlise = new Skill("Slise", 50, 0);
-		Skill skillSmite = new Skill("Smite", 50, 0);
-		Skill skillHeal = new Skill("Heal", -4, 0, healOverTime);
+		Skill skillPoison = new Skill("Poison", 50, 2, poison);
+		Skill skillSlise = new Skill("Slise", 0, 0);
+		Skill skillSmite = new Skill("Smite", 0, 0);
+		Skill skillHeal = new Skill("Heal", 0, 0, healOverTime);
+
+		Skill skillBite = new Skill("Bite", 7, 0);
+		Skill skillWeekBite = new Skill("Bite", 4, 0);
+		Skill skillSlash = new Skill("Slash", 3, 0);
+		Skill skillAcidVomit = new Skill("Acid Vomit",10,5);
 
 		//Tworzenie Bochaterów i przeciwników
 		Player.champions.add(new Champion(25, 20, "AleXXX" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 		Player.champions.add(new Champion(25, 20, "Sasha",  "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 		Player.champions.add(new Champion(100, 30, "Siwy" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
-		//Player.enemys.add(new Someone(50, 10, "wolf" , "Resources/Entity/wolf.png", new Vector2D(-150, -300)));
+	
+		Player.enemysBase.add( new Someone(20, 10, "wolf" , "Resources/Entity/wolf.png", new Vector2D(-150, -300) ) );
+			Player.enemysBase.get(0).addSkill(new Skill(skillBite));
+		Player.enemysBase.add( new Someone(50, 10, "Zombie" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ) );
+			Player.enemysBase.get(1).addSkill(new Skill(skillSlash));
+			Player.enemysBase.get(1).addSkill(new Skill(skillAcidVomit));
+		Player.enemysBase.add( new Someone(10, 0, "rat" , "Resources/Entity/wolf.png", new Vector2D(-150, -300) ) );
+			Player.enemysBase.get(2).addSkill(new Skill(skillWeekBite));
 
 		//Dawanie umiejętności
 		Player.champions.get(0).addSkill(new Skill(skillSlise));
@@ -92,7 +104,8 @@ public class DarkScene extends Scene {
 		Player.champions.get(2).addSkill(new Skill(skillSmite));
 		Player.champions.get(2).addSkill(new Skill(skillHeal));
 
-		
+		activeDungeon = new Dungeon();
+		activeRoom = activeDungeon.rooms.get(0);
 
  		this.gsm = gsm;
 
@@ -119,8 +132,6 @@ public class DarkScene extends Scene {
 		{
 			timeStep = currentTime-lastTime;
 			timeStep/=1000;
-			//System.out.println(timeStep);
-
 		}
 		bg.draw(g);
 		
@@ -177,9 +188,9 @@ public class DarkScene extends Scene {
 
 				else if(event.evType == eventType.FIGHT)
 				{
-					for (Someone enemy : event.enemys) 
+					for (int i = 0; i < event.enemys.size(); i++) 
 					{
-						enemy.drawSomeone((int) (event.posX + bg.pos.x) + 300, 600, g);	
+						event.enemys.get(i).drawSomeone((int) (event.posX + bg.pos.x) + 300+ i * 100, (int) 600, g);
 					}
 				}
 			}
@@ -220,10 +231,9 @@ public class DarkScene extends Scene {
 		
 		if (Player.champions.size() == 0) {
 			g.setColor(Color.WHITE);
-			g.drawString("back", 586, 700);
 		}
 
-		for (int i = 0; i < Player.champions.size() + Player.enemys.size() + activeChamp.skills.size() + 1; i++) {
+		for (int i = 0; i < Player.champions.size() + Player.enemys.size() + activeChamp.skills.size(); i++) {
 
 			if (i == currentChoice) {
 				g.setColor(Color.WHITE);
@@ -263,8 +273,8 @@ public class DarkScene extends Scene {
 				}
 
 				activeChamp.skills.get(j).drawSkill((int) firstChampPos.x + j * 75, (int) firstChampPos.y + 50, g);
-				// g.drawString(activeChamp.skills.get(j).getName(), firstChampX + j*50,
-				// firstChampY + 50);
+				
+
 			} else {
 				g.drawString("back", 586, 700);
 			}
@@ -280,6 +290,10 @@ public class DarkScene extends Scene {
 				{
 					if (champion.isActive())
 						numberOfActiveChamps++;
+					if(champion.isAlive() == false)
+					{
+						Player.champions.remove(champion);
+					}
 				}
 
 				if (numberOfActiveChamps == 0) {
@@ -381,6 +395,11 @@ public class DarkScene extends Scene {
 				}
 			}
 		}
+
+		for (Someone enemy : Player.enemys) 
+		{
+			enemy.setActive(true);
+		}
 	}
 	
 
@@ -428,40 +447,47 @@ public class DarkScene extends Scene {
 	}
 
 	@Override
-	public void keyPressed(int k) {
-
+	public void keyPressed(int k) 
+	{
+		
 		if (dungState == dungeonState.MovementPhace) {
 			imput = Vector2D.zero;
 
 			if (k == KeyEvent.VK_LEFT) {
 				imput = Vector2D.add(imput, Vector2D.left);
-			} else if (k == KeyEvent.VK_RIGHT) {
+			} else if (k == KeyEvent.VK_RIGHT)
+			 {
 				imput = Vector2D.add(imput, Vector2D.right);
 			}
-
-			
-				if(k== KeyEvent.VK_SPACE)
+		
+			if(k== KeyEvent.VK_SPACE)
+			{
+				if(activeDoor != null)
 				{
-					if(activeDoor != null)
 					{
-						if(activeDungeon.rooms.indexOf(activeRoom) == 0 && activeDoor == null)
-						{
-							gsm.setState(SceneManager.TOWN);
-						}
+						if(activeDoor == activeRoom.exitDoor)
 						{
 							activeRoom = activeDoor.leadTo;
-							firstChampPos.x = 200;
-							bg.pos.x = 0;
-							activeDoor = null;
+							firstChampPos.x=activeRoom.lastKonwnPlayerPos;
+							bg.pos.x = activeRoom.lastKnownBgPos;
 						}
-					}
-
-					if(activeEvent!=null && activeEvent.evType == eventType.CHEST)
-					{
-						System.out.println("chest Opened");
+						else
+						{
+							activeRoom.lastKnownBgPos = (int) bg.pos.x;
+							activeRoom.lastKonwnPlayerPos = (int) firstChampPos.x;
+							activeRoom = activeDoor.leadTo;
+							bg.pos.x = 0;
+							firstChampPos.x = 200;
+						}
+						activeDoor = null;
 					}
 				}
-			
+
+				if(activeEvent!=null && activeEvent.evType == eventType.CHEST)
+				{
+					gsm.setState(SceneManager.CHEST);
+				}
+			}			
 		}
 
 		if (dungState == dungeonState.CombatPhase) {
@@ -493,10 +519,9 @@ public class DarkScene extends Scene {
 			}
 
 			if (k == KeyEvent.VK_DOWN) {
-				if (currentChoice < Player.champions.size() + Player.enemys.size()) {
+				if (activeChamp != emptyChamp && currentChoice < Player.champions.size() + Player.enemys.size()) 
+				{
 					currentChoice = Player.champions.size() + Player.enemys.size();
-				} else if (currentChoice >= Player.champions.size() + Player.enemys.size()) {
-					currentChoice = Player.champions.size() + Player.enemys.size() + activeChamp.skills.size();
 				}
 			}
 
@@ -513,6 +538,8 @@ public class DarkScene extends Scene {
 		if (k == KeyEvent.VK_ESCAPE) {
 			gsm.setState(SceneManager.ESC);
 		}
+
+		System.out.println(currentChoice);
 	}
 
 	public void keyReleased(int k) 

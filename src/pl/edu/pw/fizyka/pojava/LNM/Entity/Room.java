@@ -8,6 +8,8 @@ public class Room
     public ArrayList<Door> doors = new ArrayList<Door>();
     public Door exitDoor;
     public int lenght;
+    public int lastKonwnPlayerPos;
+    public int lastKnownBgPos;
 
     public ArrayList<Event> events = new ArrayList<Event>();
 

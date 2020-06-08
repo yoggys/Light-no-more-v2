@@ -1,8 +1,10 @@
 package pl.edu.pw.fizyka.pojava.LNM.Entity;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import pl.edu.pw.fizyka.pojava.LNM.GameState.ChestScene;
+import pl.edu.pw.fizyka.pojava.LNM.Player.Player;
 
 public class Event 
 {
@@ -13,8 +15,9 @@ public class Event
     public int posX;
     public boolean isActive = true;
     
-    Skill skillBite = new Skill("Bite", 5, 0);
-	Skill skillSmite = new Skill("", 10, 0);
+    
+
+    Random rand = new Random(System.currentTimeMillis());
 
     public Event(eventType evType, int posX)
     {
@@ -22,14 +25,10 @@ public class Event
         this.posX = posX;
         if(evType == eventType.FIGHT)
         {
-            enemys.add(new Someone(50, 10, "wolf" , "Resources/Entity/wolf.png", new Vector2D(-150, -300)));
-            enemys.add(new Someone(50, 10, "wolf" , "Resources/Entity/wolf.png", new Vector2D(-150, -300)));
-            enemys.get(0).addSkill(new Skill(skillBite));
-            enemys.get(1).addSkill(new Skill(skillBite));
-        }
-        else if(evType == eventType.CHEST)
-        {
-            
+            for(int i =0; i < 2; i++)
+            {
+                enemys.add( new Someone( Player.enemysBase.get( ( rand.nextInt(Player.enemysBase.size() - 1) ) ) ) );
+            }
         }
     }
 }

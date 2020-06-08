@@ -47,6 +47,22 @@ public class Someone {
         efects = new ArrayList<Effect>();
     }
 
+    public Someone( Someone s1)
+    {
+       
+        hp = s1.hp;
+        maxHp = s1.maxHp;
+        maxStamina = s1.maxStamina;
+        stamina = s1.stamina;
+        name = s1.name;
+
+        imagePath = s1.imagePath;
+        image = s1.image;
+        offSet = s1.offSet;
+        skills = new ArrayList<Skill>(s1.skills);
+        efects = new ArrayList<Effect>(s1.efects);
+    }
+
     public Someone(int hp, int maxHp, int sa, int maxSa, String name) {
         this.hp = hp;
         this.maxHp = maxHp;
