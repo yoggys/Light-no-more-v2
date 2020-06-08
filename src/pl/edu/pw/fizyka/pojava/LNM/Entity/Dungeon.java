@@ -22,11 +22,11 @@ public class Dungeon
         rooms.add(r3);
         rooms.add(r4);
 
-        r1.addEvent(new Event(eventType.CHEST, 500));
         
         r1.addDoor(new Door(r2), 750);
             r2.setExitDoor(new Door(r1));
             r2.addDoor(new Door(r3), 500);
+            r2.addEvent(new Event(eventType.CHEST, 1000));
                 r3.setExitDoor(new Door(r2));
                 
         r1.addEvent( new Event(eventType.FIGHT, 1100) );
