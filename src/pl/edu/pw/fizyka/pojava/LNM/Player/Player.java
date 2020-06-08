@@ -1,4 +1,4 @@
-package pl.edu.pw.fizyka.pojava.LNM.Player;
+ package pl.edu.pw.fizyka.pojava.LNM.Player;
 
 import pl.edu.pw.fizyka.pojava.LNM.Entity.*;
 import pl.edu.pw.fizyka.pojava.LNM.System.*;

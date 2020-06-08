@@ -169,6 +169,7 @@ public class Someone {
             avatars.remove(id);
         }
     }
+    
 
     public void setAvatar(String av) {
         avatar = av;
