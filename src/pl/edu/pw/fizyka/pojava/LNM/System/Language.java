@@ -128,5 +128,16 @@ public class Language {
 		Tutorial0.options = names.toArray(new String[names.size()]);
 		names.clear();
 
+		names.add(bndl.getString("Back"));
+		names.add(bndl.getString("Inventory items"));
+		names.add(bndl.getString("Chest items"));
+		names.add(bndl.getString("Chest gold"));
+		names.add(bndl.getString("Missing inv"));
+		names.add(bndl.getString("Missing chest"));
+		names.add(bndl.getString("Inventory empty"));
+		names.add(bndl.getString("Chest empty"));
+		ChestScene.options = names.toArray(new String[names.size()]);
+		names.clear();
+
 	}
 }
