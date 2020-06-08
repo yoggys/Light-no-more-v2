@@ -12,6 +12,7 @@ public class Player {
 	public static ArrayList<Champion> reserve = new ArrayList<Champion>();
 	public static ArrayList<Champion> tavernChampions = new ArrayList<Champion>();
 	public static ArrayList<Someone> enemys = new ArrayList<Someone>();
+	public static ArrayList<Someone> enemysBase = new ArrayList<Someone>();
 
 	public static int currentDungeon = 1;
 	public static String langCards[];
