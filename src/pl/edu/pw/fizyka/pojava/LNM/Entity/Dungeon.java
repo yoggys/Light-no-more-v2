@@ -24,6 +24,7 @@ public class Dungeon
 
         r1.addDoor(new Door(r2), 750);
             r2.setExitDoor(new Door(r1));
+            r2.addEvent(new Event(eventType.CHEST, 1200));
             r2.addDoor(new Door(r3), 500);
                 r3.setExitDoor(new Door(r2));
                 

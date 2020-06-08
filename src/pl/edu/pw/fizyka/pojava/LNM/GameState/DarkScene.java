@@ -42,7 +42,7 @@ public class DarkScene extends Scene {
 	};
 
 	private dungeonState dungState = dungeonState.CombatPhase;
-	private float speed = 200; // pixel per secend
+	private float speed = 600; // pixel per secend
 
 	Champion emptyChamp = new Champion(0, 0, "", "Resources/Entity/patyczak.png", new Vector2D(-20, -420) );
 
@@ -70,8 +70,8 @@ public class DarkScene extends Scene {
 
 		//tworzenie umiejętności
 		Skill skillPoison = new Skill("Poison", 4, 2, poison);
-		Skill skillSlise = new Skill("Slise", 20, 0);
-		Skill skillSmite = new Skill("Smite", 10, 0);
+		Skill skillSlise = new Skill("Slise", 50, 0);
+		Skill skillSmite = new Skill("Smite", 50, 0);
 		Skill skillHeal = new Skill("Heal", -4, 0, healOverTime);
 
 		//Tworzenie Bochaterów i przeciwników
@@ -154,14 +154,11 @@ public class DarkScene extends Scene {
 			
 			//System.out.println(firstChampPos.x - bg.pos.x);
 			
+			
+
 			for (Door door : activeRoom.doors) 
 			{
-				if((firstChampPos.x - bg.pos.x) < 100)
-				{
-					g.drawString("Exit Room", bg.pos.x + 100, 300);
-					activeDoor = activeRoom.exitDoor;
-				}
-				else if(door.posX - 100 - (firstChampPos.x - bg.pos.x) < 100 && door.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
+				if(door.posX - 100 - (firstChampPos.x - bg.pos.x) < 100 && door.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
 				{
 					//image.draw(g, (int) door.posX + (int) bg.pos.x - 280, 170, "Resources/Entity/doors.png");
 					g.drawString("Enter Door", door.posX + bg.pos.x, 300);
@@ -175,14 +172,30 @@ public class DarkScene extends Scene {
 				}	
 				
 			}
+			
+			if((firstChampPos.x - bg.pos.x) < 100)
+			{
+				g.drawString("Exit Room", bg.pos.x + 100, 300);
+				
+				activeDoor = activeRoom.exitDoor;
+			}
+
 
 			for(pl.edu.pw.fizyka.pojava.LNM.Entity.Event event: activeRoom.events)
 			{
-				if(event.posX - 100 - (firstChampPos.x - bg.pos.x) < 100 && event.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
+				if(event.posX - 200 - (firstChampPos.x - bg.pos.x) < 100 && event.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
 				{
 					Player.enemys = event.enemys;
 					changeStateTo(dungState.CombatPhase);
 				}
+
+				else if(event.posX - 100 - (firstChampPos.x - bg.pos.x) < 100 && event.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
+				{
+					//image.draw(g, (int) door.posX + (int) bg.pos.x - 280, 170, "Resources/Entity/doors.png");
+					g.drawString("Open Chect", event.posX + bg.pos.x, 300);
+					break;
+				}
+
 			}
 
 		}
@@ -256,6 +269,20 @@ public class DarkScene extends Scene {
 				if (numberOfActiveChamps == 0) {
 					endTurn();
 				}
+
+				int numberOfAliveEnemys = 0;
+				for (Someone enemy : Player.enemys) 
+				{
+					if(enemy.isAlive())
+					{
+						numberOfAliveEnemys++;
+					}
+				}
+
+				if(numberOfAliveEnemys == 0)
+				{
+					changeStateTo(dungeonState.MovementPhace);
+				}
 			}
 		}
 	}
@@ -268,6 +295,13 @@ public class DarkScene extends Scene {
 
 		target.takeDamage(selectedSkill.getDamage());
 		activeChamp.setActive(false);
+
+		
+		if(target.isAlive() == false)
+		{
+			Player.enemys.remove(target);
+		}
+		
 
 		resetChoises();
 	}
@@ -286,6 +320,10 @@ public class DarkScene extends Scene {
 		for (Someone enemy : Player.enemys) 
 		{
 			enemyAI.calculateEnemyMove(Player.champions, enemy);	
+			if(enemy.isAlive() == false)
+			{
+				Player.enemys.remove(enemy);
+			}
 		}
 
 		for (Champion champion : Player.champions) 
@@ -362,7 +400,6 @@ public class DarkScene extends Scene {
 					selectedSkill = null;
 					selectedSkillId = 999;
 				}
-
 			}
 		}
 	}
@@ -389,10 +426,16 @@ public class DarkScene extends Scene {
 			{
 				if(k== KeyEvent.VK_SPACE)
 				{
-					activeRoom = activeDoor.leadTo;
-					firstChampPos.x = 200;
-					bg.pos.x = 0;
-					activeDoor = null;
+					if(activeDungeon.rooms.indexOf(activeRoom) == 0 && activeDoor == null)
+					{
+						gsm.setState(SceneManager.TOWN);
+					}
+					{
+						activeRoom = activeDoor.leadTo;
+						firstChampPos.x = 200;
+						bg.pos.x = 0;
+						activeDoor = null;
+					}
 				}
 			}
 		}

@@ -33,7 +33,8 @@ public class Someone {
     Vector2D offSet;
 
     private Images image = new Images();
-    public Someone(int maxHp, int maxStamina, String name, String imagePath, Vector2D offSet) {
+    public Someone(int maxHp, int maxStamina, String name, String imagePath, Vector2D offSet) 
+    {
         this.maxHp = maxHp;
         this.hp = this.maxHp;
 
