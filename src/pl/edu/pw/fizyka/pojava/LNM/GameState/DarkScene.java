@@ -1,6 +1,8 @@
 package pl.edu.pw.fizyka.pojava.LNM.GameState;
 
 import pl.edu.pw.fizyka.pojava.LNM.Entity.*;
+import pl.edu.pw.fizyka.pojava.LNM.Entity.Event;
+import pl.edu.pw.fizyka.pojava.LNM.Entity.Event.eventType;
 import pl.edu.pw.fizyka.pojava.LNM.System.*;
 import pl.edu.pw.fizyka.pojava.LNM.Player.*;
 import java.awt.*;
@@ -32,7 +34,7 @@ public class DarkScene extends Scene {
 	private Dungeon activeDungeon = new Dungeon();
 	private Room activeRoom = activeDungeon.rooms.get(0);
 	private Door activeDoor;
-
+	private Event activeEvent;
 	private boolean tmp = true;
 
 	private Images image = new Images();
@@ -48,6 +50,8 @@ public class DarkScene extends Scene {
 
 	private Vector2D firstChampPos = new Vector2D(200, 600);
 	private Vector2D firstEnemyPos = new Vector2D(600, 600);
+
+	private Vector2D firstChampMovemntPos = new Vector2D(200, 600);
 
 	private Vector2D imput = Vector2D.zero;
 
@@ -150,17 +154,12 @@ public class DarkScene extends Scene {
 						firstChampPos.x=0;
 				}
 			}
-			
-			
-			//System.out.println(firstChampPos.x - bg.pos.x);
-			
-			
+						
 
 			for (Door door : activeRoom.doors) 
 			{
 				if(door.posX - 100 - (firstChampPos.x - bg.pos.x) < 100 && door.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
 				{
-					//image.draw(g, (int) door.posX + (int) bg.pos.x - 280, 170, "Resources/Entity/doors.png");
 					g.drawString("Enter Door", door.posX + bg.pos.x, 300);
 					activeDoor = door;
 					break;
@@ -168,9 +167,21 @@ public class DarkScene extends Scene {
 				else
 				{
 					activeDoor = null;
-					//image.draw(g, (int) door.posX + (int) bg.pos.x - 280, 170, "Resources/Entity/doors.png");
 				}	
-				
+			}
+
+			for(pl.edu.pw.fizyka.pojava.LNM.Entity.Event event: activeRoom.events)
+			{
+				if(event.evType == eventType.CHEST)
+					image.draw(g, (int)( event.posX + bg.pos.x) - 100, 400, "Resources/Entity/chest2.png");
+
+				else if(event.evType == eventType.FIGHT)
+				{
+					for (Someone enemy : event.enemys) 
+					{
+						enemy.drawSomeone((int) (event.posX + bg.pos.x) + 300, 600, g);	
+					}
+				}
 			}
 			
 			if((firstChampPos.x - bg.pos.x) < 100)
@@ -183,21 +194,24 @@ public class DarkScene extends Scene {
 
 			for(pl.edu.pw.fizyka.pojava.LNM.Entity.Event event: activeRoom.events)
 			{
-				if(event.posX - 200 - (firstChampPos.x - bg.pos.x) < 100 && event.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
+				if(event.isActive)
 				{
-					Player.enemys = event.enemys;
-					changeStateTo(dungState.CombatPhase);
+					if(event.posX - 100 - (firstChampPos.x - bg.pos.x) < 100 && event.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
+					{
+						if(event.evType == eventType.FIGHT)
+						{
+							Player.enemys = event.enemys;
+							changeStateTo(dungState.CombatPhase);
+							activeEvent = event;
+						}
+						else if(event.evType == eventType.CHEST)
+						{
+							g.drawString("Open Chect", event.posX + bg.pos.x, 350);
+							activeEvent = event;
+						}
+					}
 				}
-
-				else if(event.posX - 100 - (firstChampPos.x - bg.pos.x) < 100 && event.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
-				{
-					//image.draw(g, (int) door.posX + (int) bg.pos.x - 280, 170, "Resources/Entity/doors.png");
-					g.drawString("Open Chect", event.posX + bg.pos.x, 300);
-					break;
-				}
-
 			}
-
 		}
 		
 
@@ -282,6 +296,13 @@ public class DarkScene extends Scene {
 				if(numberOfAliveEnemys == 0)
 				{
 					changeStateTo(dungeonState.MovementPhace);
+
+					activeEvent.isActive = false;
+					activeEvent = null;
+					for (Champion champion : Player.champions) 
+					{
+						champion.setActive(true);
+					}
 				}
 			}
 		}
@@ -515,12 +536,18 @@ public class DarkScene extends Scene {
 			{
 				currentChoice = 0;
 				dungState = dungeonState.CombatPhase;
+				firstChampMovemntPos = firstChampPos;
+				firstChampPos = new Vector2D(200, 600);
+				//bg =new Background();
+
 			}
 				break;
 			case MovementPhace: 
 			{
 				currentChoice = -1;
 				dungState = dungeonState.MovementPhace;
+				firstChampPos = firstChampMovemntPos;
+				bg = new Background("Resources/Backgrounds/fightbg.png");
 			}
 				break;
 			default:
