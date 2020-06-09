@@ -86,16 +86,16 @@ public class DarkScene extends Scene {
 		Skill skillAcidVomit = new Skill("Acid Vomit",10,5);
 
 		//Tworzenie Bochaterów i przeciwników
-		Player.champions.add(new Champion(25, 20, "AleXXX" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
+		Player.champions.add(new Champion(25, 20, "Yogi" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 		Player.champions.add(new Champion(25, 20, "Sasha",  "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 		Player.champions.add(new Champion(100, 30, "Siwy" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 	
-		Player.enemysBase.add( new Someone(20, 10, "wolf" , "Resources/Entity/wolf.png", new Vector2D(-120, -300) ) );
+		Player.enemysBase.add( new Someone(20, 10, "Wolf" , "Resources/Entity/wolf.png", new Vector2D(-120, -300) ) );
 			Player.enemysBase.get(0).addSkill(new Skill(skillBite));
 		Player.enemysBase.add( new Someone(50, 10, "Zombie" , "Resources/Entity/zombie.png", new Vector2D(-20, -420) ) );
 			Player.enemysBase.get(1).addSkill(new Skill(skillSlash));
 			Player.enemysBase.get(1).addSkill(new Skill(skillAcidVomit));
-		Player.enemysBase.add( new Someone(10, 0, "rat" , "Resources/Entity/rat.png", new Vector2D(-50, -220) ) );
+		Player.enemysBase.add( new Someone(10, 0, "Rat" , "Resources/Entity/rat.png", new Vector2D(-50, -220) ) );
 			Player.enemysBase.get(2).addSkill(new Skill(skillWeekBite));
 
 		//Dawanie umiejętności

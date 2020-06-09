@@ -26,7 +26,7 @@ public class HelpScene extends Scene {
 
 		// test
 		try {
-			bg = new Background("Resources/Backgrounds/darkbg.png");
+			bg = new Background("Resources/Backgrounds/xd.png");
 
 			titleColor = new Color(128, 0, 0);
 			titleFont = new Font("Century Gothic", Font.PLAIN, 96);

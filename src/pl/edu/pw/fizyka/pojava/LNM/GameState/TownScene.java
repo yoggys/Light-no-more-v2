@@ -1,5 +1,6 @@
 package pl.edu.pw.fizyka.pojava.LNM.GameState;
 
+import pl.edu.pw.fizyka.pojava.LNM.Player.Player;
 import pl.edu.pw.fizyka.pojava.LNM.System.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -59,7 +60,12 @@ public class TownScene extends Scene {
 	// wybor aktualnego trybu pracy / opcji menu
 	private void select() {
 		if (currentChoice == 0) {
-			Music.change("Resources/Music/muz11.wav");
+			if(Player.currentDungeon == 2){
+				Music.change("Resources/Music/muz33.wav");
+			} else{
+				Music.change("Resources/Music/muz11.wav");
+			}
+			
 			gsm.setScene(SceneManager.DARK);
 		}
 

@@ -80,8 +80,7 @@ public class MenuScene extends Scene {
 		}
 
 		if (currentChoice == 2) {
-			gsm.setScene(SceneManager.ENDCREDITS);
-			//gsm.setScene(SceneManager.HELP);
+			gsm.setScene(SceneManager.HELP);
 		}
 		if (currentChoice == 3) {
 			System.exit(0);

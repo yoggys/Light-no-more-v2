@@ -68,8 +68,7 @@ public class Tutorial4 extends Scene {
 			gsm.setScene(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.TUT3);
 		} 
 		if (currentChoice == 1) {
-			gsm.setScene(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.TOWN);
-			Music.change("Resources/Music/muz22.wav");
+			gsm.setScene(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.TUT5);
 		} 
 		if (currentChoice == 2) {
 			gsm.setScene(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.TOWN);
