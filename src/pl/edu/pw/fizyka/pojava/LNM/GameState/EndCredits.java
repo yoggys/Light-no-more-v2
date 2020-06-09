@@ -15,6 +15,7 @@ public class EndCredits extends Scene {
 
     public EndCredits(SceneManager gsm)
     {
+        this.gsm =gsm;
         credits.add("Dziękujemy za zagranie w naszą grę");
         credits.add("Twórcy :");
         credits.add("Mateusz Karbownik");
@@ -25,14 +26,18 @@ public class EndCredits extends Scene {
     @Override
     public void draw(Graphics2D g)
     {
-        if(bgPos.y > - 2000)
+        if(bgPos.y > - 1500)
         {
-            g.setBackground(Color.BLACK);
+            bg.draw(g);
             for(int i = 0; i<credits.size(); i++)
             {
-                g.drawString(credits.get(i), 400, bgPos.y + 1000 + i * 100);
+                g.drawString(credits.get(i), 300, bgPos.y + 1000 + i * 100);
             }
-            bgPos.y -= 5;
+            bgPos.y -= 10;
+        }
+        else
+        {
+            gsm.setState(SceneManager.MENU);
         }
 
     }
