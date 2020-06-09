@@ -30,8 +30,10 @@ public class SceneManager {
 	public static int TUT2 = 17;
 	public static int TUT3 = 18;
 	public static int TUT4 = 19;
-	public static int RESOLUTION = 20;
-	public static int ENDCREDITS = 21;
+	public static int TUT5 = 20;
+	public static int RESOLUTION = 21;
+	public static int ENDCREDITS = 22;
+	public static int DEAD = 23;
 	
 
 
@@ -61,10 +63,12 @@ public class SceneManager {
 		scenes.add(new Tutorial2(this));
 		scenes.add(new Tutorial3(this));
 		scenes.add(new Tutorial4(this));
-
+		scenes.add(new Tutorial5(this));
 
 		scenes.add(new ResolutionScene(this));
 		scenes.add(new EndCredits(this));
+		scenes.add(new DeadScene(this));
+
 	}
 
 	public void setScene(int state) {

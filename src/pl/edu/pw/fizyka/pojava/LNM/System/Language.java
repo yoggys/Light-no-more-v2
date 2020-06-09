@@ -139,5 +139,9 @@ public class Language {
 		ChestScene.options = names.toArray(new String[names.size()]);
 		names.clear();
 
+		names.add(bndl.getString("You dead"));
+		names.add(bndl.getString("Quit"));
+		DeadScene.options = names.toArray(new String[names.size()]);
+		names.clear();
 	}
 }
