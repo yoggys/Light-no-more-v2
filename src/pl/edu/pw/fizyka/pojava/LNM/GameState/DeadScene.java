@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 
 import pl.edu.pw.fizyka.pojava.LNM.System.Background;
 
+//class by Mateusz Karbownik
 public class DeadScene extends Scene {
 
     private Background bg;
