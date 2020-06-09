@@ -6,7 +6,7 @@ import pl.edu.pw.fizyka.pojava.LNM.GameState.Tutorial.*;
 //by Cyprian Siwy & Mateusz Karbownik
 public class SceneManager {
 
-	private ArrayList<Scene> scenes;
+	public ArrayList<Scene> scenes;
 	private int currentScene;
 	private int lastScene;
 
