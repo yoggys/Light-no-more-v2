@@ -50,13 +50,13 @@ public class TavernScene extends Scene {
 		Skill skillBow = new Skill("Bow", 9, 4);
 		Skill skillPowerHeal = new Skill("Power Heal", -15, 15);
 		
-		Player.reserve.add(new Champion(25, 16, "Krzysiu","Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
+		Player.reserve.add(new Champion(55, 16, "Krzysiu","Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 		Player.reserve.get(0).addSkill(new Skill(skillSlise));
 		Player.reserve.get(0).addSkill(new Skill(skillBow));
 
 
 	
-		Player.tavernChampions.add(new Champion(30, 15, "John", "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
+		Player.tavernChampions.add(new Champion(50, 15, "John", "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 		Player.tavernChampions.get(0).addSkill(new Skill(skillSlise));
 		Player.tavernChampions.get(0).addSkill(new Skill(skillPowerHeal));
 	}

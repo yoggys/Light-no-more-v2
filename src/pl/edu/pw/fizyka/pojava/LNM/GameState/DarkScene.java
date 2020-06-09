@@ -86,8 +86,8 @@ public class DarkScene extends Scene {
 		Skill skillAcidVomit = new Skill("Acid Vomit",10,5);
 
 		//Tworzenie Bochaterów i przeciwników
-		Player.champions.add(new Champion(25, 20, "Yogi" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
-		Player.champions.add(new Champion(25, 20, "Sasha",  "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
+		Player.champions.add(new Champion(50, 20, "Yogi" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
+		Player.champions.add(new Champion(50, 20, "Sasha",  "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 		Player.champions.add(new Champion(100, 30, "Siwy" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 	
 		
