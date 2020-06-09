@@ -213,6 +213,12 @@ public class DarkScene extends Scene {
 							activeEvent = event;
 							break;
 						}
+						if(event.evType == eventType.LEAVEDOOR)
+						{
+							g.drawString("Exit Dugeon", event.posX + bg.pos.x, 350);
+							activeEvent = event;
+							break;
+						}
 					}
 				}
 			}
@@ -221,6 +227,32 @@ public class DarkScene extends Scene {
 
 		if (Player.champions.size() == 0) {
 			g.setColor(Color.WHITE);
+		}
+
+		//rysowanie grafik eventów
+		for(pl.edu.pw.fizyka.pojava.LNM.Entity.Event event: activeRoom.events)
+		{
+			if(event.evType == eventType.CHEST)
+			{
+				image.draw(g, (int)( event.posX + bg.pos.x) - 100, 400, "Resources/Entity/chest2.png");
+			}
+			else if(event.evType == eventType.FIGHT)
+			{
+				for (int i = 0; i < event.enemys.size(); i++) 
+				{
+					event.enemys.get(i).drawSomeone((int) (event.posX + bg.pos.x) + 300+ i * 100, (int) 600, g);
+				}
+			}
+			else if(event.evType == eventType.TEXT)
+			{
+				g.setFont(font2);
+				g.drawString(event.text,event.posX + bg.pos.x, 150);
+				g.setFont(font);
+			}
+			else if(event.evType == eventType.LEAVEDOOR)
+			{
+				image.draw(g, (int)( event.posX + bg.pos.x) - 100, 400, "Resources/Entity/.png");
+			}
 		}
 
 		//Rysowanie chempionów i przeciwników w trakcie walki 
@@ -269,27 +301,7 @@ public class DarkScene extends Scene {
 			} 
 		}
 
-		//rysowanie grafik eventów
-		for(pl.edu.pw.fizyka.pojava.LNM.Entity.Event event: activeRoom.events)
-		{
-			if(event.evType == eventType.CHEST)
-			{
-				image.draw(g, (int)( event.posX + bg.pos.x) - 100, 400, "Resources/Entity/chest2.png");
-			}
-			else if(event.evType == eventType.FIGHT)
-			{
-				for (int i = 0; i < event.enemys.size(); i++) 
-				{
-					event.enemys.get(i).drawSomeone((int) (event.posX + bg.pos.x) + 300+ i * 100, (int) 600, g);
-				}
-			}
-			else if(event.evType == eventType.TEXT)
-			{
-				g.setFont(font2);
-				g.drawString(event.text,event.posX + bg.pos.x, 150);
-				g.setFont(font);
-			}
-		}
+		
 			
 
 
@@ -500,6 +512,11 @@ public class DarkScene extends Scene {
 				if(activeEvent!=null && activeEvent.evType == eventType.CHEST)
 				{
 					gsm.setState(SceneManager.CHEST);
+				}
+
+				if(activeEvent!=null && activeEvent.evType == eventType.LEAVEDOOR)
+				{
+					nextDungeon();
 				}
 			}			
 		}

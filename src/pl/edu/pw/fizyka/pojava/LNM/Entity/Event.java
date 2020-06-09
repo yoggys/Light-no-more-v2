@@ -7,7 +7,7 @@ import pl.edu.pw.fizyka.pojava.LNM.Player.Player;
 
 public class Event 
 {
-    public enum eventType {CHEST, FIGHT , TEXT};    
+    public enum eventType {CHEST, FIGHT , TEXT, LEAVEDOOR};    
 
     public eventType evType;
     public ArrayList<Someone> enemys;
