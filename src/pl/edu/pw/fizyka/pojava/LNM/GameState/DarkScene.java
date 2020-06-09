@@ -88,12 +88,12 @@ public class DarkScene extends Scene {
 		Player.champions.add(new Champion(25, 20, "Sasha",  "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 		Player.champions.add(new Champion(100, 30, "Siwy" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 	
-		Player.enemysBase.add( new Someone(20, 10, "wolf" , "Resources/Entity/wolf.png", new Vector2D(-150, -300) ) );
+		Player.enemysBase.add( new Someone(20, 10, "wolf" , "Resources/Entity/wolf.png", new Vector2D(-120, -300) ) );
 			Player.enemysBase.get(0).addSkill(new Skill(skillBite));
 		Player.enemysBase.add( new Someone(50, 10, "Zombie" , "Resources/Entity/zombie.png", new Vector2D(-20, -420) ) );
 			Player.enemysBase.get(1).addSkill(new Skill(skillSlash));
 			Player.enemysBase.get(1).addSkill(new Skill(skillAcidVomit));
-		Player.enemysBase.add( new Someone(10, 0, "rat" , "Resources/Entity/rat.png", new Vector2D(-150, -300) ) );
+		Player.enemysBase.add( new Someone(10, 0, "rat" , "Resources/Entity/rat.png", new Vector2D(-20, -220) ) );
 			Player.enemysBase.get(2).addSkill(new Skill(skillWeekBite));
 
 		//Dawanie umiejętności
@@ -193,6 +193,36 @@ public class DarkScene extends Scene {
 			}
 
 
+		
+			
+			
+			//rysowanie grafik eventów
+			for(pl.edu.pw.fizyka.pojava.LNM.Entity.Event event: activeRoom.events)
+			{
+				if(event.evType == eventType.CHEST)
+				{
+					image.draw(g, (int)( event.posX + bg.pos.x) - 100, 400, "Resources/Entity/chest2.png");
+				}
+				else if(event.evType == eventType.FIGHT)
+				{
+					for (int i = 0; i < event.enemys.size(); i++) 
+					{
+						event.enemys.get(i).drawSomeone((int) (event.posX + bg.pos.x) + 300+ i * 100, (int) 600, g);
+					}
+				}
+				else if(event.evType == eventType.TEXT)
+				{
+					g.setFont(font2);
+					g.drawString(event.text,event.posX + bg.pos.x, 150);
+					g.setFont(font);
+				}
+				else if(event.evType == eventType.LEAVEDOOR)
+				{
+					image.draw(g, (int) (event.posX + bg.pos.x)- 280, 170, "Resources/Entity/doorsout.png");
+				}
+			}
+		
+
 			activeEvent = null;
 			//rysowanie napisów nad eventami aby poinformować o możliwości ich aktywacji
 			for(pl.edu.pw.fizyka.pojava.LNM.Entity.Event event: activeRoom.events)
@@ -206,6 +236,7 @@ public class DarkScene extends Scene {
 							Player.enemys = event.enemys;
 							changeStateTo(dungState.CombatPhase);
 							activeEvent = event;
+							break;
 						}
 						else if(event.evType == eventType.CHEST)
 						{
@@ -224,37 +255,10 @@ public class DarkScene extends Scene {
 			}
 		}
 		
-
 		if (Player.champions.size() == 0) {
-			g.setColor(Color.WHITE);
+		g.setColor(Color.WHITE);
 		}
-
-		//rysowanie grafik eventów
-		for(pl.edu.pw.fizyka.pojava.LNM.Entity.Event event: activeRoom.events)
-		{
-			if(event.evType == eventType.CHEST)
-			{
-				image.draw(g, (int)( event.posX + bg.pos.x) - 100, 400, "Resources/Entity/chest2.png");
-			}
-			else if(event.evType == eventType.FIGHT)
-			{
-				for (int i = 0; i < event.enemys.size(); i++) 
-				{
-					event.enemys.get(i).drawSomeone((int) (event.posX + bg.pos.x) + 300+ i * 100, (int) 600, g);
-				}
-			}
-			else if(event.evType == eventType.TEXT)
-			{
-				g.setFont(font2);
-				g.drawString(event.text,event.posX + bg.pos.x, 150);
-				g.setFont(font);
-			}
-			else if(event.evType == eventType.LEAVEDOOR)
-			{
-				image.draw(g, (int)( event.posX + bg.pos.x) - 100, 400, "Resources/Entity/doosout.png");
-			}
-		}
-
+		
 		//Rysowanie chempionów i przeciwników w trakcie walki 
 		for (int i = 0; i < Player.champions.size() + Player.enemys.size() + activeChamp.skills.size(); i++) {
 
@@ -411,7 +415,6 @@ public class DarkScene extends Scene {
 		{
 			enemy = Player.enemys.get(i);
 			for (int j = 0; j < enemy.efects.size(); j++)
-			// for (Efect efect : enemy.efects)
 			{
 				enemy.efects.get(j).use(enemy);
 
@@ -620,5 +623,8 @@ public class DarkScene extends Scene {
 		Player.currentDungeon++;
 		activeDungeon = new Dungeon(Player.currentDungeon);
 		activeRoom = activeDungeon.rooms.get(0);
+		firstChampPos = new Vector2D(200, 600);
+		bg.pos = Vector2D.zero;
+		
 	}
 }

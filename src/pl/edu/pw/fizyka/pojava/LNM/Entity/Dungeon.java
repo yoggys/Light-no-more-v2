@@ -34,8 +34,8 @@ public class Dungeon
                         
                 r1.addDoor(new Door(r3), 1500);
                     r3.setExitDoor(new Door(r1));
-                    r3.addEvent( new Event(eventType.FIGHT, 500) );  
-                    r3.addEvent(new Event(eventType.LEAVEDOOR, 1000)); 
+                    r3.addEvent( new Event(eventType.FIGHT, 600) );  
+                    r3.addEvent(new Event(eventType.LEAVEDOOR, 1400)); 
 
                 break;
             }
