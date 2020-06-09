@@ -1,6 +1,5 @@
 package pl.edu.pw.fizyka.pojava.LNM.GameState;
 
-import pl.edu.pw.fizyka.pojava.LNM.Player.Player;
 import pl.edu.pw.fizyka.pojava.LNM.System.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;

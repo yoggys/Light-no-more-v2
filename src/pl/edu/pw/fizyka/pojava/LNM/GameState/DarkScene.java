@@ -90,10 +90,10 @@ public class DarkScene extends Scene {
 	
 		Player.enemysBase.add( new Someone(20, 10, "wolf" , "Resources/Entity/wolf.png", new Vector2D(-150, -300) ) );
 			Player.enemysBase.get(0).addSkill(new Skill(skillBite));
-		Player.enemysBase.add( new Someone(50, 10, "Zombie" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ) );
+		Player.enemysBase.add( new Someone(50, 10, "Zombie" , "Resources/Entity/zombie.png", new Vector2D(-20, -420) ) );
 			Player.enemysBase.get(1).addSkill(new Skill(skillSlash));
 			Player.enemysBase.get(1).addSkill(new Skill(skillAcidVomit));
-		Player.enemysBase.add( new Someone(10, 0, "rat" , "Resources/Entity/wolf.png", new Vector2D(-150, -300) ) );
+		Player.enemysBase.add( new Someone(10, 0, "rat" , "Resources/Entity/rat.png", new Vector2D(-150, -300) ) );
 			Player.enemysBase.get(2).addSkill(new Skill(skillWeekBite));
 
 		//Dawanie umiejętności
@@ -251,7 +251,7 @@ public class DarkScene extends Scene {
 			}
 			else if(event.evType == eventType.LEAVEDOOR)
 			{
-				image.draw(g, (int)( event.posX + bg.pos.x) - 100, 400, "Resources/Entity/.png");
+				image.draw(g, (int)( event.posX + bg.pos.x) - 100, 400, "Resources/Entity/doosout.png");
 			}
 		}
 

@@ -18,8 +18,8 @@ public class Dungeon
             {
                 Room 
                 r1 = new Room(1750), 
-                r2 = new Room(1500),
-                r3 = new Room(1000);
+                r2 = new Room(1000),
+                r3 = new Room(1500);
         
                 
                 rooms.add(r1);
@@ -34,7 +34,9 @@ public class Dungeon
                         
                 r1.addDoor(new Door(r3), 1500);
                     r3.setExitDoor(new Door(r1));
-                    r3.addEvent( new Event(eventType.FIGHT, 500) );        
+                    r3.addEvent( new Event(eventType.FIGHT, 500) );  
+                    r3.addEvent(new Event(eventType.LEAVEDOOR, 1000)); 
+
                 break;
             }
 

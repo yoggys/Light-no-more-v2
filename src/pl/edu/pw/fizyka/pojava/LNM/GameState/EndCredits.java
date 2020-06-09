@@ -1,6 +1,5 @@
 package pl.edu.pw.fizyka.pojava.LNM.GameState;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
