@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import pl.edu.pw.fizyka.pojava.LNM.Entity.Champion;
 import pl.edu.pw.fizyka.pojava.LNM.Entity.Effect;
 import pl.edu.pw.fizyka.pojava.LNM.Entity.Skill;
+import pl.edu.pw.fizyka.pojava.LNM.GameState.DarkScene;
 import pl.edu.pw.fizyka.pojava.LNM.Player.Inventory;
 import pl.edu.pw.fizyka.pojava.LNM.Player.*;
 
@@ -34,6 +35,7 @@ public class LoadGame {
 				}
 				Inventory.setGold(Integer.parseInt(blank.get(1)));
 				Player.currentDungeon = Integer.parseInt(blank.get(2));
+				DarkScene.state = 1;
 			}
 
 			if (true) {

@@ -18,6 +18,8 @@ public class DarkScene extends Scene {
 	private Effect poison;
 	private Effect healOverTime;
 
+	public static int state = 0;
+
 	private Skill selectedSkill = null;
 	private int selectedSkillId = 999;
 
@@ -125,6 +127,11 @@ public class DarkScene extends Scene {
 	
 	@Override
 	public void draw(Graphics2D g) {
+
+		if(state == 1){
+			loadDungeon();
+			state = 0;
+		}
 		
 		//sprawdzanie czasu trwania funcji draw potrzebne do uzyskanie prędkości niezależnej od liczby klatek
 		lastTime = currentTime;
@@ -301,10 +308,6 @@ public class DarkScene extends Scene {
 
 			} 
 		}
-
-		
-			
-
 
 			if (dungState == dungeonState.CombatPhase) {
 				if (activeChamp != emptyChamp && target != null && selectedSkill != null) {
@@ -623,4 +626,12 @@ public class DarkScene extends Scene {
 		firstChampPos = new Vector2D(200, 600);
 		bg.pos = Vector2D.zero;
 	}
+
+	public void loadDungeon(){
+		activeDungeon = new Dungeon(Player.currentDungeon);
+		activeRoom = activeDungeon.rooms.get(0);
+		firstChampPos = new Vector2D(200, 600);
+		bg.pos = Vector2D.zero;
+	}
+
 }
