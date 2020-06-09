@@ -178,6 +178,20 @@ public class Someone {
         return avatar;
     }
 
+    public void useHpPotion(){
+        hp = hp + maxHp * 30/100;
+        if(hp > maxHp) {
+            hp = maxHp;
+        }
+    }
+
+    public void useSaPotion(){
+        stamina = stamina + maxStamina * 30/100;
+        if(stamina > maxStamina) {
+            stamina = maxStamina;
+        }
+    }
+
     public void setAvatar() {
         if (avatars.size() != 0) {
             int id = 0;
@@ -215,4 +229,6 @@ public class Someone {
     {
         offSet = v1;
     }
+
+
 }
