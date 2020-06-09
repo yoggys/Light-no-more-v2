@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import pl.edu.pw.fizyka.pojava.LNM.Entity.Event.eventType;
 
+//by Cyprian Siwy
 public class Dungeon 
 {
     public ArrayList<Room> rooms = new ArrayList<Room>();
@@ -42,14 +43,15 @@ public class Dungeon
 
             case 2:
             {
-                Room r1 = new Room(1750);
+                Room r1 = new Room(1300);
 
                 rooms.add(r1);
 
-                r1.addEvent(new Event(eventType.TEXT, 500));
+                r1.addEvent(new Event(eventType.TEXT, 200));
                 r1.events.get(0).setText("Dziękujemy za zagranie w naszą grę");
-                r1.addEvent(new Event(eventType.TEXT, 1000));
+                r1.addEvent(new Event(eventType.TEXT, 1100));
                 r1.events.get(1).setText("Wykonana przez Mateusz Karbownik i Cyprian Siwy");
+                r1.addEvent(new Event(eventType.LEAVEDOOR,800));
             }
         }
        

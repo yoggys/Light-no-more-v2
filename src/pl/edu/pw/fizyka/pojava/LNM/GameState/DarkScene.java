@@ -72,13 +72,13 @@ public class DarkScene extends Scene {
 
 		activeChamp = emptyChamp;
 		poison = new Effect(2, 3);
-		healOverTime = new Effect(0, 3);
+		healOverTime = new Effect(-4, 3);
 
 		//tworzenie umiejętności
-		Skill skillPoison = new Skill("Poison", 50, 2, poison);
-		Skill skillSlise = new Skill("Slise", 0, 0);
-		Skill skillSmite = new Skill("Smite", 0, 0);
-		Skill skillHeal = new Skill("Heal", 0, 0, healOverTime);
+		Skill skillPoison = new Skill("Poison + DOT", 4, 6, poison);
+		Skill skillSlise = new Skill("Slise", 7, 0);
+		Skill skillSmite = new Skill("Smite", 12, 10);
+		Skill skillHeal = new Skill("Heal 5 per turn", 0, 5, healOverTime);
 
 		Skill skillBite = new Skill("Bite", 7, 0);
 		Skill skillWeekBite = new Skill("Bite", 4, 0);
@@ -90,6 +90,19 @@ public class DarkScene extends Scene {
 		Player.champions.add(new Champion(25, 20, "Sasha",  "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 		Player.champions.add(new Champion(100, 30, "Siwy" , "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
 	
+		
+		//Dawanie umiejętności
+		Player.champions.get(0).addSkill(new Skill(skillSlise));
+		Player.champions.get(0).addSkill(new Skill(skillSmite));
+
+		Player.champions.get(1).addSkill(new Skill(skillSlise));
+		Player.champions.get(1).addSkill(new Skill(skillHeal));
+
+
+		Player.champions.get(2).addSkill(new Skill(skillSlise));
+		Player.champions.get(2).addSkill(new Skill(skillPoison));
+
+		//dodawanie przeciwników do bazy i nadawanie im umiejętności
 		Player.enemysBase.add( new Someone(20, 10, "Wolf" , "Resources/Entity/wolf.png", new Vector2D(-120, -300) ) );
 			Player.enemysBase.get(0).addSkill(new Skill(skillBite));
 		Player.enemysBase.add( new Someone(50, 10, "Zombie" , "Resources/Entity/zombie.png", new Vector2D(-20, -420) ) );
@@ -98,13 +111,6 @@ public class DarkScene extends Scene {
 		Player.enemysBase.add( new Someone(10, 0, "Rat" , "Resources/Entity/rat.png", new Vector2D(-50, -220) ) );
 			Player.enemysBase.get(2).addSkill(new Skill(skillWeekBite));
 
-		//Dawanie umiejętności
-		Player.champions.get(0).addSkill(new Skill(skillSlise));
-		Player.champions.get(0).addSkill(new Skill(skillSmite));
-		Player.champions.get(1).addSkill(new Skill(skillHeal));
-		Player.champions.get(1).addSkill(new Skill(skillPoison));
-		Player.champions.get(2).addSkill(new Skill(skillSmite));
-		Player.champions.get(2).addSkill(new Skill(skillHeal));
 
 		activeDungeon = new Dungeon(Player.currentDungeon);
 		activeRoom = activeDungeon.rooms.get(0);
@@ -429,6 +435,11 @@ public class DarkScene extends Scene {
 		{
 			enemy.setActive(true);
 		}
+		if(Player.champions.size()==0)
+		{
+			gsm.setScene(SceneManager.DEAD);
+			Music.change("Resources/Music/muz33.wav");
+		}
 	}
 	
 
@@ -519,7 +530,15 @@ public class DarkScene extends Scene {
 
 				if(activeEvent!=null && activeEvent.evType == eventType.LEAVEDOOR)
 				{
-					nextDungeon();
+					
+					if(Player.currentDungeon == 2)
+					{
+						gsm.setScene(SceneManager.ENDCREDITS);
+					}
+					else
+					{
+						nextDungeon();
+					}
 				}
 			}			
 		}

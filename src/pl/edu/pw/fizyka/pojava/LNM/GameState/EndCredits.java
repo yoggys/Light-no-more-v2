@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import pl.edu.pw.fizyka.pojava.LNM.Entity.Vector2D;
 import pl.edu.pw.fizyka.pojava.LNM.System.Background;
 
+//by Cyprian Siwy
 public class EndCredits extends Scene {
 
     Background bg;

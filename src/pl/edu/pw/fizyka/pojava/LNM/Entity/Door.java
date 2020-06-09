@@ -1,5 +1,6 @@
 package pl.edu.pw.fizyka.pojava.LNM.Entity;
 
+//by Cyprian Siwy
 public class Door 
 {
     public Room leadTo;

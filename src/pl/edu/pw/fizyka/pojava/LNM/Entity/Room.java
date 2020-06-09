@@ -3,6 +3,7 @@ package pl.edu.pw.fizyka.pojava.LNM.Entity;
 
 import java.util.ArrayList;
 
+//by Cyprian Siwy
 public class Room 
 {
     public ArrayList<Door> doors = new ArrayList<Door>();

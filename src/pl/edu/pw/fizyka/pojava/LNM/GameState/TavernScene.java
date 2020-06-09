@@ -46,20 +46,19 @@ public class TavernScene extends Scene {
 		image = new Images();
 		hud = new HUDgold();
 
-		Skill skillSlise = new Skill("Slise", 20, 5);
-		Skill skillSmite = new Skill("Smite", 10, 20);
+		Skill skillSlise = new Skill("Slise", 7, 0);
+		Skill skillBow = new Skill("Bow", 9, 4);
+		Skill skillPowerHeal = new Skill("Power Heal", -15, 15);
+		
+		Player.reserve.add(new Champion(25, 16, "Krzysiu","Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
+		Player.reserve.get(0).addSkill(new Skill(skillSlise));
+		Player.reserve.get(0).addSkill(new Skill(skillBow));
 
-		// Player.reserve.add(new Champion(25, 20, "test1"));
-		// Player.reserve.add(new Champion(25, 20, "test2"));
-		Player.reserve.add(new Champion(100, 30, "test3","Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
-		Player.reserve.get(0).addSkill(skillSlise);
-		Player.reserve.get(0).addSkill(skillSmite);
 
-		// Player.tavernChampions.add(new Champion(25, 20, "test4"));
-		// Player.tavernChampions.add(new Champion(25, 20, "test5"));
-		Player.tavernChampions.add(new Champion(100, 30, "test6", "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
-		Player.tavernChampions.get(0).addSkill(skillSlise);
-		Player.tavernChampions.get(0).addSkill(skillSmite);
+	
+		Player.tavernChampions.add(new Champion(30, 15, "John", "Resources/Entity/patyczak.png", new Vector2D(-20, -420) ));
+		Player.tavernChampions.get(0).addSkill(new Skill(skillSlise));
+		Player.tavernChampions.get(0).addSkill(new Skill(skillPowerHeal));
 	}
 
 	// rysowanie gui

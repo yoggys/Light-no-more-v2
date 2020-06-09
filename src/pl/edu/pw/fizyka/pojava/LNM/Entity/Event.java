@@ -5,6 +5,7 @@ import java.util.Random;
 
 import pl.edu.pw.fizyka.pojava.LNM.Player.Player;
 
+//by Cyprian Siwy
 public class Event 
 {
     public enum eventType {CHEST, FIGHT , TEXT, LEAVEDOOR};    

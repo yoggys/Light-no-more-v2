@@ -5,12 +5,13 @@ import java.util.Random;
 
 import pl.edu.pw.fizyka.pojava.LNM.Player.Player;
 
+//by Cyprian Siwy
 public class EnemyBrain 
 {
     Random rand = new Random();
     public void calculateEnemyMove(ArrayList<Champion> champions, Someone thisEnemy)
     {
-        if(thisEnemy.isAlive() && thisEnemy.isActive())
+        if(thisEnemy.isAlive() && thisEnemy.isActive() && champions.size()!=0)
         {
 
             Skill skillToUse = null;
