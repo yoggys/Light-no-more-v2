@@ -31,6 +31,7 @@ public class SceneManager {
 	public static int TUT3 = 18;
 	public static int TUT4 = 19;
 	public static int RESOLUTION = 20;
+	public static int ENDCREDITS = 21;
 	
 
 
@@ -63,6 +64,7 @@ public class SceneManager {
 
 
 		scenes.add(new ResolutionScene(this));
+		scenes.add(new EndCredits(this));
 	}
 
 	public void setState(int state) {

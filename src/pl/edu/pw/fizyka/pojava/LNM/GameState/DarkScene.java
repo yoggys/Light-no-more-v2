@@ -7,7 +7,6 @@ import pl.edu.pw.fizyka.pojava.LNM.System.*;
 import pl.edu.pw.fizyka.pojava.LNM.Player.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.concurrent.TimeUnit;
 
 
 //by Cyprian Siwy
@@ -30,6 +29,7 @@ public class DarkScene extends Scene {
 	private int currentChoice = 0;
 
 	private Font font;
+	private Font font2;
 
 	private Dungeon activeDungeon;
 	private Room activeRoom;
@@ -104,7 +104,7 @@ public class DarkScene extends Scene {
 		Player.champions.get(2).addSkill(new Skill(skillSmite));
 		Player.champions.get(2).addSkill(new Skill(skillHeal));
 
-		activeDungeon = new Dungeon();
+		activeDungeon = new Dungeon(2);
 		activeRoom = activeDungeon.rooms.get(0);
 
  		this.gsm = gsm;
@@ -114,7 +114,7 @@ public class DarkScene extends Scene {
 			bg = new Background("Resources/Backgrounds/fightbg.png");
 			
 			font = new Font("Arial", Font.PLAIN, 12);
-			//bg.pos.x+=100;
+			font2 = new Font("Arial", Font.BOLD, 24);
 		}
 		
 		catch (Exception e) 
@@ -126,6 +126,7 @@ public class DarkScene extends Scene {
 	@Override
 	public void draw(Graphics2D g) {
 		
+		//sprawdzanie czasu trwania funcji draw potrzebne do uzyskanie prędkości niezależnej od liczby klatek
 		lastTime = currentTime;
 		currentTime = System.currentTimeMillis();
 		if(lastTime!=0)
@@ -138,14 +139,15 @@ public class DarkScene extends Scene {
 		g.setFont(font);
 		g.setColor(Color.WHITE);
 
+		//rysowanie drzwi
 		for (Door door : activeRoom.doors) 
 			{
 				image.draw(g, (int)( door.posX + bg.pos.x) - 280, 170, "Resources/Entity/doors.png");
 			}
 
+			//róch bochaterów poza walką
 		if (dungState == dungeonState.MovementPhace) 
 		{
-
 			if( imput.x == Vector2D.right.x && firstChampPos.x - bg.pos.x <activeRoom.lenght)
 			{
 				if(firstChampPos.x >= 500 )
@@ -166,7 +168,7 @@ public class DarkScene extends Scene {
 				}
 			}
 						
-
+			//rysowanie napisów nad drzwiami aby poinformować o możliwości ich aktywacji
 			for (Door door : activeRoom.doors) 
 			{
 				if(door.posX - 100 - (firstChampPos.x - bg.pos.x) < 100 && door.posX - 100 - (firstChampPos.x - bg.pos.x) > -100)
@@ -181,21 +183,9 @@ public class DarkScene extends Scene {
 				}	
 			}
 
-			for(pl.edu.pw.fizyka.pojava.LNM.Entity.Event event: activeRoom.events)
-			{
-				if(event.evType == eventType.CHEST)
-					image.draw(g, (int)( event.posX + bg.pos.x) - 100, 400, "Resources/Entity/chest2.png");
-
-				else if(event.evType == eventType.FIGHT)
-				{
-					for (int i = 0; i < event.enemys.size(); i++) 
-					{
-						event.enemys.get(i).drawSomeone((int) (event.posX + bg.pos.x) + 300+ i * 100, (int) 600, g);
-					}
-				}
-			}
 			
-			if((firstChampPos.x - bg.pos.x) < 100)
+			
+			if((firstChampPos.x - bg.pos.x) < 100 && activeRoom != activeDungeon.rooms.get(0))
 			{
 				g.drawString("Exit Room", bg.pos.x + 100, 300);
 				
@@ -204,6 +194,7 @@ public class DarkScene extends Scene {
 
 
 			activeEvent = null;
+			//rysowanie napisów nad eventami aby poinformować o możliwości ich aktywacji
 			for(pl.edu.pw.fizyka.pojava.LNM.Entity.Event event: activeRoom.events)
 			{
 				if(event.isActive)
@@ -228,11 +219,11 @@ public class DarkScene extends Scene {
 		}
 		
 
-		
 		if (Player.champions.size() == 0) {
 			g.setColor(Color.WHITE);
 		}
 
+		//Rysowanie chempionów i przeciwników w trakcie walki 
 		for (int i = 0; i < Player.champions.size() + Player.enemys.size() + activeChamp.skills.size(); i++) {
 
 			if (i == currentChoice) {
@@ -275,9 +266,32 @@ public class DarkScene extends Scene {
 				activeChamp.skills.get(j).drawSkill((int) firstChampPos.x + j * 75, (int) firstChampPos.y + 50, g);
 				
 
-			} else {
-				g.drawString("back", 586, 700);
+			} 
+		}
+
+		//rysowanie grafik eventów
+		for(pl.edu.pw.fizyka.pojava.LNM.Entity.Event event: activeRoom.events)
+		{
+			if(event.evType == eventType.CHEST)
+			{
+				image.draw(g, (int)( event.posX + bg.pos.x) - 100, 400, "Resources/Entity/chest2.png");
 			}
+			else if(event.evType == eventType.FIGHT)
+			{
+				for (int i = 0; i < event.enemys.size(); i++) 
+				{
+					event.enemys.get(i).drawSomeone((int) (event.posX + bg.pos.x) + 300+ i * 100, (int) 600, g);
+				}
+			}
+			else if(event.evType == eventType.TEXT)
+			{
+				g.setFont(font2);
+				g.drawString(event.text,event.posX + bg.pos.x, 150);
+				g.setFont(font);
+			}
+		}
+			
+
 
 			if (dungState == dungeonState.CombatPhase) {
 				if (activeChamp != emptyChamp && target != null && selectedSkill != null) {
@@ -321,7 +335,7 @@ public class DarkScene extends Scene {
 					}
 				}
 			}
-		}
+		
 	}
 
 	void calculateMove() {
@@ -538,8 +552,6 @@ public class DarkScene extends Scene {
 		if (k == KeyEvent.VK_ESCAPE) {
 			gsm.setState(SceneManager.ESC);
 		}
-
-		System.out.println(currentChoice);
 	}
 
 	public void keyReleased(int k) 
