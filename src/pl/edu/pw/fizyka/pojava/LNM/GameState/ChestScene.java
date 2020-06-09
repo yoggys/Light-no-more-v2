@@ -16,7 +16,7 @@ public class ChestScene extends Scene {
 	public static String options[];
 	private int row;
 	private HUDgold hud;
-	private int currentChoice[] = { 0, 0 , 0};
+	private int currentChoice[] = { 0, 0, 0};
 	private int state = 0;
 
 	private Font font;
@@ -52,6 +52,22 @@ public class ChestScene extends Scene {
 		hud.draw(g);
 
 		g.setFont(font);
+
+		if(state == 3){ 
+			Inventory.removeItems(currentChoice[row]);
+			if (currentChoice[row] != 0) {
+				currentChoice[row]--;
+			}
+
+			if (Inventory.invSize() == 0) {
+				if (chest.size() > 0) {
+					row--;
+				} else {
+					row = 0;
+				}
+			}
+			state = 0;
+		}
 
 		if (state == 1) {
 			if (Inventory.invSize() >= 10) {
@@ -238,6 +254,16 @@ public class ChestScene extends Scene {
 	public void keyReleased(int k) {
 		if (k == KeyEvent.VK_ENTER) {
 			select();
+		}
+
+		if (k == KeyEvent.VK_SPACE) {
+			if(row == 2){
+				int id = Inventory.getId(currentChoice[2]);
+				Inventory.usePotion(id);
+				if(id == 6 || id == 7){
+					state = 3;
+				}
+			}
 		}
 	}
 

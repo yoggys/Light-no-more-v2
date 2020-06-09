@@ -1,13 +1,14 @@
 package pl.edu.pw.fizyka.pojava.LNM.Player;
 
 import pl.edu.pw.fizyka.pojava.LNM.System.*;
+import pl.edu.pw.fizyka.pojava.LNM.Entity.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 //class by Mateusz Karbownik
 public class Inventory {
 
-	private static ArrayList<Integer> items = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 0));
+	private static ArrayList<Integer> items = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
 	private static int gold = 10000;
 
 	private static String names[] = { "working", "book", "jewellery", "silverbar", "goldbar", "gems", "sapot", "hppot",
@@ -86,5 +87,18 @@ public class Inventory {
 
 	public static void removeItems(int pos) {
 		items.remove(pos);
+	}
+
+	public static void usePotion(int id){
+		if(id == 7){
+			for (Champion champion : Player.champions) {
+				champion.useHpPotion();
+			}
+		}
+		if(id == 6){
+			for (Champion champion : Player.champions) {
+				champion.useSaPotion();
+			}
+		}
 	}
 }
