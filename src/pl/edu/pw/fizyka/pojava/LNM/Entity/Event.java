@@ -26,9 +26,9 @@ public class Event
         if(evType == eventType.FIGHT)
         {
             enemys = new ArrayList<Someone>();
-            for(int i =0; i < 2; i++)
+            for(int i =0; i < 3; i++)
             {
-                enemys.add( new Someone( Player.enemysBase.get( ( rand.nextInt(Player.enemysBase.size() - 1) ) ) ) );
+                enemys.add( new Someone( Player.enemysBase.get( ( i ) ) ) );
             }
         }
     }
