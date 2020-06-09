@@ -54,13 +54,13 @@ public class HeadquartersScene extends Scene {
 	// wybor aktualnego trybu pracy / opcji menu etc.
 	private void select() {
 		if (currentChoice == 0) {
-			gsm.setState(SceneManager.HQUPGRADE);
+			gsm.setScene(SceneManager.HQUPGRADE);
 		} else if (currentChoice == 1) {
-			gsm.setState(SceneManager.HQSQUAD);
+			gsm.setScene(SceneManager.HQSQUAD);
 		} else if (currentChoice == 2) {
-			gsm.setState(SceneManager.HQINFO);
+			gsm.setScene(SceneManager.HQINFO);
 		} else if (currentChoice == 3) {
-			gsm.setState(SceneManager.TOWN);
+			gsm.setScene(SceneManager.TOWN);
 		}
 	}
 
@@ -85,7 +85,7 @@ public class HeadquartersScene extends Scene {
 
 		}
 		if (k == KeyEvent.VK_ESCAPE) {
-			gsm.setState(SceneManager.ESC);
+			gsm.setScene(SceneManager.ESC);
 		}
 	}
 

@@ -82,7 +82,7 @@ public class HqInfoScene extends Scene {
 	private void select() {
 		if (row == 0) {
 			currentChoice = 0;
-			gsm.setState(SceneManager.HEADQUARTERS);
+			gsm.setScene(SceneManager.HEADQUARTERS);
 		}
 	}
 
@@ -126,7 +126,7 @@ public class HqInfoScene extends Scene {
 			}
 		}
 		if (k == KeyEvent.VK_ESCAPE) {
-			gsm.setState(SceneManager.ESC);
+			gsm.setScene(SceneManager.ESC);
 		}
 	}
 

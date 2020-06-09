@@ -67,7 +67,7 @@ public class SceneManager {
 		scenes.add(new EndCredits(this));
 	}
 
-	public void setState(int state) {
+	public void setScene(int state) {
 		lastScene = currentScene;
 		currentScene = state;
 	}

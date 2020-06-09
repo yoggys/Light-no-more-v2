@@ -35,7 +35,7 @@ public class EasterEgg extends Scene {
 	@Override
 	public void keyReleased(int k) {
 		if (k == KeyEvent.VK_ENTER) {
-			gsm.setState(SceneManager.MENU);
+			gsm.setScene(SceneManager.MENU);
 		}
 	}
 }

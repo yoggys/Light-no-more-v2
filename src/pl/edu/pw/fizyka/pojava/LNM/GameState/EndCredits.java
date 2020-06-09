@@ -25,7 +25,7 @@ public class EndCredits extends Scene {
     @Override
     public void draw(Graphics2D g)
     {
-        if(bgPos.y > - 1500)
+        if(bgPos.y > - 700)
         {
             bg.draw(g);
             for(int i = 0; i<credits.size(); i++)
@@ -34,10 +34,7 @@ public class EndCredits extends Scene {
             }
             bgPos.y -= 10;
         }
-        else
-        {
-            gsm.setState(SceneManager.MENU);
-        }
+        
 
     }
 

@@ -65,13 +65,13 @@ public class Tutorial1 extends Scene {
 	// wybor aktualnego trybu pracy / opcji menu etc.
 	private void select() {
 		if (currentChoice == 0) {
-			gsm.setState(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.TUT0);
+			gsm.setScene(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.TUT0);
 		} 
 		if (currentChoice == 1) {
-			gsm.setState(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.TUT2);
+			gsm.setScene(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.TUT2);
 		} 
 		if (currentChoice == 2) {
-			gsm.setState(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.TOWN);
+			gsm.setScene(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.TOWN);
 			Music.change("Resources/Music/muz22.wav");
 		} 
 	}

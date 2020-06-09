@@ -129,7 +129,7 @@ public class CharlatanScene extends Scene {
 	// wybor aktualnego trybu pracy / opcji menu etc.
 	private void select() {
 		if (row == 0) {
-			gsm.setState(SceneManager.TOWN);
+			gsm.setScene(SceneManager.TOWN);
 		} else if (row == 1) {
 			if (currentChoice[row] == 0 && Inventory.getGold() - (int) Player.champions.get(0).payHeal() >= 0) {
 				heal(0);
@@ -211,7 +211,7 @@ public class CharlatanScene extends Scene {
 
 		}
 		if (k == KeyEvent.VK_ESCAPE) {
-			gsm.setState(SceneManager.ESC);
+			gsm.setScene(SceneManager.ESC);
 		}
 	}
 

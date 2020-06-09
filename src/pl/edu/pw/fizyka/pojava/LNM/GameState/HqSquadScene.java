@@ -128,7 +128,7 @@ public class HqSquadScene extends Scene {
 	private void select() {
 		boolean done = false;
 		if (row == 0) {
-			gsm.setState(SceneManager.HEADQUARTERS);
+			gsm.setScene(SceneManager.HEADQUARTERS);
 		}
 		if (row == 1 && Player.reserve.size() > 0 && !lock[0]) {
 			lock[0] = true;
@@ -207,7 +207,7 @@ public class HqSquadScene extends Scene {
 			}
 		}
 		if (k == KeyEvent.VK_ESCAPE) {
-			gsm.setState(SceneManager.ESC);
+			gsm.setScene(SceneManager.ESC);
 		}
 	}
 

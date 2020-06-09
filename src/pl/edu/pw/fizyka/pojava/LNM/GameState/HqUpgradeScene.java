@@ -83,7 +83,7 @@ public class HqUpgradeScene extends Scene {
 	// wybor aktualnego trybu pracy / opcji menu etc.
 	private void select() {
 		if (row == 0) {
-			gsm.setState(SceneManager.HEADQUARTERS);
+			gsm.setScene(SceneManager.HEADQUARTERS);
 		} else if (row == 1) {
 			if (Inventory.getGold() - 500 >= 0 && Player.champions.get(currentChoice[1]).skills != null) {
 				Player.champions.get(currentChoice[1]).upgradeChamp();
@@ -132,7 +132,7 @@ public class HqUpgradeScene extends Scene {
 
 		}
 		if (k == KeyEvent.VK_ESCAPE) {
-			gsm.setState(SceneManager.ESC);
+			gsm.setScene(SceneManager.ESC);
 		}
 	}
 

@@ -68,7 +68,7 @@ public class HelpScene extends Scene {
 		if (k == KeyEvent.VK_X) {
 			egg += 1;
 			if (egg++ == 101) {
-				gsm.setState(SceneManager.EASTEREGG);
+				gsm.setScene(SceneManager.EASTEREGG);
 			}
 		}
 	}
@@ -76,7 +76,7 @@ public class HelpScene extends Scene {
 	@Override
 	public void keyReleased(int k) {
 		if (k == KeyEvent.VK_ENTER) {
-			gsm.setState(SceneManager.MENU);
+			gsm.setScene(SceneManager.MENU);
 		}
 	}
 }
