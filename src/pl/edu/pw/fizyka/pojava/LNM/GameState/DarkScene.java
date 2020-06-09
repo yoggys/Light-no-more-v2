@@ -615,7 +615,7 @@ public class DarkScene extends Scene {
 	}
 
 	public void nextDungeon(){
-		gsm.setScenśe(SceneManager.TOWN);
+		gsm.setScene(SceneManager.TOWN);
 
 		Player.currentDungeon++;
 		activeDungeon = new Dungeon(Player.currentDungeon);
