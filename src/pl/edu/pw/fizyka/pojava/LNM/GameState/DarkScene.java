@@ -104,7 +104,7 @@ public class DarkScene extends Scene {
 		Player.champions.get(2).addSkill(new Skill(skillSmite));
 		Player.champions.get(2).addSkill(new Skill(skillHeal));
 
-		activeDungeon = new Dungeon(2);
+		activeDungeon = new Dungeon(Player.currentDungeon);
 		activeRoom = activeDungeon.rooms.get(0);
 
  		this.gsm = gsm;
@@ -463,7 +463,7 @@ public class DarkScene extends Scene {
 	@Override
 	public void keyPressed(int k) 
 	{
-		
+
 		if (dungState == dungeonState.MovementPhace) {
 			imput = Vector2D.zero;
 
@@ -595,5 +595,13 @@ public class DarkScene extends Scene {
 			default:
 				break;
 		}
+	}
+
+	public void nextDungeon(){
+		gsm.setState(SceneManager.TOWN);
+
+		Player.currentDungeon++;
+		activeDungeon = new Dungeon(Player.currentDungeon);
+		activeRoom = activeDungeon.rooms.get(0);
 	}
 }
