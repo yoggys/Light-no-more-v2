@@ -182,7 +182,7 @@ public class ChestScene extends Scene {
 			state = 1;
 		}
 		if (row == 0 && currentChoice[0] == 0) {
-			gsm.setState(gsm.getLastScene());
+			gsm.setScene(gsm.getLastScene());
 		}
 		if (row == 0 && currentChoice[0] == 1) {
 			openChest();

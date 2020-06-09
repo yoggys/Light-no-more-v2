@@ -60,23 +60,23 @@ public class TownScene extends Scene {
 	private void select() {
 		if (currentChoice == 0) {
 			Music.change("Resources/Music/muz11.wav");
-			gsm.setState(SceneManager.DARK);
+			gsm.setScene(SceneManager.DARK);
 		}
 
 		if (currentChoice == 1) {
-			gsm.setState(SceneManager.TAVERN);
+			gsm.setScene(SceneManager.TAVERN);
 		}
 
 		if (currentChoice == 2) {
-			gsm.setState(SceneManager.CHARLATAN);
+			gsm.setScene(SceneManager.CHARLATAN);
 		}
 
 		if (currentChoice == 3) {
-			gsm.setState(SceneManager.MERCHANT);
+			gsm.setScene(SceneManager.MERCHANT);
 		}
 
 		if (currentChoice == 4) {
-			gsm.setState(SceneManager.HEADQUARTERS);
+			gsm.setScene(SceneManager.HEADQUARTERS);
 		}
 	}
 
@@ -101,7 +101,7 @@ public class TownScene extends Scene {
 		}
 
 		if (k == KeyEvent.VK_ESCAPE) {
-			gsm.setState(SceneManager.ESC);
+			gsm.setScene(SceneManager.ESC);
 		}
 	}
 

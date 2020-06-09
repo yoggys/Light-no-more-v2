@@ -70,10 +70,10 @@ public class Tutorial0 extends Scene {
 			//gsm.setState(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.Tutorial0);
 		} 
 		if (currentChoice == 1) {
-			gsm.setState(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.TUT1);
+			gsm.setScene(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.TUT1);
 		} 
 		if (currentChoice == 2) {
-			gsm.setState(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.TOWN);
+			gsm.setScene(pl.edu.pw.fizyka.pojava.LNM.GameState.SceneManager.TOWN);
 			Music.change("Resources/Music/muz22.wav");
 		} 
 	}

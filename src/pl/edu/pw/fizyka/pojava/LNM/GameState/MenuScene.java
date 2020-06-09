@@ -66,7 +66,7 @@ public class MenuScene extends Scene {
 	// wybor aktualnego trybu pracy / opcji menu etc.
 	private void select() {
 		if (currentChoice == 0) {
-			gsm.setState(SceneManager.TUT0);
+			gsm.setScene(SceneManager.TUT0);
 		}
 
 		if (currentChoice == 1) {
@@ -75,12 +75,12 @@ public class MenuScene extends Scene {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			gsm.setState(SceneManager.TOWN);
+			gsm.setScene(SceneManager.TOWN);
 			Music.change("Resources/Music/muz22.wav");
 		}
 
 		if (currentChoice == 2) {
-			gsm.setState(SceneManager.ENDCREDITS);
+			gsm.setScene(SceneManager.ENDCREDITS);
 			//gsm.setState(SceneManager.HELP);
 		}
 		if (currentChoice == 3) {

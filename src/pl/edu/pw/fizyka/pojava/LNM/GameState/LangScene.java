@@ -68,7 +68,7 @@ public class LangScene extends Scene {
 				Tutorial0.isPolish = true;
 				Language.setLanguage("pl");
 			}
-			gsm.setState(SceneManager.MENU);
+			gsm.setScene(SceneManager.MENU);
 		}
 	}
 }

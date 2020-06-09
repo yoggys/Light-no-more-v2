@@ -107,7 +107,7 @@ public class ResolutionScene extends Scene {
 				}
 			}
 			else {
-				gsm.setState(SceneManager.LANG);
+				gsm.setScene(SceneManager.LANG);
 			}		
 		}
 	}

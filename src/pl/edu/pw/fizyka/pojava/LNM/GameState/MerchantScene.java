@@ -111,7 +111,7 @@ public class MerchantScene extends Scene {
 	// rysowanie gui
 	private void select() {
 		if (row == 0) {
-			gsm.setState(SceneManager.TOWN);
+			gsm.setScene(SceneManager.TOWN);
 		} else if (row == 1 && Inventory.getId(currentChoice[row]) != 0 && Inventory.invSize() != 0) {
 			Inventory.sellItem(currentChoice[row]);
 			if (currentChoice[row] != 0) {
@@ -186,7 +186,7 @@ public class MerchantScene extends Scene {
 			}
 		}
 		if (k == KeyEvent.VK_ESCAPE) {
-			gsm.setState(SceneManager.ESC);
+			gsm.setScene(SceneManager.ESC);
 		}
 	}
 

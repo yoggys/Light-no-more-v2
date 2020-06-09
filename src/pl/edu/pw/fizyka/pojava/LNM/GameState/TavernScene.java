@@ -196,7 +196,7 @@ public class TavernScene extends Scene {
 	// wybor aktualnego trybu pracy / opcji menu etc.
 	private void select() {
 		if (row == 0) {
-			gsm.setState(SceneManager.TOWN);
+			gsm.setScene(SceneManager.TOWN);
 		} else if (row == 1 && Player.tavernChampions.size() > 0 && Player.reserve.size() < 3
 				&& Inventory.getGold() - priceSell.get(currentChoice[row]) >= 0 && state == 0) {
 			state = 1;
@@ -286,7 +286,7 @@ public class TavernScene extends Scene {
 			}
 		}
 		if (k == KeyEvent.VK_ESCAPE) {
-			gsm.setState(SceneManager.ESC);
+			gsm.setScene(SceneManager.ESC);
 		}
 	}
 
