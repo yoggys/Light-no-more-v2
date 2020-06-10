@@ -21,6 +21,8 @@ public class DeadScene extends Scene {
     @Override
     public void draw(Graphics2D g)
     {
+        Font font = new Font("Arial", Font.PLAIN, 44);
+        g.setFont(font);
         bg.draw(g);
         g.setColor(Color.BLACK);
         g.drawString(options[0], 540, 200);

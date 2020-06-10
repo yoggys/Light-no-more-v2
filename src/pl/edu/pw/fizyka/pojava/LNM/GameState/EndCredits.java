@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 import pl.edu.pw.fizyka.pojava.LNM.Entity.Vector2D;
 import pl.edu.pw.fizyka.pojava.LNM.System.Background;
 
-//by Cyprian Siwy
+//class by Cyprian Siwy
 public class EndCredits extends Scene {
 
     Background bg;
@@ -29,8 +29,12 @@ public class EndCredits extends Scene {
     @Override
     public void draw(Graphics2D g)
     {
+        Font font = new Font("Arial", Font.PLAIN, 44);
+        g.setFont(font);
+        
         if(bgPos.y > - 850)
         {
+
             bg.draw(g);
             for(int i = 0; i<credits.size(); i++)
             {

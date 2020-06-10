@@ -42,6 +42,7 @@ public class MenuScene extends Scene {
 		g.setColor(titleColor);
 		g.setFont(titleFont);
 		g.drawString("Light no more", 310, 160);
+		
 		g.setFont(font);
 
 		for (int i = 0; i < options.length; i++) {
